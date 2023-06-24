@@ -1,0 +1,72 @@
+<?php
+include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <?php require_once PATH . 'Template/_includes/_head.php'; ?>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <?php
+        include_once PATH . 'Template/_includes/_topo.php';
+        include_once PATH . 'Template/_includes/_menu.php';
+        ?>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h2 class="text-primary">Novo Chamado</h2>
+                            <a>Realize aberturas de chamados nesta página</a>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" action="novo_chamado.php">
+                            <div class="form-group">
+                                <label>Escolha o equipamento</label>
+                                <select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Descreva o problema</label>
+                                <textarea class="form-control" rows="3" placeholder="Digite aqui..."></textarea>
+                            </div>
+                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.content -->
+
+        </div>
+        <!-- /.content-wrapper -->
+
+        <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
+
+    </div>
+    <!-- ./wrapper -->
+
+    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
+
+</body>
+
+</html>

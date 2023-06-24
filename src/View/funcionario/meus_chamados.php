@@ -25,8 +25,8 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h2 class="text-primary">Gerenciar tipo de equipamento</h2>
-                            <a>Aqui você gerencia todos os tipos de equipamentos</a>
+                            <h2 class="text-primary">Meus Chamados</h2>
+                            <a>Consulte todos seus chamados e acompanhe os atendimentos</a>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -38,28 +38,30 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Cadastre um novo tipo de equipamento</h3>
+                        <h3 class="card-title">Consulte os seus chamados por situação</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="gerenciar_tipoequipamento.php">
+                        <form method="post" action="meus_chamados.php">
                             <div class="form-group">
-                                <label>Tipo de equipamento</label>
-                                <input class="form-control" placeholder="Digite aqui..." name="tipo" id="tipo">
+                                <label>Escolha a situação</label>
+                                <select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Todos</option>
+                                </select>
                             </div>
-                            <button class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
+                            <button class="btn btn-success" name="btn_pesquisar">Pesquisar</button>
                         </form>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tipos cadastrados</h3>
+                        <h3 class="card-title">Resultado encontrado</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Altere ou exclua os registros</h3>
+                                        <h3 class="card-title">Aqui você pode ver os detalhes dos seus chamados</h3>
 
                                         <div class="card-tools">
                                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -79,16 +81,30 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                                             <thead>
                                                 <tr>
                                                     <th>Ação</th>
-                                                    <th>Tipo do equipamento</th>
+                                                    <th>Data Abertura</th>
+                                                    <th>Funcionário</th>
+                                                    <th>Equipamento</th>
+                                                    <th>Problema</th>
+                                                    <th>Data Atendimento</th>
+                                                    <th>Técnico</th>
+                                                    <th>Data Encerramento</th>
+                                                    <th>Laudo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <a href="#" class="btn btn-warning btn-xs">Alterar</a>
-                                                        <a href="#" class="btn btn-danger btn-xs">Excluir</a>
+                                                        <a href="#" class="btn btn-block bg-gradient-info btn-xs">Ver Mais</a>
                                                     </td>
-                                                    <td>183</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                    <td>...</td>
                                                 </tr>
                                             </tbody>
                                         </table>
