@@ -52,6 +52,9 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                                 <label>Setor</label>
                                 <select class="form-control select2" style="width: 100%;">
                                     <option selected="selected">Selecione</option>
+                                    <option>Administrador<option>
+                                    <option>Funcionário<option>
+                                    <option>Técnico<option>
                                 </select>
                             </div>
                             <div class="form-group">
