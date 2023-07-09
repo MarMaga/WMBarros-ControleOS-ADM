@@ -13,9 +13,7 @@ class EquipamentoVO
     private $data_descarte;
     private $motivo_descarte;
     private $id_tipo_equipamento;
-    private $tipo_equipamento;
     private $id_modelo;
-    private $nome_modelo;
 
     // SET e GET id
     public function setId($id): void
@@ -87,16 +85,6 @@ class EquipamentoVO
         return $this->id_tipo_equipamento;
     }
 
-    // SET e GET tipo_equipamento
-    public function setTipoEquipamento($tipo_equipamento): void
-    {
-        $this->tipo_equipamento = $tipo_equipamento;
-    }
-    public function getTipoEquipamento(): string
-    {
-        return $this->tipo_equipamento;
-    }
-
     // SET e GET id_modelo
     public function setIdModelo($id_modelo): void
     {
@@ -105,16 +93,6 @@ class EquipamentoVO
     public function getIdModelo(): int
     {
         return $this->id_modelo;
-    }
-
-    // SET e GET motivo_descarte
-    public function setNomeModelo($nome_modelo): void
-    {
-        $this->nome_modelo = $nome_modelo;
-    }
-    public function getNomeModelo(): string
-    {
-        return $this->nome_modelo;
     }
 }
 
