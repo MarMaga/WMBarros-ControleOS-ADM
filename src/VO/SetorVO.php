@@ -10,7 +10,7 @@ class SetorVO
     private $nome;
 
     // SET e GET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -20,7 +20,7 @@ class SetorVO
     }
 
     // SET e GET nome
-    public function setNome($nome): void
+    public function setNome(string $nome): void
     {
         $this->nome = $nome;
     }

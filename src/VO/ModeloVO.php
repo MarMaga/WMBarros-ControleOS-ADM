@@ -10,7 +10,7 @@ class ModeloVO
     private $nome_modelo;
 
     // SET e GET id_modelo
-    public function setIdModelo($id): void
+    public function setIdModelo(int $id): void
     {
         $this->id = $id;
     }
@@ -20,7 +20,7 @@ class ModeloVO
     }
     
     // SET e GET motivo_descarte
-    public function setNomeModelo($nome_modelo): void
+    public function setNomeModelo(int $nome_modelo): void
     {
         $this->nome_modelo = Util::RemoverTags($nome_modelo);
     }

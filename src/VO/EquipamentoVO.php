@@ -16,7 +16,7 @@ class EquipamentoVO
     private $id_modelo;
 
     // SET e GET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -26,7 +26,7 @@ class EquipamentoVO
     }
 
     // SET e GET ident_equipamento
-    public function setIdentificacaoEquipamento($ident_equipamento): void
+    public function setIdentificacaoEquipamento(string $ident_equipamento): void
     {
         $this->ident_equipamento = Util::RemoverTags($ident_equipamento);
     }
@@ -36,7 +36,7 @@ class EquipamentoVO
     }
 
     // SET e GET desc_equipamento
-    public function setDescricaoEquipamento($desc_equipamento): void
+    public function setDescricaoEquipamento(string $desc_equipamento): void
     {
         $this->desc_equipamento = Util::RemoverTags($desc_equipamento);
     }
@@ -46,7 +46,7 @@ class EquipamentoVO
     }
 
     // SET e GET id
-    public function setSituacao($situacao): void
+    public function setSituacao(int $situacao): void
     {
         $this->situacao = $situacao;
     }
@@ -56,7 +56,7 @@ class EquipamentoVO
     }
 
     // GET data_descarte
-    public function setDataDescarte($data_descarte): void
+    public function setDataDescarte(string $data_descarte): void
     {
         $this->data_descarte = Util::TirarCaracteresEspeciais($data_descarte);
     }
@@ -66,7 +66,7 @@ class EquipamentoVO
     }
 
     // SET e GET motivo_descarte
-    public function setMotivoDescarte($motivo_descarte): void
+    public function setMotivoDescarte(string $motivo_descarte): void
     {
         $this->motivo_descarte = $motivo_descarte;
     }
@@ -76,7 +76,7 @@ class EquipamentoVO
     }
 
     // SET e GET id_tipo_equipamento
-    public function setIdTipoEquipamento($id_tipo_equipamento): void
+    public function setIdTipoEquipamento(int $id_tipo_equipamento): void
     {
         $this->id_tipo_equipamento = $id_tipo_equipamento;
     }
@@ -86,7 +86,7 @@ class EquipamentoVO
     }
 
     // SET e GET id_modelo
-    public function setIdModelo($id_modelo): void
+    public function setIdModelo(int $id_modelo): void
     {
         $this->id_modelo = $id_modelo;
     }

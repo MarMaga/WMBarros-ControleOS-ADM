@@ -7,13 +7,11 @@ use Src\_Public\Util;
 class AlocacaoVO
 {
     private $id;
-    private $data_alocacao;
-    private $data_remocao;
     private $id_equipamento;
     private $id_setor;
 
     // SET e GET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -35,7 +33,7 @@ class AlocacaoVO
     }
 
     // SET e GET id_equipamento
-    public function setIdEquiupamento($id_equipamento): void
+    public function setIdEquipamento(int $id_equipamento): void
     {
         $this->id_equipamento = $id_equipamento;
     }
@@ -45,7 +43,7 @@ class AlocacaoVO
     }
 
     // SET e GET id_setor
-    public function setIdSetor($id_setor): void
+    public function setIdSetor(int $id_setor): void
     {
         $this->id_setor = $id_setor;
     }

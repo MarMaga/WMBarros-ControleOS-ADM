@@ -11,12 +11,14 @@ class UsuarioVO
     private $nome;
     private $tipo;
     private $email;
+    private $cpf;
     private $senha;
-    private $telefone;
     private $status;
+    private $telefone;
+    private $endereco;
 
     //GET e SET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -26,7 +28,7 @@ class UsuarioVO
     }
 
     //GET e SET nome
-    public function setNome($nome): void
+    public function setNome(string $nome): void
     {
         $this->nome = Util::TratarDadosGeral($nome);
     }
@@ -36,7 +38,7 @@ class UsuarioVO
     }
 
     //GET e SET tipo
-    public function setTipo($tipo): void
+    public function setTipo(int $tipo): void
     {
         $this->tipo = $tipo;
     }
@@ -46,7 +48,7 @@ class UsuarioVO
     }
 
     //GET e SET email
-    public function setEmail($email): void
+    public function setEmail(string $email): void
     {
         $this->email = Util::RemoverTags($email);
     }
@@ -55,8 +57,18 @@ class UsuarioVO
         return $this->email;
     }
 
+    //GET e SET cpf
+    public function setCPF(string $cpf): void
+    {
+        $this->email = Util::TirarCaracteresEspeciais($cpf);
+    }
+    public function getCPF(): string
+    {
+        return $this->cpf;
+    }
+
     //GET e SET senha
-    public function setSenha($senha): void
+    public function setSenha(string $senha): void
     {
         $this->senha = Util::RemoverTags($senha);
     }
@@ -65,8 +77,18 @@ class UsuarioVO
         return $this->senha;
     }
 
+    //GET e SET status
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
     //GET e SET telefone
-    public function setTelefone($telefone): void
+    public function setTelefone(string $telefone): void
     {
         $this->telefone = Util::TirarCaracteresEspeciais($telefone);
     }
@@ -75,14 +97,14 @@ class UsuarioVO
         return $this->telefone;
     }
 
-    //GET e SET status
-    public function setStatus($status): void
+    //GET e SET endereco
+    public function setEndereco(string $endereco): void
     {
-        $this->status = $status;
+        $this->endereco = Util::RemoverTags($endereco);
     }
-    public function getStatus(): int
+    public function getEndereco(): string
     {
-        return $this->status;
+        return $this->endereco;
     }
 }
 

@@ -18,7 +18,7 @@ class EnderecoVO
     private $sigla_estado;
 
     // SET e GET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -28,7 +28,7 @@ class EnderecoVO
     }
 
     // SET e GET rua
-    public function setRua($rua): void
+    public function setRua(string $rua): void
     {
         $this->rua = Util::RemoverTags($rua);
     }
@@ -38,7 +38,7 @@ class EnderecoVO
     }
 
     // SET e GET bairro
-    public function setBairro($bairro): void
+    public function setBairro(string $bairro): void
     {
         $this->bairro = Util::TratarDadosGeral($bairro);
     }
@@ -48,7 +48,7 @@ class EnderecoVO
     }
 
     // SET e GET cep
-    public function setCep($cep): void
+    public function setCep(string $cep): void
     {
         $this->cep = Util::TirarCaracteresEspeciais($cep);
     }
@@ -58,7 +58,7 @@ class EnderecoVO
     }
 
     // SET e GET id_usuario
-    public function setIdUsuario($id_usuario): void
+    public function setIdUsuario(int $id_usuario): void
     {
         $this->id_usuario = $id_usuario;
     }
@@ -68,7 +68,7 @@ class EnderecoVO
     }
 
     // SET e GET id_cidade
-    public function setIdCidade($id_cidade): void
+    public function setIdCidade(int $id_cidade): void
     {
         $this->id_cidade = $id_cidade;
     }
@@ -78,7 +78,7 @@ class EnderecoVO
     }
 
     // SET e GET nome_cidade
-    public function setNomeCidade($nome_cidade): void
+    public function setNomeCidade(string $nome_cidade): void
     {
         $this->nome_cidade = Util::TratarDadosGeral($nome_cidade);
     }
@@ -88,7 +88,7 @@ class EnderecoVO
     }
 
     // SET e GET id_estado
-    public function setIdEstado($id_estado): void
+    public function setIdEstado(int $id_estado): void
     {
         $this->id_estado = $id_estado;
     }
@@ -98,17 +98,17 @@ class EnderecoVO
     }
 
     // SET e GET nome_estado
-    public function setNomeEstado($nome_estado): void
+    public function setNomeEstado(string $nome_estado): void
     {
         $this->nome_estado = $nome_estado;
     }
-    public function getNomeEstado(): int
+    public function getNomeEstado(): string
     {
         return $this->nome_estado;
     }
 
     // SET e GET sigla_estado
-    public function setSiglaEstado($sigla_estado): void
+    public function setSiglaEstado(string $sigla_estado): void
     {
         $this->sigla_estado = $sigla_estado;
     }
@@ -116,7 +116,6 @@ class EnderecoVO
     {
         return $this->sigla_estado;
     }
-
 }
 
 ?>

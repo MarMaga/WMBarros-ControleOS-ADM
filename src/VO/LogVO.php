@@ -11,7 +11,7 @@ class LogVO
     private $id_usuario;
 
     // SET e GET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -27,7 +27,7 @@ class LogVO
     }
 
     // SET e GET id_usuario
-    public function setIdUsuario($id_usuario): void
+    public function setIdUsuario(int $id_usuario): void
     {
         $this->id_usuario = $id_usuario;
     }

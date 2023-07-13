@@ -7,12 +7,6 @@ use Src\_Public\Util;
 class ChamadoVO
 {
     private $id;
-    private $data_abertura;
-    private $hora_abertura;
-    private $data_atendimento;
-    private $hora_atendimento;
-    private $data_encerramento;
-    private $hora_encerramento;
     private $problema;
     private $laudo;
     private $id_equipamento;
@@ -21,7 +15,7 @@ class ChamadoVO
     private $id_tecnico_encerramento;
 
     // SET e GET id
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -67,7 +61,7 @@ class ChamadoVO
     }
 
     // SET e GET problema
-    public function setProblema($problema): void
+    public function setProblema(string $problema): void
     {
         $this->problema = $problema;
     }
@@ -77,7 +71,7 @@ class ChamadoVO
     }
 
     // SET e GET laudo
-    public function setLaudo($laudo): void
+    public function setLaudo(string $laudo): void
     {
         $this->laudo = $laudo;
     }
@@ -87,7 +81,7 @@ class ChamadoVO
     }
 
     // SET e GET id_equipamento
-    public function setIdEquipamento($id_equipamento): void
+    public function setIdEquipamento(int $id_equipamento): void
     {
         $this->id_equipamento = $id_equipamento;
     }
@@ -96,9 +90,8 @@ class ChamadoVO
         return $this->id_equipamento;
     }
 
-
     // SET e GET id_funcionario
-    public function setIdFuncionario($id_funcionario): void
+    public function setIdFuncionario(int $id_funcionario): void
     {
         $this->id_funcionario = $id_funcionario;
     }
@@ -108,7 +101,7 @@ class ChamadoVO
     }
 
     // SET e GET id_tecnico_atendimento
-    public function setIdTecnicoAtendimento($id_tecnico_atendimento): void
+    public function setIdTecnicoAtendimento(int $id_tecnico_atendimento): void
     {
         $this->id_tecnico_atendimento = $id_tecnico_atendimento;
     }
@@ -118,7 +111,7 @@ class ChamadoVO
     }
 
     // SET e GET id_tecnico_encerramento
-    public function setIdTecnicoEncerramento($id_tecnico_encerramento): void
+    public function setIdTecnicoEncerramento(int $id_tecnico_encerramento): void
     {
         $this->id_tecnico_encerramento = $id_tecnico_encerramento;
     }
@@ -127,6 +120,5 @@ class ChamadoVO
         return $this->id_tecnico_encerramento;
     }
 }
-
 
 ?>

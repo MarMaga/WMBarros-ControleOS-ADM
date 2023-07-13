@@ -7,10 +7,10 @@ use Src\_Public\Util;
 class TipoEquipamentoVO
 {
     private $id;
-    private $tipo_equipamento;
+    private $nome;
 
     // SET e GET id_tipo_equipamento
-    public function setIdTipoEquipamento($id): void
+    public function setIdTipoEquipamento(int $id): void
     {
         $this->id = $id;
     }
@@ -20,13 +20,13 @@ class TipoEquipamentoVO
     }
 
     // SET e GET tipo_equipamento
-    public function setTipoEquipamento($tipo_equipamento): void
+    public function setTipoEquipamento(string $nome): void
     {
-        $this->tipo_equipamento = Util::RemoverTags($tipo_equipamento);
+        $this->nome = Util::RemoverTags($nome);
     }
     public function getTipoEquipamento(): string
     {
-        return $this->tipo_equipamento;
+        return $this->nome;
     }
 }
 

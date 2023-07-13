@@ -9,7 +9,7 @@ class FuncionarioVO extends UsuarioVO
 
     private $id_setor;
 
-    public function setIdSetor($id): void
+    public function setIdSetor(int $id): void
     {
         $this->id_setor = $id;
     }
