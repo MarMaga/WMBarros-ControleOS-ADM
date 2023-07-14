@@ -8,14 +8,17 @@ class UsuarioVO
 {
 
     private $id;
-    private $nome;
     private $tipo;
-    private $email;
+    private $setor;
+    private $nome;
     private $cpf;
-    private $senha;
-    private $status;
+    private $email;
     private $telefone;
     private $endereco;
+    private $senha;
+    private $novaSenha;
+    private $novaSenhaRepetida;
+    private $status;
 
     //GET e SET id
     public function setId(int $id): void
@@ -25,16 +28,6 @@ class UsuarioVO
     public function getId(): int
     {
         return $this->id;
-    }
-
-    //GET e SET nome
-    public function setNome(string $nome): void
-    {
-        $this->nome = Util::TratarDadosGeral($nome);
-    }
-    public function getNome(): string
-    {
-        return $this->nome;
     }
 
     //GET e SET tipo
@@ -47,6 +40,36 @@ class UsuarioVO
         return $this->tipo;
     }
 
+    //GET e SET setor
+    public function setSetor(int $setor): void
+    {
+        $this->setor = $setor;
+    }
+    public function getSetor(): int
+    {
+        return $this->setor;
+    }
+
+    //GET e SET nome
+    public function setNome(string $nome): void
+    {
+        $this->nome = Util::TratarDadosGeral($nome);
+    }
+    public function getNome(): string
+    {
+        return $this->nome;
+    }
+
+    //GET e SET cpf
+    public function setCPF(string $cpf): void
+    {
+        $this->cpf = Util::TratarDadosGeral($cpf);
+    }
+    public function getCPF(): string
+    {
+        return $this->cpf;
+    }
+
     //GET e SET email
     public function setEmail(string $email): void
     {
@@ -55,36 +78,6 @@ class UsuarioVO
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    //GET e SET cpf
-    public function setCPF(string $cpf): void
-    {
-        $this->email = Util::TirarCaracteresEspeciais($cpf);
-    }
-    public function getCPF(): string
-    {
-        return $this->cpf;
-    }
-
-    //GET e SET senha
-    public function setSenha(string $senha): void
-    {
-        $this->senha = Util::RemoverTags($senha);
-    }
-    public function getSenha(): string
-    {
-        return $this->senha;
-    }
-
-    //GET e SET status
-    public function setStatus(int $status): void
-    {
-        $this->status = $status;
-    }
-    public function getStatus(): int
-    {
-        return $this->status;
     }
 
     //GET e SET telefone
@@ -105,6 +98,46 @@ class UsuarioVO
     public function getEndereco(): string
     {
         return $this->endereco;
+    }
+
+    //GET e SET senha
+    public function setSenha(string $senha): void
+    {
+        $this->senha = Util::RemoverTags($senha);
+    }
+    public function getSenha(): string
+    {
+        return $this->senha;
+    }
+
+    //GET e SET novaSenha
+    public function setNovaSenha(string $novaSenha): void
+    {
+        $this->novaSenha = $novaSenha;
+    }
+    public function getNovaSenha(): string
+    {
+        return $this->novaSenha;
+    }
+  
+    //GET e SET status
+    public function setNovaSenhaRepetida(string $novaSenhaRepetida): void
+    {
+        $this->novaSenhaRepetida = $novaSenhaRepetida;
+    }
+    public function getNovaSenhaRepetida(): string
+    {
+        return $this->novaSenhaRepetida;
+    }
+  
+    //GET e SET status
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+    public function getStatus(): int
+    {
+        return $this->status;
     }
 }
 

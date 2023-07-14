@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarChamadosDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +44,11 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="consultar_chamados.php">
                             <div class="form-group">
                                 <label>Escolha a situação</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Todos</option>
+                                <select class="form-control select2" name="status" id="status" style="width: 100%;">
+                                    <option value="0" selected="selected">Todos</option>
+                                    <option value="1">Aberto</option>
+                                    <option value="2">Em atendimento</option>
+                                    <option value="3">Encerrado</option>
                                 </select>
                             </div>
                             <button class="btn btn-success" name="btn_pesquisar">Pesquisar</button>
@@ -95,7 +98,7 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                                                 <tr>
                                                     <td>
                                                         <a href="#" class="btn btn-block bg-gradient-info btn-xs">Ver Mais</a>
-                                                        <a href="#" class="btn btn-block btn-default btn-xs">Atender</a>
+                                                        <a href="atender_chamado.php?cod=" class="btn btn-block btn-default btn-xs">Atender</a>
                                                     </td>
                                                     <td>...</td>
                                                     <td>...</td>
@@ -131,6 +134,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
 
+    <script>
+        toastr.success('Pesquisar chamado')
+    </script>
+    
 </body>
 
 </html>

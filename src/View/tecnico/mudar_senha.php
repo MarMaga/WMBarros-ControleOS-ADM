@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/MudarSenhaDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -41,17 +41,17 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="mudar_senha.php">
                             <div class="form-group">
                                 <label>Senha atual</label>
-                                <input type="password" name="senhaatual" class="form-control"
+                                <input type="password" name="senhaatual" id="senhaatual" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Nova senha</label>
-                                <input type="password" name="senha1" class="form-control"
+                                <input type="password" name="senha" id="senha" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Repetir senha</label>
-                                <input type="password" name="senha2" class="form-control"
+                                <input type="password" name="senharepetida" id="senharepetida" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <button class="btn btn-success" name="btn_gravar">Gravar</button>
@@ -71,6 +71,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
     <!-- ./wrapper -->
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
+
+    <script>
+        toastr.success('Mudar Senha técnico')
+    </script>
 
 </body>
 

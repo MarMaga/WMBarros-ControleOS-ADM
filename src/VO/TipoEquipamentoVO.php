@@ -20,11 +20,11 @@ class TipoEquipamentoVO
     }
 
     // SET e GET tipo_equipamento
-    public function setTipoEquipamento(string $nome): void
+    public function setNomeTipoEquipamento(string $nome): void
     {
         $this->nome = Util::RemoverTags($nome);
     }
-    public function getTipoEquipamento(): string
+    public function getNomeTipoEquipamento(): string
     {
         return $this->nome;
     }

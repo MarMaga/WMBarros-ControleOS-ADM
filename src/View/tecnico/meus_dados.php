@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/MeusDadosDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +44,22 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="meus_dados.php">
                             <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" name="nome" class="form-control"
+                                <input type="text" name="nome" id="nome" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>E-mail</label>
-                                <input type="text" name="email" class="form-control"
+                                <input type="text" name="email" id="email" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Telefone</label>
-                                <input type="text" name="telefone" class="form-control"
+                                <input type="text" name="telefone" id="telefone" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Endereço</label>
-                                <input type="text" name="endereco" class="form-control"
+                                <input type="text" name="endereco" id="endereco" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <button class="btn btn-success" name="btn_gravar">Gravar</button>
@@ -79,6 +79,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
     <!-- ./wrapper -->
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
+
+    <script>
+        toastr.success('Meus Dados técnico')
+    </script>
 
 </body>
 

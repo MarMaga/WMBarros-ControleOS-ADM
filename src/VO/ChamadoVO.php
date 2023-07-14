@@ -9,10 +9,12 @@ class ChamadoVO
     private $id;
     private $problema;
     private $laudo;
+    private $id_setor;
     private $id_equipamento;
     private $id_funcionario;
     private $id_tecnico_atendimento;
     private $id_tecnico_encerramento;
+    private $status;
 
     // SET e GET id
     public function setId(int $id): void
@@ -80,6 +82,16 @@ class ChamadoVO
         return $this->laudo;
     }
 
+    // SET e GET id_setor
+    public function setIdSetor(int $id_setor): void
+    {
+        $this->id_setor = $id_setor;
+    }
+    public function getIdSetor(): int
+    {
+        return $this->id_setor;
+    }
+
     // SET e GET id_equipamento
     public function setIdEquipamento(int $id_equipamento): void
     {
@@ -118,6 +130,16 @@ class ChamadoVO
     public function getIdTecnicoEncerramento(): int
     {
         return $this->id_tecnico_encerramento;
+    }
+
+    // SET e GET status
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+    public function getStatus(): int
+    {
+        return $this->status;
     }
 }
 

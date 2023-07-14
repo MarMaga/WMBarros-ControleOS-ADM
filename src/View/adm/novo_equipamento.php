@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,26 +44,26 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="novo_equipamento.php">
                             <div class="form-group">
                                 <label>Tipo</label>
-                                <select class="form-control select2" style="width: 100%;">
+                                <select class="form-control select2" name="tipo" id="tipo" style="width: 100%;">
                                     <option selected="selected">Selecione</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Modelo</label>
-                                <select class="form-control select2" style="width: 100%;">
+                                <select class="form-control select2" name="modelo" id="modelo" style="width: 100%;">
                                     <option selected="selected">Selecione</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Identificação</label>
-                                <input type="text" name="table_search" class="form-control"
+                                <input type="text" name="identificacao" id="identificacao" class="form-control"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Descrição</label>
-                                <textarea class="form-control" rows="3" placeholder="Digite aqui..."></textarea>
+                                <textarea class="form-control" rows="3" name="descricao" id="descricao" placeholder="Digite aqui..."></textarea>
                             </div>
-                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                            <button class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
@@ -81,6 +81,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
 
+    <script>
+        toastr.success('Novo equipamento')
+    </script>
+    
 </body>
 
 </html>

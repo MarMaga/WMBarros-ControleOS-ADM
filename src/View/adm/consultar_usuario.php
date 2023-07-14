@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="consultar_usuario.php">
                             <div class="form-group">
                                 <label>Pesquisar por Nome</label>
-                                <input class="form-control" placeholder="Digite aqui..." name="tipo" id="tipo">
+                                <input class="form-control" name="nome" id="nome" placeholder="Digite aqui...">
                             </div>
                             <button class="btn btn-success" name="btn_buscar">Buscar</button>
                         </form>
@@ -115,6 +115,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
     <!-- ./wrapper -->
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
+
+    <script>
+        toastr.success('Consultar usuário')
+    </script>
 
 </body>
 

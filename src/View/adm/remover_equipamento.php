@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/RemoverEquipamentoDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +44,9 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="remover_equipamento.php">
                             <div class="form-group">
                                 <label>Setor</label>
-                                <select class="form-control select2" style="width: 100%;">
+                                <select class="form-control select2" name="setor" id="setor" style="width: 100%;">
                                     <option selected="selected">Selecione</option>
+                                    <option value="1">Setor 1</option>
                                 </select>
                             </div>
                             <button class="btn btn-success" name="btn_procurar">Procurar</button>
@@ -115,6 +116,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
 
+    <script>
+        toastr.success('Remover equipamento')
+    </script>
+    
 </body>
 
 </html>

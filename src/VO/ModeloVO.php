@@ -20,7 +20,7 @@ class ModeloVO
     }
     
     // SET e GET motivo_descarte
-    public function setNomeModelo(int $nome_modelo): void
+    public function setNomeModelo(string $nome_modelo): void
     {
         $this->nome_modelo = Util::RemoverTags($nome_modelo);
     }

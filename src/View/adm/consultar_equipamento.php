@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="consultar_equipamento.php">
                             <div class="form-group">
                                 <label>Pesquisar por Tipo</label>
-                                <input class="form-control" placeholder="Digite aqui..." name="tipo" id="tipo">
+                                <select class="form-control select2" name="tipo" id="tipo" style="width: 100%;">
+                                    <option selected="selected">Selecione</option>
+                                    <option value="1">NOTEBOOK</option>
+                                </select>
                             </div>
                             <button class="btn btn-success" name="btn_buscar">Buscar</button>
                         </form>
@@ -120,6 +123,9 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
 
+    <script>
+        toastr.success('Consultar equipamento')
+    </script>
 </body>
 
 </html>

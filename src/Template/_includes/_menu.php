@@ -15,33 +15,45 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="gerenciar_tipoequipamento.php" class="nav-link">
+                            <a href="../adm/gerenciar_tipoequipamento.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tipos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index2.html" class="nav-link">
+                            <a href="../adm/gerenciar_modeloequipamento.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Modelos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            <a href="../adm/novo_equipamento.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Novo</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            <a href="../adm/consultar_equipamento.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Consultar</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="../adm/alocar_equipamento.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Alocar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../adm/remover_equipamento.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Remover</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                 <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Usuário
@@ -50,25 +62,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="gerenciar_tipoequipamento.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tipos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../../index2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Modelos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../adm/novo_usuario.php" class="nav-link active">
+                            <a href="../adm/novo_usuario.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Novo</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            <a href="../adm/consultar_usuario.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Consultar</p>
                             </a>
@@ -120,15 +120,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../tecnico/atender_chamado.php" class="nav-link">
+                            <a href="../tecnico/consultar_chamados.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Atender chamado</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../tecnico/consultar_chamado.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Consultar chamado</p>
+                                <p>Consultar chamados</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -4,7 +4,7 @@ namespace Src\VO;
 
 use Src\_Public\Util;
 
-class AlocacaoVO
+class AlocarVO
 {
     private $id;
     private $id_equipamento;

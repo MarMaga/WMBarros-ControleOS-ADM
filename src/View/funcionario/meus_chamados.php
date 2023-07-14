@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/MeusChamadosDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +44,11 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
                         <form method="post" action="meus_chamados.php">
                             <div class="form-group">
                                 <label>Escolha a situação</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Todos</option>
+                                <select class="form-control select2" name="status" id="status" style="width: 100%;">
+                                    <option value="0" selected="selected">Todos</option>
+                                    <option value="1">Aberto</option>
+                                    <option value="2">Em atendimento</option>
+                                    <option value="3">Encerrado</option>
                                 </select>
                             </div>
                             <button class="btn btn-success" name="btn_pesquisar">Pesquisar</button>
@@ -129,6 +132,10 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
     <!-- ./wrapper -->
 
     <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
+
+    <script>
+        toastr.success('Meus chamados')
+    </script>
 
 </body>
 
