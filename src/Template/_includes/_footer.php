@@ -11,3 +11,7 @@
     <!-- Control sidebar content goes here -->
 </aside>
 <!-- /.control-sidebar -->
+<?php
+include_once PATH . 'Template/_includes/_scripts.php';
+include_once PATH . 'Template/_includes/_msg.php';
+?>

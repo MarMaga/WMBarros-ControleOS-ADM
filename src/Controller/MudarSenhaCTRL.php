@@ -6,7 +6,7 @@ use Src\VO\UsuarioVO;
 
 class MudarSenhaCTRL
 {
-    public function AtualizarSenha(UsuarioVO $voMudarSenha)
+    public function AtualizarSenha(UsuarioVO $voMudarSenha): int
     {
 
         if (
@@ -15,7 +15,7 @@ class MudarSenhaCTRL
             empty($voMudarSenha->getNovaSenhaRepetida())
         )
             return 0;
-        
+        return 1;
     }
 }
 

@@ -8,3 +8,7 @@
 <script src="../../Template/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../Template/dist/js/demo.js"></script>
+<!-- Mensagens -->
+<script src="../../Resource/js/mensagem.js"></script>
+<!-- Funções -->
+<script src="../../Resource/js/funcoes.js"></script>

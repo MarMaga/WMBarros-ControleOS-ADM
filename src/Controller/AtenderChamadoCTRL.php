@@ -17,7 +17,7 @@ class AtenderChamadoCTRL
             empty($voAtenderChamado->getLaudo())
         )
             return 0;
-        
+        return 1;
     }
 }
 

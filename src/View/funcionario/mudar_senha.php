@@ -38,23 +38,23 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/MudarSenhaDV.php';
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="mudar_senha.php">
+                        <form id="formMudarSenhaFun" method="post" action="mudar_senha.php">
                             <div class="form-group">
                                 <label>Senha atual</label>
-                                <input type="password" name="senhaatual" id="senhaatual" class="form-control"
+                                <input type="password" name="senhaatual" id="senhaatual" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Nova senha</label>
-                                <input type="password" name="senha" id="senha" class="form-control"
+                                <input type="password" name="senha" id="senha" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Repetir senha</label>
-                                <input type="password" name="senharepetida" id="senharepetida" class="form-control"
+                                <input type="password" name="senharepetida" id="senharepetida" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
-                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                            <button onclick="return NotificarCampos('formMudarSenhaFun')" class="btn btn-success" name="btn_gravar">Gravar</button>
                         </form>
                     </div>
                 </div>
@@ -70,12 +70,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/MudarSenhaDV.php';
     </div>
     <!-- ./wrapper -->
 
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Mudar Senha funcionário')
-    </script>
-    
 </body>
 
 </html>

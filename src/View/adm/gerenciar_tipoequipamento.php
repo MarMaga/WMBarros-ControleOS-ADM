@@ -41,12 +41,18 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                         <h3 class="card-title">Cadastre um novo tipo de equipamento</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="gerenciar_tipoequipamento.php">
+                        <form id="formTipo" method="post" action="gerenciar_tipoequipamento.php">
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
-                                <input class="form-control" name="tipo" id="tipo" placeholder="Digite aqui...">
+                                <input name="novo" id="novo" type="hidden" value="S">
+                                <input name="h_id_alt" id="h_id_alt" type="hidden" value="">
+                                <input name="h_tipo" id="h_tipo" type="hidden" value="">
+                                <input class="form-control obg" name="tipo" id="tipo" onblur="Maiuscula();"
+                                    placeholder="Digite aqui...">
                             </div>
-                            <button class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
+                            <button onclick="return NovoTipo()" class="btn btn-default" name="btn_novo">Novo</button>
+                            <button onclick="return VerificaDigitacaoTipoEquipamento()" class="btn btn-success"
+                                name="btn_salvar">Salvar</button>
                         </form>
                     </div>
                 </div>
@@ -83,13 +89,55 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-xs">Alterar</a>
-                                                        <a href="#" class="btn btn-danger btn-xs">Excluir</a>
-                                                    </td>
-                                                    <td>183</td>
-                                                </tr>
+                                                <?php for ($i = 0; $i < count($tipos); $i++) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="#"
+                                                                onclick="return AlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                                                                class="btn btn-warning btn-xs">Alterar</a>
+                                                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
+                                                                data-target="#modalExcluir<?= $i ?>">Excluir</a>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" name="id" id="id"
+                                                                value="<?= $tipos[$i]['id'] ?>" />
+                                                            <?= $tipos[$i]['tipo_equipamento'] ?>
+                                                            <form action="gerenciar_tipoequipamento.php" method="post">
+                                                                <input name="h_id" type="hidden"
+                                                                    value="<?= $tipos[$i]['id'] ?>" />
+                                                                <div class="modal fade" id="modalExcluir<?= $i ?>"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title" id="myModalLabel">
+                                                                                    Confirmação de
+                                                                                    exclusão</h4>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-hidden="true">&times;</button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Deseja excluir o tipo: <b>
+                                                                                    <?= $tipos[$i]['tipo_equipamento'] ?>
+                                                                                </b> ?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-default"
+                                                                                    data-dismiss="modal">Cancelar</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary"
+                                                                                    name="btn_excluir">Sim</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -112,10 +160,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
     </div>
     <!-- ./wrapper -->
 
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
     <script>
-        toastr.success('Tipo de equipamento');
+        $("#tipo").focus();
+        AjustaMenu("Gerenciar tipo de equipamento", "menuEquipamentos", "tiposEquipamentos");
     </script>
 
 </body>

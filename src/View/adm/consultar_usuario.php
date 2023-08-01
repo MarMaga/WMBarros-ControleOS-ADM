@@ -41,12 +41,12 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
                         <h3 class="card-title">Consulte os usuários</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="consultar_usuario.php">
+                        <form id="formConsUsu" method="post" action="consultar_usuario.php">
                             <div class="form-group">
                                 <label>Pesquisar por Nome</label>
-                                <input class="form-control" name="nome" id="nome" placeholder="Digite aqui...">
+                                <input class="form-control obg" name="nome" id="nome" placeholder="Digite aqui...">
                             </div>
-                            <button class="btn btn-success" name="btn_buscar">Buscar</button>
+                            <button onclick="return NotificarCampos('formConsUsu')" class="btn btn-success" name="btn_buscar">Buscar</button>
                         </form>
                     </div>
                 </div>
@@ -113,12 +113,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Consultar usuário')
-    </script>
 
 </body>
 

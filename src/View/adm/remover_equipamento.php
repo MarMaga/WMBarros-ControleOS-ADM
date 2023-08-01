@@ -41,15 +41,15 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/RemoverEquipamentoDV.php'
                         <h3 class="card-title">Consulte os seus equipamentos por setor</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="remover_equipamento.php">
+                        <form id="formRem" method="post" action="remover_equipamento.php">
                             <div class="form-group">
                                 <label>Setor</label>
-                                <select class="form-control select2" name="setor" id="setor" style="width: 100%;">
-                                    <option selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="setor" id="setor" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
                                     <option value="1">Setor 1</option>
                                 </select>
                             </div>
-                            <button class="btn btn-success" name="btn_procurar">Procurar</button>
+                            <button onclick="return NotificarCampos('formRem')" class="btn btn-success" name="btn_procurar">Procurar</button>
                         </form>
                     </div>
                 </div>
@@ -113,12 +113,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/RemoverEquipamentoDV.php'
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Remover equipamento')
-    </script>
     
 </body>
 

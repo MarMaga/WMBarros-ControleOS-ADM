@@ -41,12 +41,12 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                         <h3 class="card-title">Cadastre um novo modelo de equipamento</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="gerenciar_modeloequipamento.php">
+                        <form id="formMod" method="post" action="gerenciar_modeloequipamento.php">
                             <div class="form-group">
                                 <label>Nome do modelo</label>
-                                <input class="form-control" name="nome" id="nome" placeholder="Digite aqui...">
+                                <input class="form-control obg" name="nome" id="nome" placeholder="Digite aqui...">
                             </div>
-                            <button class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
+                            <button onclick="return NotificarCampos('formMod')" class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
@@ -111,12 +111,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script> 
-        toastr.success('Modelo de equipamento');
-    </script>
 
 </body>
 

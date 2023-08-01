@@ -41,28 +41,28 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/MeusDadosDV.php';
                         <h3 class="card-title">Cadastre aqui os seus dados</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="meus_dados.php">
+                        <form id="formMeusDadosTec" method="post" action="meus_dados.php">
                             <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" name="nome" id="nome" class="form-control"
+                                <input type="text" name="nome" id="nome" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>E-mail</label>
-                                <input type="text" name="email" id="email" class="form-control"
+                                <input type="text" name="email" id="email" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Telefone</label>
-                                <input type="text" name="telefone" id="telefone" class="form-control"
+                                <input type="text" name="telefone" id="telefone" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Endereço</label>
-                                <input type="text" name="endereco" id="endereco" class="form-control"
+                                <input type="text" name="endereco" id="endereco" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
-                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                            <button onclick="return NotificarCampos('formMeusDadosTec')" class="btn btn-success" name="btn_gravar">Gravar</button>
                         </form>
                     </div>
                 </div>
@@ -77,12 +77,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/MeusDadosDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Meus Dados técnico')
-    </script>
 
 </body>
 

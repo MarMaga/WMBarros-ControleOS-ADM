@@ -10,7 +10,8 @@ if(isset($_POST['btn_cadastrar'])){
     $voEq = new EquipamentoVO();
     $ctrlEq = new EquipamentoCTRL();
 
-    $voEq->setId(intval($_POST['tipo']));
+    
+    $voEq->setId((int)$_POST['tipo']);
     $voEq->setIdModelo(intval($_POST['modelo']));
     $voEq->setIdentificacaoEquipamento(trim($_POST['identificacao']));
     $voEq->setDescricaoEquipamento(trim($_POST['descricao']));

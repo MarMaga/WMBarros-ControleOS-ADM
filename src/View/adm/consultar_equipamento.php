@@ -41,15 +41,15 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                         <h3 class="card-title">Consulte os equipamentos</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="consultar_equipamento.php">
+                        <form id="formConsEq" method="post" action="consultar_equipamento.php">
                             <div class="form-group">
                                 <label>Pesquisar por Tipo</label>
-                                <select class="form-control select2" name="tipo" id="tipo" style="width: 100%;">
-                                    <option selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
                                     <option value="1">NOTEBOOK</option>
                                 </select>
                             </div>
-                            <button class="btn btn-success" name="btn_buscar">Buscar</button>
+                            <button onclick="return NotificarCampos('formConsEq')" class="btn btn-success" name="btn_buscar">Buscar</button>
                         </form>
                     </div>
                 </div>
@@ -121,11 +121,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
     </div>
     <!-- ./wrapper -->
 
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Consultar equipamento')
-    </script>
 </body>
 
 </html>

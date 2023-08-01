@@ -99,12 +99,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/NovoUsuarioDV.php';
     </div>
     <!-- ./wrapper -->
 
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Novo usuário')
-    </script>
-
 </body>
 
 </html>

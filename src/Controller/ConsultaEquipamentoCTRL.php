@@ -11,7 +11,7 @@ class ConsultaEquipamentoCTRL
 
         if ($voTipoEq->getIdTipoEquipamento() == 0)
             return 0;
-    
+        return 1;
     }
 }
 

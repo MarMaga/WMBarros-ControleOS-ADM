@@ -58,7 +58,7 @@ class EquipamentoVO
     // GET data_descarte
     public function setDataDescarte(string $data_descarte): void
     {
-        $this->data_descarte = Util::TirarCaracteresEspeciais($data_descarte);
+        $this->data_descarte = Util::TratarDadosGeral($data_descarte);
     }
     public function getDataDescarte(): string
     {

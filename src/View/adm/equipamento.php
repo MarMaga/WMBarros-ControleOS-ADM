@@ -41,29 +41,33 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                         <h3 class="card-title">Cadastre aqui os seus equipamentos</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="novo_equipamento.php">
+                        <form id="formCAD" method="post" action="equipamento.php">
                             <div class="form-group">
                                 <label>Tipo</label>
-                                <select class="form-control select2" name="tipo" id="tipo" style="width: 100%;">
-                                    <option selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
+                                    <option value="NOTEBOOK">NOTEBOOK</option>
+                                    <option value="IMPRESSORA">IMPRESSORA</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Modelo</label>
-                                <select class="form-control select2" name="modelo" id="modelo" style="width: 100%;">
-                                    <option selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="modelo" id="modelo" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
+                                    <option value="EQ1">Equipamento 1</option>
+                                    <option value="EQ2">Equipamento 2</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Identificação</label>
-                                <input type="text" name="identificacao" id="identificacao" class="form-control"
+                                <input onblur="VerificaCampoVazio('identificacao')"type="text" name="identificacao" id="identificacao" class="form-control obg"
                                     placeholder="Digite aqui...">
                             </div>
                             <div class="form-group">
                                 <label>Descrição</label>
-                                <textarea class="form-control" rows="3" name="descricao" id="descricao" placeholder="Digite aqui..."></textarea>
+                                <textarea class="form-control obg" rows="3" name="descricao" id="descricao" placeholder="Digite aqui..."></textarea>
                             </div>
-                            <button class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
+                            <button onclick="return NotificarCampos('formCAD')" class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
@@ -78,12 +82,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Novo equipamento')
-    </script>
     
 </body>
 

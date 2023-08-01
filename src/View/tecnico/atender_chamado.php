@@ -41,7 +41,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AtenderChamadoDV.php';
                         <h3 class="card-title">Coloque os detalhes dos seus atendimentos</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="atender_chamado.php">
+                        <form id="formAt" method="post" action="atender_chamado.php">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -51,14 +51,14 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AtenderChamadoDV.php';
                                                 <span class="input-group-text"><i
                                                         class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                            <input type="text" class="form-control obg" data-inputmask-alias="datetime"
                                                 data-inputmask-inputformat="dd/mm/yyyy" data-mask name="data" id="data">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Setor</label>
-                                        <select class="form-control select2" name="setor" id="setor" style="width: 100%;">
-                                            <option value="0" selected="selected">Selecione</option>
+                                        <select class="form-control select2 obg" name="setor" id="setor" style="width: 100%;">
+                                            <option value="" selected="selected">Selecione</option>
                                             <option value="1" >Setor 1</option>
                                         </select>
                                     </div>
@@ -66,15 +66,15 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AtenderChamadoDV.php';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Funcionário</label>
-                                        <select class="form-control select2" name="funcionario" id="funcionario" style="width: 100%;">
-                                            <option value="0" selected="selected">Selecione</option>
+                                        <select class="form-control select2 obg" name="funcionario" id="funcionario" style="width: 100%;">
+                                            <option value="" selected="selected">Selecione</option>
                                             <option value="1">Funcionário 1</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Equipamento</label>
-                                        <select class="form-control select2" name="equipamento" id="equipamento" style="width: 100%;">
-                                            <option value="0" selected="selected">Selecione</option>
+                                        <select class="form-control select2 obg" name="equipamento" id="equipamento" style="width: 100%;">
+                                            <option value="" selected="selected">Selecione</option>
                                             <option value="1">Notebook ACER</option>
                                         </select>
                                     </div>
@@ -82,13 +82,13 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AtenderChamadoDV.php';
                             </div>
                             <div class="form-group">
                                 <label>Descrição do problema</label>
-                                <textarea class="form-control" rows="3" name="problema" id="problema" placeholder="Digite aqui..."></textarea>
+                                <textarea class="form-control obg" rows="3" name="problema" id="problema" placeholder="Digite aqui..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Laudo</label>
-                                <textarea class="form-control" rows="3" name="laudo" id="laudo" placeholder="Digite aqui..."></textarea>
+                                <textarea class="form-control obg" rows="3" name="laudo" id="laudo" placeholder="Digite aqui..."></textarea>
                             </div>
-                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                            <button onclick="return NotificarCampos('formAt')" class="btn btn-success" name="btn_gravar">Gravar</button>
                         </form>
                     </div>
                 </div>
@@ -103,12 +103,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AtenderChamadoDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Atender chamado')
-    </script>
 
 </body>
 

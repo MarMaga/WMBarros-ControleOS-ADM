@@ -38,19 +38,19 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/NovoChamadoDV.php';
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="novo_chamado.php">
+                        <form id="formNovoChamado" method="post" action="novo_chamado.php">
                             <div class="form-group">
                                 <label>Escolha o equipamento</label>
-                                <select class="form-control select2" name="equipamento" id="equipamento" style="width: 100%;">
-                                    <option value="0" selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="equipamento" id="equipamento" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
                                     <option value="1">Notebook ACER</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Descreva o problema</label>
-                                <textarea class="form-control" rows="3" name="problema" id="problema" placeholder="Digite aqui..."></textarea>
+                                <textarea class="form-control obg" rows="3" name="problema" id="problema" placeholder="Digite aqui..."></textarea>
                             </div>
-                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                            <button onclick="return NotificarCampos('formNovoChamado')" class="btn btn-success" name="btn_gravar">Gravar</button>
                         </form>
                     </div>
                 </div>
@@ -65,12 +65,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/NovoChamadoDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Novo chamado')
-    </script>
 
 </body>
 

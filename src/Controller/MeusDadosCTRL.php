@@ -6,7 +6,7 @@ use Src\VO\UsuarioVO;
 
 class MeusDadosCTRL
 {
-    public function AtualizarMeusDados(UsuarioVO $voMeusDados)
+    public function AtualizarMeusDados(UsuarioVO $voMeusDados): int
     {
 
         if (
@@ -16,7 +16,7 @@ class MeusDadosCTRL
             empty($voMeusDados->getEndereco())
         )
             return 0;
-        
+        return 1;
     }
 }
 

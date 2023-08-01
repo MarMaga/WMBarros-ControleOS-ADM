@@ -41,17 +41,17 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarChamadosDV.php';
                         <h3 class="card-title">Consulte os seus chamados por situação</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="consultar_chamados.php">
+                        <form id="formConsCha" method="post" action="consultar_chamados.php">
                             <div class="form-group">
                                 <label>Escolha a situação</label>
-                                <select class="form-control select2" name="status" id="status" style="width: 100%;">
-                                    <option value="0" selected="selected">Todos</option>
+                                <select class="form-control select2 obg" name="status" id="status" style="width: 100%;">
+                                    <option value="" selected="selected">Todos</option>
                                     <option value="1">Aberto</option>
                                     <option value="2">Em atendimento</option>
                                     <option value="3">Encerrado</option>
                                 </select>
                             </div>
-                            <button class="btn btn-success" name="btn_pesquisar">Pesquisar</button>
+                            <button onclick="return NotificarCampos('formConsCha')" class="btn btn-success" name="btn_pesquisar">Pesquisar</button>
                         </form>
                     </div>
                 </div>
@@ -132,12 +132,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarChamadosDV.php';
     </div>
     <!-- ./wrapper -->
 
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Pesquisar chamado')
-    </script>
-    
 </body>
 
 </html>

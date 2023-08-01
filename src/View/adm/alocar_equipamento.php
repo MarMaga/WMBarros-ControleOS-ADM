@@ -41,22 +41,22 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AlocarEquipamentoDV.php';
                         <h3 class="card-title">Aloque aqui o equipamento ao setor específico</h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="alocar_equipamento.php">
+                        <form id="formAloc" method="post" action="alocar_equipamento.php">
                             <div class="form-group">
                                 <label>Equipamento</label>
-                                <select class="form-control select2" name="equipamento" id="equipamento" style="width: 100%;">
-                                    <option selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="equipamento" id="equipamento" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
                                     <option value="1">AAA</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Setor</label>
-                                <select class="form-control select2" name="setor" id="setor" style="width: 100%;">
-                                    <option selected="selected">Selecione</option>
+                                <select class="form-control select2 obg" name="setor" id="setor" style="width: 100%;">
+                                    <option value="" selected="selected">Selecione</option>
                                     <option value="1">BBB</option>
                                 </select>
                             </div>
-                            <button class="btn btn-success" name="btn_gravar">Gravar</button>
+                            <button onclick="return NotificarCampos('formAloc')" class="btn btn-success" name="btn_gravar">Gravar</button>
                         </form>
                     </div>
                 </div>
@@ -71,12 +71,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AlocarEquipamentoDV.php';
 
     </div>
     <!-- ./wrapper -->
-
-    <?php include_once PATH . 'Template/_includes/_scripts.php'; ?>
-
-    <script>
-        toastr.success('Alocar equipamento')
-    </script>
     
 </body>
 

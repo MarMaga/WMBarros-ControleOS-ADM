@@ -6,7 +6,7 @@ use Src\VO\UsuarioVO;
 
 class NovoUsuarioCTRL
 {
-    public function CadastrarUsuario(UsuarioVO $voNovoUsuario)
+    public function CadastrarUsuario(UsuarioVO $voNovoUsuario): int
     {
 
         if (
@@ -19,7 +19,7 @@ class NovoUsuarioCTRL
             empty($voNovoUsuario->getEndereco())
         )
             return 0;
-       
+        return 1;
     }
 }
 

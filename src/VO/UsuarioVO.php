@@ -83,7 +83,7 @@ class UsuarioVO
     //GET e SET telefone
     public function setTelefone(string $telefone): void
     {
-        $this->telefone = Util::TirarCaracteresEspeciais($telefone);
+        $this->telefone = Util::TratarDadosGeral($telefone);
     }
     public function getTelefone(): string
     {
