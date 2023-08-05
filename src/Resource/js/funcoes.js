@@ -65,6 +65,7 @@ function AlterarTipoEquipamento(id, nome) {
     $("#h_tipo").val(nome);
     $("#tipo").val(nome);
     $("#tipo").focus();
+    
     return false;
 }
 

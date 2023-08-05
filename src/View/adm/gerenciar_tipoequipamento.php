@@ -119,9 +119,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                                                     aria-hidden="true">&times;</button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                Deseja excluir o tipo: <b>
-                                                                                    <?= $tipos[$i]['tipo_equipamento'] ?>
-                                                                                </b> ?
+                                                                                Deseja excluir o tipo: <b><?= $tipos[$i]['tipo_equipamento'] ?> </b> ?
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
@@ -149,7 +147,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                     </div>
                 </div>
                 <!-- /.card -->
-
             </section>
             <!-- /.content -->
         </div>
