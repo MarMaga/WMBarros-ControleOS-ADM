@@ -5,15 +5,15 @@ use Src\Controller\TipoEquipamentoCTRL;
 
 include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
-if (isset($_POST['btn_salvar'])) {
+$ctrlTipoEq = new TipoEquipamentoCTRL();
+
+if (isset($_POST['btn_cadastrar'])) {
 
     $voTipoEq = new TipoEquipamentoVO();
 
     $inclusao = $_POST['novo'];
 
     $voTipoEq->setNomeTipoEquipamento($_POST['tipo']);
-
-    $ctrlTipoEq = new TipoEquipamentoCTRL();
 
     if ($inclusao == 'S') {
 
@@ -33,19 +33,31 @@ if (isset($_POST['btn_salvar'])) {
         }
     }
 
-} elseif (isset($_POST['btn_excluir'])) {
+} elseif(isset($_POST['btn_alterar'])){
+    
+    $tipoOriginal = $_POST['tipo_original_alterar'];
+    $tipo = $_POST['tipo_alterar'];
 
+    if($tipoOriginal == $tipo){
+        $ret = -2;
+    }
+
+    $voTipoEq = new TipoEquipamentoVO();
+
+    $voTipoEq->setIdTipoEquipamento($_POST['id_tipo_alterar']);
+    $voTipoEq->setNomeTipoEquipamento($tipo);
+
+    $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
+
+} elseif (isset($_POST['btn_excluir'])) {
+    
     $voTipoEq = new TipoEquipamentoVO();
 
     $voTipoEq->setIdTipoEquipamento($_POST['h_id']);
 
-    $ctrlTipoEq = new TipoEquipamentoCTRL();
-
     $ret = $ctrlTipoEq->ExcluirTipoEquipamentoCTRL($voTipoEq);
-
 }
 
-$sqlConsultaTodos = new TipoEquipamentoCTRL();
-$tipos = $sqlConsultaTodos->ConsultarTodosTipoEquipamentoCTRL();
+$tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
 ?>

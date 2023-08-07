@@ -7,12 +7,18 @@ use Src\Model\Conexao;
 use Src\Model\SQL\TIPO_EQUIPAMENTO_SQL;
 use Src\VO\TipoEquipamentoVO;
 
+
 class TipoEquipamentoMODEL extends Conexao
 {
+    private $conexao;
+
+    public function __construct()
+    {
+        $this->conexao = parent::retornarConexao();
+    }
     public function CadastrarTipoEquipamentoMODEL(TipoEquipamentoVO $voTipoEq)
     {
-        $conexao = parent::retornarConexao();
-        $sql = $conexao->prepare(TIPO_EQUIPAMENTO_SQL::INSERIR_TIPO_EQUIPAMENTO());
+        $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::INSERIR_TIPO_EQUIPAMENTO());
         $sql->bindValue(1, $voTipoEq->getNomeTipoEquipamento());
 
         try {
@@ -23,10 +29,9 @@ class TipoEquipamentoMODEL extends Conexao
         }
     }
 
-    public function ConsultaTodosTipoEquipamentoMODEL()
+    public function ConsultarTipoEquipamentoMODEL()
     {
-        $conexao = parent::retornarConexao();
-        $sql = $conexao->prepare(TIPO_EQUIPAMENTO_SQL::CONSULTAR_TODOS_TIPO_EQUIPAMENTO());
+        $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::SELECIONAR_TIPO_EQUIPAMENTO());
 
         try {
             $sql->setFetchMode(\PDO::FETCH_ASSOC);
@@ -39,23 +44,22 @@ class TipoEquipamentoMODEL extends Conexao
 
     public function AlterarTipoEquipamentoMODEL(TipoEquipamentoVO $voTipoEq)
     {
-        $conexao = parent::retornarConexao();
-        $sql = $conexao->prepare(TIPO_EQUIPAMENTO_SQL::ALTERAR_TIPO_EQUIPAMENTO());
-        $sql->bindValue(1, $voTipoEq->getNomeTipoEquipamento());
-        $sql->bindValue(2, $voTipoEq->getIdTipoEquipamento());
+        $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::ALTERAR_TIPO_EQUIPAMENTO());
+        $i = 1;
+        $sql->bindValue($i++, $voTipoEq->getNomeTipoEquipamento());
+        $sql->bindValue($i++, $voTipoEq->getIdTipoEquipamento());
 
-        try{
+        try {
             $sql->execute();
             return 1;
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             return -1;
         }
     }
 
     public function ExcluiTipoEquipamentoMODEL(TipoEquipamentoVO $voTipoEq)
     {
-        $conexao = parent::retornarConexao();
-        $sql = $conexao->prepare(TIPO_EQUIPAMENTO_SQL::EXCLUIR_TIPO_EQUIPAMENTO());
+        $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::EXCLUIR_TIPO_EQUIPAMENTO());
         $sql->bindValue(1, $voTipoEq->getIdTipoEquipamento());
 
         try {

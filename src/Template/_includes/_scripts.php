@@ -12,3 +12,5 @@
 <script src="../../Resource/js/mensagem.js"></script>
 <!-- Funções -->
 <script src="../../Resource/js/funcoes.js"></script>
+<!-- Modais -->
+<script src="../../Resource/js/carregar_modal.js"></script>

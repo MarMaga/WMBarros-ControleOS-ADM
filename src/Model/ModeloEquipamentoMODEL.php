@@ -9,7 +9,8 @@ use Src\VO\ModeloVO;
 
 class ModeloEquipamentoMODEL extends Conexao
 {
-    public static function CadastrarModeloEquipamento(ModeloVO $voModelo)
+
+    public static function CadastrarModeloEquipamentoMODEL(ModeloVO $voModelo)
     {
         $conexao = parent::retornarConexao();
         $sql = $conexao->prepare(MODELO_EQUIPAMENTO_SQL::INSERIR_MODELO_EQUIPAMENTO());
@@ -21,6 +22,11 @@ class ModeloEquipamentoMODEL extends Conexao
         } catch (Exception $ex) {
             return -1;
         }
+    }
+
+    public static function ConsultarModeloEquipamentoMODEL(ModeloVO $voModelo)
+    {
+
     }
 }
 

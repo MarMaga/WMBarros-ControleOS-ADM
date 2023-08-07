@@ -45,14 +45,11 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
                                 <input name="novo" id="novo" type="hidden" value="S">
-                                <input name="h_id_alt" id="h_id_alt" type="hidden" value="">
-                                <input name="h_tipo" id="h_tipo" type="hidden" value="">
                                 <input class="form-control obg" name="tipo" id="tipo" onblur="Maiuscula();"
                                     placeholder="Digite aqui...">
                             </div>
-                            <button onclick="return NovoTipo()" class="btn btn-default" name="btn_novo">Novo</button>
-                            <button onclick="return VerificaDigitacaoTipoEquipamento()" class="btn btn-success"
-                                name="btn_salvar">Salvar</button>
+                            <button onclick="return NotificarCampos('formTipo')" class="btn btn-success"
+                                name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
@@ -93,8 +90,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                     <tr>
                                                         <td>
                                                             <a href="#"
-                                                                onclick="return AlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
-                                                                class="btn btn-warning btn-xs">Alterar</a>
+                                                                onclick="return ModalAlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                                                                class="btn btn-warning btn-xs" data-toggle="modal"
+                                                                data-target="#alterarTipo">Alterar</a>
                                                             <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
                                                                 data-target="#modalExcluir<?= $i ?>">Excluir</a>
                                                         </td>
@@ -119,7 +117,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                                                     aria-hidden="true">&times;</button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                Deseja excluir o tipo: <b><?= $tipos[$i]['tipo_equipamento'] ?> </b> ?
+                                                                                Deseja excluir o tipo: <b>
+                                                                                    <?= $tipos[$i]['tipo_equipamento'] ?>
+                                                                                </b> ?
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
@@ -147,6 +147,12 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                     </div>
                 </div>
                 <!-- /.card -->
+                <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
+                    <?php include_once 'modais/alterar_tipo.php'; ?>
+                </form>
+                <form action="gerenciar_tipoequipamento.php" method="post" id="formExc">
+                    <?php include_once 'modais/excluir_tipo.php'; ?>
+                </form>
             </section>
             <!-- /.content -->
         </div>
@@ -158,8 +164,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
     <!-- ./wrapper -->
 
     <script>
-        $("#tipo").focus();
         AjustaMenu("Gerenciar tipo de equipamento", "menuEquipamentos", "tiposEquipamentos");
+        $("#tipo").focus();
     </script>
 
 </body>

@@ -38,7 +38,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Insira ou altere um modelo de equipamento</h3>
+                        <h3 class="card-title">Cadastre um modelo de equipamento</h3>
                     </div>
                     <div class="card-body">
                         <form id="formMod" method="post" action="gerenciar_modeloequipamento.php">
@@ -46,8 +46,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                                 <label>Nome do modelo</label>
                                 <input class="form-control obg" name="nome" id="nome" placeholder="Digite aqui...">
                             </div>
-                            <button onclick="return NovoModelo()" class="btn btn-default" name="btn_novo">Novo</button>
-                            <button onclick="return NotificarCampos('formMod')" class="btn btn-success" name="btn_cadastrar">Salvar</button>
+                            <button onclick="return NotificarCampos('formMod')" class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>

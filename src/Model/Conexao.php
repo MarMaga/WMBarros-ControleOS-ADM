@@ -17,7 +17,7 @@ define('DB', 'db_controleos'); //banco
 class Conexao
 {
 
-    /** @var PDO */
+    /** @var \PDO */
     private static $Connect;
 
     private static function Conectar()

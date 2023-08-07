@@ -7,44 +7,35 @@ use Src\VO\TipoEquipamentoVO;
 
 class TipoEquipamentoCTRL
 {
-    public function CadastrarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
+    private $modTipoEq;
+
+    public function __construct()
+    {
+        $this->modTipoEq = new TipoEquipamentoMODEL();
+    }
+
+    public function CadastrarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int|array
     {
 
         if (empty($voTipoEq->getNomeTipoEquipamento()))
             return 0;
 
-        $modTipoEq = new TipoEquipamentoMODEL();
-
-        $ret = $modTipoEq->CadastrarTipoEquipamentoMODEL($voTipoEq);
-
-        return $ret;
+        return $this->modTipoEq->CadastrarTipoEquipamentoMODEL($voTipoEq);
     }
 
-    public function ConsultarTodosTipoEquipamentoCTRL()
+    public function ConsultarTipoEquipamentoCTRL()
     {
-        $modTipoEq = new TipoEquipamentoMODEL();
-
-        $ret = $modTipoEq->ConsultaTodosTipoEquipamentoMODEL();
-
-        return $ret;
+        return $this->modTipoEq->ConsultarTipoEquipamentoMODEL();
     }
 
     public function AlterarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
     {
-        $modTipoEq = new TipoEquipamentoMODEL();
-
-        $ret = $modTipoEq->AlterarTipoEquipamentoMODEL($voTipoEq);
-
-        return $ret;
+        return $this->modTipoEq->AlterarTipoEquipamentoMODEL($voTipoEq);
     }
-    
+
     public function ExcluirTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
     {
-        $modTipoEq = new TipoEquipamentoMODEL();
-
-        $ret = $modTipoEq->ExcluiTipoEquipamentoMODEL($voTipoEq);
-
-        return $ret;
+        return $this->modTipoEq->ExcluiTipoEquipamentoMODEL($voTipoEq);
     }
 }
 ?>

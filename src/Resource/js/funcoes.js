@@ -26,16 +26,6 @@ function NotificarCampos(formID) {
     return ret;
 }
 
-function VerificaDigitacaoTipoEquipamento() {
-
-    if ($("#h_tipo").val() == $("#tipo").val()) {
-        MostrarMensagem(-2);
-        return false;
-    }
-
-    NotificarCampos('formTipo');
-}
-
 function VerificaCampoVazio(id) {
 
     if ($("#" + id).val() == "") {
