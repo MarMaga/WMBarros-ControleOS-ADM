@@ -10,6 +10,12 @@ function GravarAlteracaoTipoEquipamento(){
     }
 
     if($("#tipo_alterar").val() == $("#tipo_original_alterar").val()){
+        MostrarMensagem(-2);
         return false;
     }
+}
+
+function ModalExcluirTipoEquipamento(ID,nome){
+    $("#id_tipo_excluir").val(ID);
+    document.getElementById('tipo_excluir').innerHTML = nome;
 }

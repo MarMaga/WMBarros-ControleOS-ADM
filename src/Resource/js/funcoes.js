@@ -35,10 +35,10 @@ function VerificaCampoVazio(id) {
     }
 }
 
-function Maiuscula() {
-    var tipo = document.getElementById("tipo");
+function Maiuscula(id) {
+    var campo = document.getElementById(id);
 
-    tipo.value = tipo.value.toUpperCase();
+    campo.value = campo.value.toUpperCase();
 }
 
 function NovoTipo() {

@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <label>Tipo de equipamento</label>
                 <input name="id_tipo_alterar" id="id_tipo_alterar" type="hidden">
-                <input class="form-control obg" name="tipo_alterar" id="tipo_alterar" style="width: 100%">
+                <input class="form-control obg" name="tipo_alterar" id="tipo_alterar" style="width: 100%" onblur="Maiuscula('tipo_alterar')">
                 <input name="tipo_original_alterar" id="tipo_original_alterar" style="width: 100%" type="hidden">
             </div>
             <div class="modal-footer justify-content-between">

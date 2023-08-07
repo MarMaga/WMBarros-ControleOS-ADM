@@ -45,7 +45,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
                                 <input name="novo" id="novo" type="hidden" value="S">
-                                <input class="form-control obg" name="tipo" id="tipo" onblur="Maiuscula();"
+                                <input class="form-control obg" name="tipo" id="tipo" onblur="Maiuscula('tipo')"
                                     placeholder="Digite aqui...">
                             </div>
                             <button onclick="return NotificarCampos('formTipo')" class="btn btn-success"
@@ -93,46 +93,15 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                                 onclick="return ModalAlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
                                                                 class="btn btn-warning btn-xs" data-toggle="modal"
                                                                 data-target="#alterarTipo">Alterar</a>
-                                                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-                                                                data-target="#modalExcluir<?= $i ?>">Excluir</a>
+                                                            <a href="#"
+                                                                onclick="return ModalExcluirTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                                                                class="btn btn-danger btn-xs" data-toggle="modal"
+                                                                data-target="#excluirTipo">Excluir</a>
                                                         </td>
                                                         <td>
                                                             <input type="hidden" name="id" id="id"
                                                                 value="<?= $tipos[$i]['id'] ?>" />
                                                             <?= $tipos[$i]['tipo_equipamento'] ?>
-                                                            <form action="gerenciar_tipoequipamento.php" method="post">
-                                                                <input name="h_id" type="hidden"
-                                                                    value="<?= $tipos[$i]['id'] ?>" />
-                                                                <div class="modal fade" id="modalExcluir<?= $i ?>"
-                                                                    tabindex="-1" role="dialog"
-                                                                    aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="modal-title" id="myModalLabel">
-                                                                                    Confirmação de
-                                                                                    exclusão</h4>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-hidden="true">&times;</button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                Deseja excluir o tipo: <b>
-                                                                                    <?= $tipos[$i]['tipo_equipamento'] ?>
-                                                                                </b> ?
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button"
-                                                                                    class="btn btn-default"
-                                                                                    data-dismiss="modal">Cancelar</button>
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary"
-                                                                                    name="btn_excluir">Sim</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
