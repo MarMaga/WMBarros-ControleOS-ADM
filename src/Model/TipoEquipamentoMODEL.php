@@ -41,10 +41,15 @@ class TipoEquipamentoMODEL extends Conexao
         }
     }
 
-    public function FiltrarTipoEquipamentoMODEL(TipoEquipamentoVO $voTipoEq): int|array
+    public function FiltrarTipoEquipamentoMODEL(TipoEquipamentoVO $voTipoEq, string $checarCadastro): int|array
     {
-        $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::SELECIONAR_TIPO_EQUIPAMENTO("S"));
-        $sql->bindValue(1, '%' . $voTipoEq->getNomeTipoEquipamento() . '%');
+        if ($checarCadastro == "F") {
+            $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::SELECIONAR_TIPO_EQUIPAMENTO("F"));
+            $sql->bindValue(1, '%' . $voTipoEq->getNomeTipoEquipamento() . '%');
+        } else {
+            $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::SELECIONAR_TIPO_EQUIPAMENTO("S"));
+            $sql->bindValue(1, $voTipoEq->getNomeTipoEquipamento());
+        }
 
         try {
             $sql->setFetchMode(\PDO::FETCH_ASSOC);

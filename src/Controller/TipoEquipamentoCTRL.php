@@ -28,9 +28,9 @@ class TipoEquipamentoCTRL
         return $this->modTipoEq->ConsultarTipoEquipamentoMODEL();
     }
 
-    public function FiltrarTipoEquipamento(TipoEquipamentoVO $voTipoEq): int|array
+    public function FiltrarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq, string $checarCadastro): int|array
     {
-        return $this->modTipoEq->FiltrarTipoEquipamentoMODEL($voTipoEq);
+        return $this->modTipoEq->FiltrarTipoEquipamentoMODEL($voTipoEq, $checarCadastro);
     }
 
     public function AlterarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int

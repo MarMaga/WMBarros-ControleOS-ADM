@@ -13,8 +13,7 @@ class TIPO_EQUIPAMENTO_SQL
 
     public static function SELECIONAR_TIPO_EQUIPAMENTO(string $comFiltro): string
     {
-        if ($comFiltro == "N") 
-        {
+        if ($comFiltro == "N") {
             $sql = 'SELECT id, 
                        tipo_equipamento 
                   FROM tb_tipoequipamento

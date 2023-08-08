@@ -16,21 +16,32 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $voTipoEq->setNomeTipoEquipamento($_POST['tipo']);
 
-    if ($inclusao == 'S') {
+    // consulta se o tipo já está cadastrado
+    $ret = $ctrlTipoEq->FiltrarTipoEquipamentoCTRL($voTipoEq, "S");
 
-        $ret = $ctrlTipoEq->CadastrarTipoEquipamentoCTRL($voTipoEq);
+    // se o tipo já estiver cadastrado
+    if (count($ret) == 1) {
+
+        $ret = -3;
 
     } else {
 
-        if ($_POST['h_tipo'] == $_POST['tipo']) {
+        if ($inclusao == 'S') {
 
-            $ret = -2;
+            $ret = $ctrlTipoEq->CadastrarTipoEquipamentoCTRL($voTipoEq);
 
         } else {
 
-            $voTipoEq->setIdTipoEquipamento($_POST['h_id_alt']);
+            if ($_POST['h_tipo'] == $_POST['tipo']) {
 
-            $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
+                $ret = -2;
+
+            } else {
+
+                $voTipoEq->setIdTipoEquipamento($_POST['h_id_alt']);
+
+                $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
+            }
         }
     }
 
@@ -70,19 +81,23 @@ if (isset($_POST['btn_filtrar'])) {
 
         $voTipoEq->setNomeTipoEquipamento($filtro);
 
-        $tipos = $ctrlTipoEq->FiltrarTipoEquipamento($voTipoEq);
+        $tipos = $ctrlTipoEq->FiltrarTipoEquipamentoCTRL($voTipoEq, "F");
 
     } else {
+
         $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
+
     }
 
-} elseif(isset($_POST['btn_limparFiltro'])) {
+} elseif (isset($_POST['btn_limparFiltro'])) {
 
     $filtro = "";
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
-    
+
 } else {
+
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
+    
 }
 
 ?>

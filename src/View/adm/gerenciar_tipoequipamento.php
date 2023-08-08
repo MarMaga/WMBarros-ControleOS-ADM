@@ -54,71 +54,75 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Tipos cadastrados</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <form action="gerenciar_tipoequipamento.php" method="post">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Altere ou exclua os registros</h3>
-                                            <div class="card-tools">
-                                                <div class="input-group input-group-sm" style="width: 200px;">
-                                                    <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Maiuscula('filtroTipo')" 
-                                                    class="form-control float-right" placeholder="Pesquise por..." value="<?= $filtro ?>">
-                                                    
-                                                    <div class="input-group-append">
-                                                        <button name="btn_filtrar" id="btn_filtrar" title="Pesquisar" onclick="return FiltrarTipoEquipamento()"
-                                                        class="btn btn-default btn-sm"><i
-                                                        class="fas fa-search"></i></button>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <button name="btn_limparFiltro" class="btn btn-info btn-sm" title="Limpar filtro" onclick="return LimparFiltroTipoEquipamento()"><i class="fas fa-backspace"></i></button>
-</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <!-- /.card-header -->
-                                    <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ação</th>
-                                                    <th>Tipo do equipamento</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php for ($i = 0; $i < count($tipos); $i++) { ?>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="#"
-                                                                onclick="return ModalAlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
-                                                                class="btn btn-warning btn-xs" data-toggle="modal"
-                                                                data-target="#alterarTipo">Alterar</a>
-                                                            <a href="#"
-                                                                onclick="return ModalExcluirTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
-                                                                class="btn btn-danger btn-xs" data-toggle="modal"
-                                                                data-target="#excluirTipo">Excluir</a>
-                                                        </td>
-                                                        <td>
-                                                            <input type="hidden" name="id" id="id"
-                                                                value="<?= $tipos[$i]['id'] ?>" />
-                                                            <?= $tipos[$i]['tipo_equipamento'] ?>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                    <form action="gerenciar_tipoequipamento.php" method="post">
+                        <div class="card-header">
+                            <h3 class="card-title">Tipos cadastrados</h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="text" name="filtroTipo" id="filtroTipo"
+                                        onkeyup="Maiuscula('filtroTipo')" class="form-control float-right"
+                                        placeholder="Pesquise por..." value="<?= $filtro ?>">
+                                    <div class="input-group-append">
+                                        <button name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
+                                            onclick="return FiltrarTipoEquipamento()" class="btn btn-default btn-sm"><i
+                                                class="fas fa-search"></i></button>
                                     </div>
-                                    <!-- /.card-body -->
+                                    <div class="input-group-append">
+                                        <button name="btn_limparFiltro" class="btn btn-info btn-sm"
+                                            title="Limpar filtro" onclick="return LimparFiltroTipoEquipamento()"><i
+                                                class="fas fa-times"></i></button>
+                                    </div>
                                 </div>
-                                <!-- /.card -->
                             </div>
                         </div>
-                    </div>
+                    </form>
+                    <?php if (count($tipos) > 0) { ?>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Altere ou exclua os registros</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ação</th>
+                                                        <th>Tipo do equipamento</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php for ($i = 0; $i < count($tipos); $i++) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <a href="#"
+                                                                    onclick="return ModalAlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                                                                    class="btn btn-warning btn-xs" data-toggle="modal"
+                                                                    data-target="#alterarTipo">Alterar</a>
+                                                                <a href="#"
+                                                                    onclick="return ModalExcluirTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                                                                    class="btn btn-danger btn-xs" data-toggle="modal"
+                                                                    data-target="#excluirTipo">Excluir</a>
+                                                            </td>
+                                                            <td>
+                                                                <input type="hidden" name="id" id="id"
+                                                                    value="<?= $tipos[$i]['id'] ?>" />
+                                                                <?= $tipos[$i]['tipo_equipamento'] ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
                 <!-- /.card -->
                 <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
