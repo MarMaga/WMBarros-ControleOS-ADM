@@ -76,8 +76,12 @@ if (isset($_POST['btn_filtrar'])) {
         $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
     }
 
-} else {
+} elseif(isset($_POST['btn_limparFiltro'])) {
 
+    $filtro = "";
+    $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
+    
+} else {
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 }
 

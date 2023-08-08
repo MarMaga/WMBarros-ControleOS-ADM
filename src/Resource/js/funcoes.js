@@ -77,3 +77,10 @@ function TratarEnter() {
         }
     });
 }
+
+function LimparFiltroTipoEquipamento(){
+    if($("#filtroTipo").val() == ""){
+        $("#tipo").focus();
+        return false;
+    }
+}

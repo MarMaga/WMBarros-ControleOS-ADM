@@ -65,15 +65,18 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                         <div class="card-header">
                                             <h3 class="card-title">Altere ou exclua os registros</h3>
                                             <div class="card-tools">
-                                                <div class="input-group input-group-sm" style="width: 150px;">
+                                                <div class="input-group input-group-sm" style="width: 200px;">
                                                     <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Maiuscula('filtroTipo')" 
-                                                        class="form-control float-right" placeholder="Pesquise por..." value="<?= $filtro ?>">
-
+                                                    class="form-control float-right" placeholder="Pesquise por..." value="<?= $filtro ?>">
+                                                    
                                                     <div class="input-group-append">
-                                                        <button name="btn_filtrar" id="btn_filtrar" onclick="return FiltrarTipoEquipamento()"
-                                                            class="btn btn-default"><i
-                                                                class="fas fa-search"></i></button>
+                                                        <button name="btn_filtrar" id="btn_filtrar" title="Pesquisar" onclick="return FiltrarTipoEquipamento()"
+                                                        class="btn btn-default btn-sm"><i
+                                                        class="fas fa-search"></i></button>
                                                     </div>
+                                                    <div class="input-group-append">
+                                                        <button name="btn_limparFiltro" class="btn btn-info btn-sm" title="Limpar filtro" onclick="return LimparFiltroTipoEquipamento()"><i class="fas fa-backspace"></i></button>
+</div>
                                                 </div>
                                             </div>
                                         </div>
