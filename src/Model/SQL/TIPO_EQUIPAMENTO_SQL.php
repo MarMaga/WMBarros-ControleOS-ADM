@@ -11,13 +11,23 @@ class TIPO_EQUIPAMENTO_SQL
         return $sql;
     }
 
-    public static function SELECIONAR_TIPO_EQUIPAMENTO(): string
+    public static function SELECIONAR_TIPO_EQUIPAMENTO(string $comFiltro): string
     {
-        $sql = 'SELECT id, 
+        if ($comFiltro == "N") 
+        {
+            $sql = 'SELECT id, 
                        tipo_equipamento 
                   FROM tb_tipoequipamento
               ORDER BY tipo_equipamento';
 
+        } else {
+
+            $sql = 'SELECT id, 
+                           tipo_equipamento 
+                      FROM tb_tipoequipamento 
+                     WHERE tipo_equipamento LIKE ?
+                  ORDER BY tipo_equipamento';
+        }
         return $sql;
     }
 

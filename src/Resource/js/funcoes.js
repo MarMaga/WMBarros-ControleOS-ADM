@@ -55,12 +55,25 @@ function AlterarTipoEquipamento(id, nome) {
     $("#h_tipo").val(nome);
     $("#tipo").val(nome);
     $("#tipo").focus();
-    
+
     return false;
 }
 
-function AjustaMenu(titulo, menu, item) {
+function AjustarMenu(titulo, menu, item) {
     document.title = "ControleOS | " + titulo;
     $("#" + menu).addClass("menu-open");
     $("#" + item).addClass("active");
+}
+
+function TratarEnter() {
+    $(document.body).on('keypress', function (e) {
+        //o 13 é o Codigo do ENTER
+        if (e.keyCode === 13) {
+
+            e.preventDefault();
+            GravarAlteracaoTipoEquipamento();
+            $("#btn_alterar").click();
+            //document.getElementById("btn_alterar").click();
+        }
+    });
 }

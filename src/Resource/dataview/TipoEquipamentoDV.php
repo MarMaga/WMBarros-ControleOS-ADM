@@ -6,6 +6,7 @@ use Src\Controller\TipoEquipamentoCTRL;
 include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
 $ctrlTipoEq = new TipoEquipamentoCTRL();
+$filtro = "";
 
 if (isset($_POST['btn_cadastrar'])) {
 
@@ -33,12 +34,12 @@ if (isset($_POST['btn_cadastrar'])) {
         }
     }
 
-} elseif(isset($_POST['btn_alterar'])){
-    
+} elseif (isset($_POST['btn_alterar'])) {
+
     $tipoOriginal = $_POST['tipo_original_alterar'];
     $tipo = $_POST['tipo_alterar'];
 
-    if($tipoOriginal == $tipo){
+    if ($tipoOriginal == $tipo) {
         $ret = -2;
     }
 
@@ -50,14 +51,34 @@ if (isset($_POST['btn_cadastrar'])) {
     $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
 
 } elseif (isset($_POST['btn_excluir'])) {
-    
+
     $voTipoEq = new TipoEquipamentoVO();
 
     $voTipoEq->setIdTipoEquipamento($_POST['id_tipo_excluir']);
 
     $ret = $ctrlTipoEq->ExcluirTipoEquipamentoCTRL($voTipoEq);
+
 }
 
-$tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
+if (isset($_POST['btn_filtrar'])) {
+
+    $filtro = $_POST['filtroTipo'];
+
+    if ($filtro != "") {
+
+        $voTipoEq = new TipoEquipamentoVO();
+
+        $voTipoEq->setNomeTipoEquipamento($filtro);
+
+        $tipos = $ctrlTipoEq->FiltrarTipoEquipamento($voTipoEq);
+
+    } else {
+        $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
+    }
+
+} else {
+
+    $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
+}
 
 ?>

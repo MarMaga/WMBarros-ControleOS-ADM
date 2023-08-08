@@ -45,7 +45,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
                                 <input name="novo" id="novo" type="hidden" value="S">
-                                <input class="form-control obg" name="tipo" id="tipo" onblur="Maiuscula('tipo')"
+                                <input class="form-control obg" name="tipo" id="tipo" onkeyup="Maiuscula('tipo')"
                                     placeholder="Digite aqui...">
                             </div>
                             <button onclick="return NotificarCampos('formTipo')" class="btn btn-success"
@@ -61,21 +61,23 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Altere ou exclua os registros</h3>
+                                    <form action="gerenciar_tipoequipamento.php" method="post">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Altere ou exclua os registros</h3>
+                                            <div class="card-tools">
+                                                <div class="input-group input-group-sm" style="width: 150px;">
+                                                    <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Maiuscula('filtroTipo')" 
+                                                        class="form-control float-right" placeholder="Pesquise por..." value="<?= $filtro ?>">
 
-                                        <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 150px;">
-                                                <input type="text" name="table_search" class="form-control float-right"
-                                                    placeholder="Pesquise por...">
-
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-default"><i
-                                                            class="fas fa-search"></i></button>
+                                                    <div class="input-group-append">
+                                                        <button name="btn_filtrar" id="btn_filtrar" onclick="return FiltrarTipoEquipamento()"
+                                                            class="btn btn-default"><i
+                                                                class="fas fa-search"></i></button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
                                         <table class="table table-hover">
@@ -119,7 +121,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                 <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
                     <?php include_once 'modais/alterar_tipo.php'; ?>
                 </form>
-                <form action="gerenciar_tipoequipamento.php" method="post" id="formExc">
+                <form action="gerenciar_tipoequipamento.php" method="post">
                     <?php include_once 'modais/excluir_tipo.php'; ?>
                 </form>
             </section>
@@ -133,7 +135,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
     <!-- ./wrapper -->
 
     <script>
-        AjustaMenu("Gerenciar tipo de equipamento", "menuEquipamentos", "tiposEquipamentos");
+        AjustarMenu("Gerenciar tipo de equipamento", "menuEquipamentos", "tiposEquipamentos");
         $("#tipo").focus();
     </script>
 

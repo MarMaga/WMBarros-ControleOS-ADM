@@ -14,7 +14,7 @@ class TipoEquipamentoCTRL
         $this->modTipoEq = new TipoEquipamentoMODEL();
     }
 
-    public function CadastrarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int|array
+    public function CadastrarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
     {
 
         if (empty($voTipoEq->getNomeTipoEquipamento()))
@@ -23,9 +23,14 @@ class TipoEquipamentoCTRL
         return $this->modTipoEq->CadastrarTipoEquipamentoMODEL($voTipoEq);
     }
 
-    public function ConsultarTipoEquipamentoCTRL()
+    public function ConsultarTipoEquipamentoCTRL(): int|array
     {
         return $this->modTipoEq->ConsultarTipoEquipamentoMODEL();
+    }
+
+    public function FiltrarTipoEquipamento(TipoEquipamentoVO $voTipoEq): int|array
+    {
+        return $this->modTipoEq->FiltrarTipoEquipamentoMODEL($voTipoEq);
     }
 
     public function AlterarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
