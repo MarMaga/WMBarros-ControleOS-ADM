@@ -15,6 +15,7 @@ class TipoEquipamentoMODEL extends Conexao
     {
         $this->conexao = parent::retornarConexao();
     }
+    
     public function CadastrarTipoEquipamentoMODEL(TipoEquipamentoVO $voTipoEq): int
     {
         $sql = $this->conexao->prepare(TIPO_EQUIPAMENTO_SQL::INSERIR_TIPO_EQUIPAMENTO());

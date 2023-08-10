@@ -7,6 +7,7 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
 $ctrlTipoEq = new TipoEquipamentoCTRL();
 $filtro = "";
+$filtroAtivado = false;
 
 if (isset($_POST['btn_cadastrar'])) {
 
@@ -83,21 +84,25 @@ if (isset($_POST['btn_filtrar'])) {
 
         $tipos = $ctrlTipoEq->FiltrarTipoEquipamentoCTRL($voTipoEq, "F");
 
+        $filtroAtivado = true;
+
     } else {
 
         $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
-
-    }
+        $filtroAtivado = false;
+        
+    }    
 
 } elseif (isset($_POST['btn_limparFiltro'])) {
 
     $filtro = "";
+    $filtroAtivado = false;
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
 } else {
 
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
-    
+
 }
 
 ?>

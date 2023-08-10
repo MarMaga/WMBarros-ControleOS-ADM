@@ -41,24 +41,6 @@ function Maiuscula(id) {
     campo.value = campo.value.toUpperCase();
 }
 
-function NovoTipo() {
-    $("#novo").val("S");
-    $("#h_id_alt").val("");
-    $("#h_tipo").val("");
-    $("#tipo").val("");
-    $("#tipo").focus();
-    return false;
-}
-function AlterarTipoEquipamento(id, nome) {
-    $("#novo").val("N");
-    $("#h_id_alt").val(id);
-    $("#h_tipo").val(nome);
-    $("#tipo").val(nome);
-    $("#tipo").focus();
-
-    return false;
-}
-
 function AjustarMenu(titulo, menu, item) {
     document.title = "ControleOS | " + titulo;
     $("#" + menu).addClass("menu-open");
@@ -78,9 +60,38 @@ function TratarEnter() {
     });
 }
 
+// TIPO DE EQUIPAMENTO
+function AlterarTipoEquipamento(id, nome) {
+    $("#novo").val("N");
+    $("#h_id_alt").val(id);
+    $("#h_tipo").val(nome);
+    $("#tipo").val(nome);
+    $("#tipo").focus();
+
+    return false;
+}
+
 function LimparFiltroTipoEquipamento(){
     if($("#filtroTipo").val() == ""){
         $("#tipo").focus();
+        return false;
+    }
+}
+
+// MODELO DE EQUIPAMENTO
+function AlterarModeloEquipamento(id, nome) {
+    $("#novo").val("N");
+    $("#h_id_alt").val(id);
+    $("#h_modelo").val(nome);
+    $("#model").val(nome);
+    $("#modelo").focus();
+
+    return false;
+}
+
+function LimparFiltroModeloEquipamento(){
+    if($("#filtroModelo").val() == ""){
+        $("#modelo").focus();
         return false;
     }
 }

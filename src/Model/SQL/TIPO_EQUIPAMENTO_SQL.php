@@ -14,6 +14,7 @@ class TIPO_EQUIPAMENTO_SQL
     public static function SELECIONAR_TIPO_EQUIPAMENTO(string $comFiltro): string
     {
         if ($comFiltro == "N") {
+
             $sql = 'SELECT id, 
                        tipo_equipamento 
                   FROM tb_tipoequipamento
@@ -27,6 +28,7 @@ class TIPO_EQUIPAMENTO_SQL
                      WHERE tipo_equipamento LIKE ?
                   ORDER BY tipo_equipamento';
         }
+
         return $sql;
     }
 
@@ -45,7 +47,5 @@ class TIPO_EQUIPAMENTO_SQL
 
         return $sql;
     }
-
 }
-
 ?>
