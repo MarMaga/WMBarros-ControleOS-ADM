@@ -13,7 +13,7 @@ class ModeloEquipamentoCTRL
     {
         $this->modModelo = new ModeloEquipamentoMODEL();
     }
-    
+
     public function CadastrarModeloEquipamentoCTRL(ModeloVO $voMod): int
     {
 
@@ -24,6 +24,25 @@ class ModeloEquipamentoCTRL
 
         return $ret;
     }
-}
 
+    public function ConsultarModeloEquipamentoCTRL(): int|array
+    {
+        return $this->modModelo->ConsultarModeloEquipamentoMODEL();
+    }
+
+    public function FiltrarModeloEquipamentoCTRL(ModeloVO $voMod, string $checarCadastro): int|array
+    {
+        return $this->modModelo->FiltrarModeloEquipamentoMODEL($voMod, $checarCadastro);
+    }
+
+    public function AlterarModeloEquipamentoCTRL(ModeloVO $voMod): int
+    {
+        return $this->modModelo->AlterarModeloEquipamentoMODEL($voMod);
+    }
+
+    public function ExcluirModeloEquipamentoCTRL(ModeloVO $voMod): int
+    {
+        return $this->modModelo->ExcluirModeloEquipamentoMODEL($voMod);
+    }
+}
 ?>

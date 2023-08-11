@@ -8,7 +8,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <input name="id_tipo_excluir" id="id_tipo_excluir" type="hidden" />
+                <input name="id_modelo_excluir" id="id_modelo_excluir" type="hidden" />
                 Deseja excluir o modelo: <b>
                     <label name="modelo_excluir" id="modelo_excluir"></label>
                 </b> ?

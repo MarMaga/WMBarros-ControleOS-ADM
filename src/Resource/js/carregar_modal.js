@@ -16,7 +16,7 @@ function GravarAlteracaoTipoEquipamento(){
     }
 }
 
-function ModalExcluirModeloEquipamento(ID,nome){
+function ModalExcluirTipoEquipamento(ID,nome){
     $("#id_modelo_excluir").val(ID);
     document.getElementById('modelo_excluir').innerHTML = nome;
 }
@@ -24,7 +24,7 @@ function ModalExcluirModeloEquipamento(ID,nome){
 // MODELO DE EQUIPAMENTO
 function ModalAlterarModeloEquipamento(ID,nome){
     $("#id_modelo_alterar").val(ID);
-    $("#model_alterar").val(nome);
+    $("#modelo_alterar").val(nome);
     $("#modelo_original_alterar").val(nome);
 }
 

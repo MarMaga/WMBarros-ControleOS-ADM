@@ -33,7 +33,7 @@ if (isset($_POST['btn_cadastrar'])) {
 
         } else {
 
-            if ($_POST['h_Modelo'] == $_POST['Modelo']) {
+            if ($_POST['h_modelo'] == $_POST['modelo']) {
 
                 $ret = -2;
 
@@ -48,8 +48,8 @@ if (isset($_POST['btn_cadastrar'])) {
 
 } elseif (isset($_POST['btn_alterar'])) {
 
-    $ModeloOriginal = $_POST['Modelo_original_alterar'];
-    $Modelo = $_POST['Modelo_alterar'];
+    $ModeloOriginal = $_POST['modelo_original_alterar'];
+    $Modelo = $_POST['modelo_alterar'];
 
     if ($ModeloOriginal == $Modelo) {
         $ret = -2;
@@ -57,7 +57,7 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $voModeloEq = new ModeloVO();
 
-    $voModeloEq->setIdModelo($_POST['id_Modelo_alterar']);
+    $voModeloEq->setIdModelo($_POST['id_modelo_alterar']);
     $voModeloEq->setNomeModelo($Modelo);
 
     $ret = $ctrlModeloEq->AlterarModeloEquipamentoCTRL($voModeloEq);
@@ -66,7 +66,7 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $voModeloEq = new ModeloVO();
 
-    $voModeloEq->setIdModelo($_POST['id_Modelo_excluir']);
+    $voModeloEq->setIdModelo($_POST['id_modelo_excluir']);
 
     $ret = $ctrlModeloEq->ExcluirModeloEquipamentoCTRL($voModeloEq);
 
@@ -82,13 +82,13 @@ if (isset($_POST['btn_filtrar'])) {
 
         $voModeloEq->setNomeModelo($filtro);
 
-        $Modelos = $ctrlModeloEq->FiltrarModeloEquipamentoCTRL($voModeloEq, "F");
+        $modelos = $ctrlModeloEq->FiltrarModeloEquipamentoCTRL($voModeloEq, "F");
 
         $filtroAtivado = true;
 
     } else {
 
-        $Modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
+        $modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
         $filtroAtivado = false;
         
     }    
@@ -97,11 +97,11 @@ if (isset($_POST['btn_filtrar'])) {
 
     $filtro = "";
     $filtroAtivado = false;
-    $Modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
+    $modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
 
 } else {
 
-    $Modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
+    $modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
 
 }
 
