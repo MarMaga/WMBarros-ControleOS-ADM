@@ -14,7 +14,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button name="btn_cancelar" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
-            <button onclick="return GravarAlteracaoModeloEquipamento()" name="btn_alterar" id="btn_alterar" class="btn btn-outline-dark">Gravar</button>
+                <button onclick="return GravarAlteracaoModeloEquipamento()" name="btn_alterar" id="btn_alterar" class="btn btn-outline-dark">Gravar</button>
             </div>
         </div>
         <!-- /.modal-content -->

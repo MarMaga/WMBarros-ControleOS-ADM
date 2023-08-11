@@ -13,8 +13,6 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $voModeloEq = new ModeloVO();
 
-    $inclusao = $_POST['novo'];
-
     $voModeloEq->setNomeModelo($_POST['modelo']);
 
     // consulta se o Modelo já está cadastrado
@@ -27,23 +25,7 @@ if (isset($_POST['btn_cadastrar'])) {
 
     } else {
 
-        if ($inclusao == 'S') {
-
-            $ret = $ctrlModeloEq->CadastrarModeloEquipamentoCTRL($voModeloEq);
-
-        } else {
-
-            if ($_POST['h_modelo'] == $_POST['modelo']) {
-
-                $ret = -2;
-
-            } else {
-
-                $voModeloEq->setNomeModelo($_POST['h_id_alt']);
-
-                $ret = $ctrlModeloEq->AlterarModeloEquipamentoCTRL($voModeloEq);
-            }
-        }
+        $ret = $ctrlModeloEq->CadastrarModeloEquipamentoCTRL($voModeloEq);
     }
 
 } elseif (isset($_POST['btn_alterar'])) {

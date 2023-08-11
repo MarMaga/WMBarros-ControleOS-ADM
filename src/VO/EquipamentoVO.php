@@ -45,7 +45,7 @@ class EquipamentoVO
         return $this->desc_equipamento;
     }
 
-    // SET e GET id
+    // SET e GET situacao
     public function setSituacao(int $situacao): void
     {
         $this->situacao = $situacao;
@@ -95,5 +95,4 @@ class EquipamentoVO
         return $this->id_modelo;
     }
 }
-
 ?>
