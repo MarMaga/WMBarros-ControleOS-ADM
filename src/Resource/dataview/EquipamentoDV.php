@@ -17,16 +17,16 @@ $descricao = '';
 $ctrlTipo = new TipoEquipamentoCTRL();
 $ctrlModelo = new ModeloEquipamentoCTRL();
 
-if(isset($_POST['btn_cadastrar'])){
+if (isset($_POST['btn_cadastrar'])) {
 
     $tipoSelected = $_POST['tipo'];
     $modeloSelected = $_POST['modelo'];
     $identificacao = $_POST['identificacao'];
     $descricao = $_POST['descricao'];
-    
+
     // busca o ID do tipo
     $tipo = $_POST['tipo'];
-    
+
     $tipoVO = new TipoEquipamentoVO();
 
     $tipoVO->setNomeTipoEquipamento($tipo);
@@ -46,22 +46,34 @@ if(isset($_POST['btn_cadastrar'])){
     // confere apenas tipo, modelo e identificação. não confere a descrição
     $voEq = new EquipamentoVO();
     $ctrlEq = new EquipamentoCTRL();
-    
-    $voEq->setIdTipoEquipamento((int)$idTipo);
+
+    $voEq->setIdTipoEquipamento((int) $idTipo);
     $voEq->setIdModelo(intval($idModelo));
     $voEq->setIdentificacaoEquipamento(trim($_POST['identificacao']));
     $voEq->setDescricaoEquipamento(trim($_POST['descricao']));
 
     $ret = $ctrlEq->FiltrarEquipamentoCTRL($voEq, "C");
 
-    if(count($ret) == 1){
-        
-        $ret = -3; // Registro já cadastrado
+    if (count($ret) == 1) {
+
+        if ($ret[0]['desc_equipamento'] != $descricao) {
+
+            $ret = -4; // Registro já cadastrado com outra descrição
+
+        } else {
+            
+            $ret = -3; // Registro já cadastrado
+        }
 
     } else {
 
         $ctrlEq->CadastrarEquipamentoCTRL($voEq);
-        
+
+        $tipoSelected = '';
+        $modeloSelected = '';
+        $identificacao = '';
+        $descricao = '';
+
         $ret = 1;
 
     }

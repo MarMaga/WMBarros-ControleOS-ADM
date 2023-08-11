@@ -1,5 +1,8 @@
 function MostrarMensagem(ret) {
     switch (ret) {
+        case -4:
+            toastr.warning('Registro já cadastrado com outra descrição')
+            break;
         case -3:
             toastr.warning('Registro já cadastrado')
             break;

@@ -44,7 +44,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                         <form id="formModelo" method="post" action="gerenciar_modeloequipamento.php">
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
-                                <input name="novo" id="novo" type="hidden" value="S">
                                 <input class="form-control obg" name="modelo" id="modelo" onkeyup="Maiuscula('modelo')"
                                     placeholder="Digite aqui...">
                             </div>
@@ -160,7 +159,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
 
     <script>
         AjustarMenu("Gerenciar modelo de equipamento", "menuEquipamentos", "modelosEquipamentos");
-        $("#tipo").focus();
+        $("#modelo").focus();
     </script>
 
 </body>
