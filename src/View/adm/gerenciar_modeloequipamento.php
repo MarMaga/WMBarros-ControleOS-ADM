@@ -43,7 +43,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                     <div class="card-body">
                         <form id="formModelo" method="post" action="gerenciar_modeloequipamento.php">
                             <div class="form-group">
-                                <label>Tipo de equipamento</label>
+                                <label>Modelo de equipamento</label>
                                 <input class="form-control obg" name="modelo" id="modelo" onkeyup="Maiuscula('modelo')"
                                     placeholder="Digite aqui...">
                             </div>

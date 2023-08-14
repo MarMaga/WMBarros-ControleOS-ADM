@@ -1,5 +1,6 @@
 <?php
 
+use Src\Controller\EquipamentoCTRL;
 use Src\VO\ModeloVO;
 use Src\VO\TipoEquipamentoVO;
 use Src\VO\EquipamentoVO;
@@ -12,6 +13,7 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 $tipoSelected = '';
 
 $ctrlTipo = new TipoEquipamentoCTRL();
+$ctrlEq = new EquipamentoCTRL();
 
 if(isset($_POST['btn_buscar'])){
 
@@ -39,5 +41,6 @@ if(isset($_POST['btn_buscar'])){
 }
 
 $tipos = $ctrlTipo->ConsultarTipoEquipamentoCTRL();
+$equipamentos = $ctrlEq->ConsultarEquipamentoCTRL("T");
 
 ?>

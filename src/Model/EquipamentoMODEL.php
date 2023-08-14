@@ -34,9 +34,9 @@ class EquipamentoMODEL extends Conexao
         }
     }
 
-    public function ConsultarEquipamentoMODEL(): int|array
+    public function ConsultarEquipamentoMODEL(string $comFiltro): int|array
     {
-        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::SELECIONAR_EQUIPAMENTO("N"));
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::SELECIONAR_EQUIPAMENTO($comFiltro));
 
         try{
             $sql->setFetchMode(\PDO::FETCH_ASSOC);

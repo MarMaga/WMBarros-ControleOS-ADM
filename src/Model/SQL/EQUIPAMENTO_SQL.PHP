@@ -48,9 +48,17 @@ class EQUIPAMENTO_SQL
 
         } else if($comFiltro == "T") {
 
-            $sql = 'SELECT ident_equipamento, 
-                           desc_equipamento, 
-                           ';
+            $sql = 'SELECT eq.id, 
+                           eq.ident_equipamento, 
+                           eq.desc_equipamento, 
+                           tipo.tipo_equipamento, 
+                           modelo.nome_modelo 
+                      FROM tb_equipamento eq
+                INNER JOIN tb_tipoequipamento tipo
+                        ON eq.tipoequipamento_id = tipo.id 
+                INNER JOIN tb_modelo modelo
+                        ON eq.modelo_id = modelo.id 
+                  ORDER BY tipo.tipo_equipamento';
 
         } else { // comFiltro == "F" (usado na pesquisa da tela)
 
