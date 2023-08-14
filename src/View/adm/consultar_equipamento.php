@@ -45,8 +45,10 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                             <div class="form-group">
                                 <label>Pesquisar por Tipo</label>
                                 <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
-                                    <option value="" selected="selected">Selecione</option>
-                                    <option value="1">NOTEBOOK</option>
+                                    <option value="" <?= ($tipoSelected == '') ? 'selected="selected"' : '' ?>>Selecione</option>
+                                    <?php foreach($tipos as $item){ ?>
+                                        <option value="<?= $item['tipo_equipamento'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>><?= $item['tipo_equipamento'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                             <button onclick="return NotificarCampos('formConsEq')" class="btn btn-success" name="btn_buscar">Buscar</button>
@@ -120,6 +122,11 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
 
     </div>
     <!-- ./wrapper -->
+    
+    <script>
+        AjustarMenu("Consultar equipamento", "menuEquipamentos", "consultarEquipamento");
+        $("#tipo").focus();
+    </script>
 
 </body>
 

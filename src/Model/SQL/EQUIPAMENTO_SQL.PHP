@@ -45,7 +45,13 @@ class EQUIPAMENTO_SQL
                        AND modelo_id = ?
                        AND ident_equipamento = ?
                   ORDER BY tipoequipamento_id';
-            
+
+        } else if($comFiltro == "T") {
+
+            $sql = 'SELECT ident_equipamento, 
+                           desc_equipamento, 
+                           ';
+
         } else { // comFiltro == "F" (usado na pesquisa da tela)
 
             $sql = 'SELECT ident_equipamento, 
