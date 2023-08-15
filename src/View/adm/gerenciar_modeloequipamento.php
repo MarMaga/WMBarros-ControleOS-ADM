@@ -43,7 +43,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                     <div class="card-body">
                         <form id="formModelo" method="post" action="gerenciar_modeloequipamento.php">
                             <div class="form-group">
-                                <label>Tipo de equipamento</label>
+                                <label>Modelo de equipamento</label>
                                 <input class="form-control obg" name="modelo" id="modelo" onkeyup="Maiuscula('modelo')"
                                     placeholder="Digite aqui...">
                             </div>
@@ -106,7 +106,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                                                 <thead>
                                                     <tr>
                                                         <th>Ação</th>
-                                                        <th>Modelo do equipamento</th>
+                                                        <th>Modelo de equipamento</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -118,9 +118,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                                                                     class="btn btn-warning btn-xs" data-toggle="modal"
                                                                     data-target="#alterarModelo">Alterar</a>
                                                                 <a href="#"
-                                                                    onclick="return ModalExcluirModeloEquipamento('<?= $modelos[$i]['id'] ?>', '<?= $modelos[$i]['nome_modelo'] ?>')"
+                                                                    onclick="return CarregarExcluir('<?= $modelos[$i]['id'] ?>', '<?= $modelos[$i]['nome_modelo'] ?>')"
                                                                     class="btn btn-danger btn-xs" data-toggle="modal"
-                                                                    data-target="#excluirModelo">Excluir</a>
+                                                                    data-target="#modalExcluir">Excluir</a>
                                                             </td>
                                                             <td>
                                                                 <input type="hidden" name="id" id="id"
@@ -145,7 +145,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                     <?php include_once 'modais/alterar_modelo.php'; ?>
                 </form>
                 <form action="gerenciar_modeloequipamento.php" method="post">
-                    <?php include_once 'modais/excluir_modelo.php'; ?>
+                    <?php include_once 'modais/excluir.php'; ?>
                 </form>
             </section>
             <!-- /.content -->

@@ -1,3 +1,9 @@
+// carrega o modal Excluir padrozinado
+function CarregarExcluir(ID, nome){
+    $("#id_excluir").val(ID);
+    $("#nome_excluir").html(nome);
+}
+
 // TIPO DE EQUIPAMENTO
 function ModalAlterarTipoEquipamento(ID,nome){
     $("#id_tipo_alterar").val(ID);
@@ -16,11 +22,6 @@ function GravarAlteracaoTipoEquipamento(){
     }
 }
 
-function ModalExcluirTipoEquipamento(ID,nome){
-    $("#id_modelo_excluir").val(ID);
-    document.getElementById('modelo_excluir').innerHTML = nome;
-}
-
 // MODELO DE EQUIPAMENTO
 function ModalAlterarModeloEquipamento(ID,nome){
     $("#id_modelo_alterar").val(ID);
@@ -37,9 +38,4 @@ function GravarAlteracaoModeloEquipamento(){
         MostrarMensagem(-2);
         return false;
     }
-}
-
-function ModalExcluirModeloEquipamento(ID,nome){
-    $("#id_modelo_excluir").val(ID);
-    document.getElementById('modelo_excluir').innerHTML = nome;
 }

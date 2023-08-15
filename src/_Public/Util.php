@@ -16,6 +16,12 @@ class Util
         return date('Y-m-d');
     }
 
+    public static function DataAtualBr()
+    {
+        self::SetarFusoHorario();
+        return date('d/m/Y');
+    }
+
     public static function HoraAtual()
     {
         self::SetarFusoHorario();

@@ -1,4 +1,4 @@
-<div class="modal fade" id="excluirModelo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,14 +8,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <input name="id_modelo_excluir" id="id_modelo_excluir" type="hidden" />
-                Deseja excluir o modelo: <b>
-                    <label name="modelo_excluir" id="modelo_excluir"></label>
+                <input name="id_excluir" id="id_excluir" type="hidden" />
+                Deseja excluir o registro: <b>
+                    <label name="nome_excluir" id="nome_excluir"></label>
                 </b> ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" name="btn_excluir">Sim</button>
+                <button type="submit" class="btn btn-primary" name="btn_excluir" onclick="">Sim</button>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace Src\Model;
+use Src\VO\LogErroVO;
 
 // Configurações do Site
 define('HOST', 'localhost'); //IP
@@ -14,7 +15,7 @@ define('DB', 'db_controleos'); //banco
  * @copyright (c) year, Wladimir M. Barros
  */
 
-class Conexao
+class Conexao extends LogErroVO
 {
 
     /** @var \PDO */

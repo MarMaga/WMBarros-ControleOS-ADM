@@ -119,9 +119,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                                     class="btn btn-warning btn-xs" data-toggle="modal"
                                                                     data-target="#alterarTipo">Alterar</a>
                                                                 <a href="#"
-                                                                    onclick="return ModalExcluirTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                                                                    onclick="return CarregarExcluir('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
                                                                     class="btn btn-danger btn-xs" data-toggle="modal"
-                                                                    data-target="#excluirTipo">Excluir</a>
+                                                                    data-target="#modalExcluir">Excluir</a>
                                                             </td>
                                                             <td>
                                                                 <input type="hidden" name="id" id="id"
@@ -144,9 +144,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                 <!-- /.card -->
                 <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
                     <?php include_once 'modais/alterar_tipo.php'; ?>
-                </form>
-                <form action="gerenciar_tipoequipamento.php" method="post">
-                    <?php include_once 'modais/excluir_tipo.php'; ?>
+                    <?php include_once 'modais/excluir.php'; ?>
                 </form>
             </section>
             <!-- /.content -->

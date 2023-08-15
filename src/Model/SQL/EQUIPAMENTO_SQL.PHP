@@ -37,7 +37,7 @@ class EQUIPAMENTO_SQL
                            desc_equipamento, 
                            situacao, 
                            data_descarte, 
-                           motivo_descarte, 
+                           motivo_dSescarte, 
                            tipoequipamento_id, 
                            modelo_id 
                       FROM tb_equipamento
