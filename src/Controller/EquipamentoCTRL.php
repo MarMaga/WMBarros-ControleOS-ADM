@@ -37,6 +37,13 @@ class EquipamentoCTRL
 
         return $ret;
     }
+
+    public function ConsultarEquipamentoCTRL(string $comFiltro): int|array
+    {
+        $ret = $this->modEq->ConsultarEquipamentoMODEL($comFiltro);
+
+        return $ret;
+    }
 }
 
 ?>

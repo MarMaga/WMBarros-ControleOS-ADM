@@ -91,16 +91,19 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php for($i = 0; $i < count($equipamentos); $i++) { ?>
                                                 <tr>
                                                     <td>
                                                         <a href="#" class="btn btn-warning btn-xs">Alterar</a>
                                                         <a href="#" class="btn btn-danger btn-xs">Excluir</a>
                                                     </td>
-                                                    <td>...</td>
-                                                    <td>...</td>
-                                                    <td>...</td>
-                                                    <td>...</td>
+                                                    <td><input type="hidden" name="id" id="id"
+                                                                    value="<?= $equipamentos[$i]['id'] ?>" /><?= $equipamentos[$i]['tipo_equipamento'] ?></td>
+                                                    <td><?= $equipamentos[$i]['nome_modelo'] ?></td>
+                                                    <td><?= $equipamentos[$i]['ident_equipamento'] ?></td>
+                                                    <td><?= $equipamentos[$i]['desc_equipamento'] ?></td>
                                                 </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
