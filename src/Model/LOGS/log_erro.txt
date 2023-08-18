@@ -1,0 +1,6 @@
+-----------------------------------
+Data do erro: 18/08/2023
+Hora do erro: 16:50
+Código do logado: 1
+Função do erro: CadastrarTipoEquipamento
+Erro técnico: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'db_controleos.tb_tipoequipamentof' doesn't exist

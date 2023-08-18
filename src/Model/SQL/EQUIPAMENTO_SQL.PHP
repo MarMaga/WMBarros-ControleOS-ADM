@@ -19,7 +19,7 @@ class EQUIPAMENTO_SQL
 
     public static function SELECIONAR_EQUIPAMENTO(string $comFiltro): string
     {
-        if ($comFiltro == "N") {
+        if ($comFiltro == "N") { // N de Não: sem filtro; busca todos os registros
 
             $sql = 'SELECT ident_equipamento, 
                            desc_equipamento, 
@@ -31,7 +31,7 @@ class EQUIPAMENTO_SQL
                       FROM tb_equipamento
                   ORDER BY tipoequipamento_id';
 
-        } else if($comFiltro == "C") {
+        } else if($comFiltro == "C") { // C de Consulta: verifica a existência de um registro
 
             $sql = 'SELECT ident_equipamento, 
                            desc_equipamento, 
@@ -46,7 +46,7 @@ class EQUIPAMENTO_SQL
                        AND ident_equipamento = ?
                   ORDER BY tipoequipamento_id';
 
-        } else if($comFiltro == "T") {
+        } else if($comFiltro == "T") { // T de Tabela: usado para preenchimento da tabela da tela
 
             $sql = 'SELECT eq.id, 
                            eq.ident_equipamento, 
@@ -60,7 +60,7 @@ class EQUIPAMENTO_SQL
                         ON eq.modelo_id = modelo.id 
                   ORDER BY tipo.tipo_equipamento';
 
-        } else { // comFiltro == "F" (usado na pesquisa da tela)
+        } else { // comFiltro == "F" de Filtro; usado na pesquisa da tela (input Pesquisar por ...)
 
             $sql = 'SELECT ident_equipamento, 
                            desc_equipamento, 

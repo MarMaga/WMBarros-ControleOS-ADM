@@ -66,7 +66,7 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $voTipoEq = new TipoEquipamentoVO();
 
-    $voTipoEq->setIdTipoEquipamento($_POST['id_tipo_excluir']);
+    $voTipoEq->setIdTipoEquipamento($_POST['id_excluir']);
 
     $ret = $ctrlTipoEq->ExcluirTipoEquipamentoCTRL($voTipoEq);
 

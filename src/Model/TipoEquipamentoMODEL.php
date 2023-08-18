@@ -25,6 +25,8 @@ class TipoEquipamentoMODEL extends Conexao
             $sql->execute();
             return 1;
         } catch (Exception $ex) {
+            $voTipoEq->setErroTecnico($ex->getMessage());
+            parent::GravarErroLog($voTipoEq);
             return -1;
         }
     }
@@ -72,6 +74,8 @@ class TipoEquipamentoMODEL extends Conexao
             $sql->execute();
             return 1;
         } catch (Exception $ex) {
+            $voTipoEq->setErroTecnico($ex->getMessage());
+            parent::GravarErroLog($voTipoEq);
             return -1;
         }
     }
@@ -85,6 +89,8 @@ class TipoEquipamentoMODEL extends Conexao
             $sql->execute();
             return 1;
         } catch (Exception $ex) {
+            $voTipoEq->setErroTecnico($ex->getMessage());
+            parent::GravarErroLog($voTipoEq);
             return -1;
         }
     }

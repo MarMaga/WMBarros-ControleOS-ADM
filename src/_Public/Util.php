@@ -213,7 +213,8 @@ class Util
 
     public static function CodigoLogado(){
         self::IniciarSessao();
-        return $_SESSION['cod'];
+        //return $_SESSION['cod'];
+        return '1';
     }
 
     public static function Deslogar(){

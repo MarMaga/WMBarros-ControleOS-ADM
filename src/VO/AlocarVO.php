@@ -3,8 +3,9 @@
 namespace Src\VO;
 
 use Src\_Public\Util;
+use Src\VO\LogErroVO;
 
-class AlocarVO
+class AlocarVO extends LogErroVO
 {
     private $id;
     private $id_equipamento;

@@ -2,9 +2,9 @@
 
 namespace Src\VO;
 
-use Src\_Public\Util;
+use Src\VO\LogErroVO;
 
-class SetorVO
+class SetorVO extends LogErroVO
 {
     private $id;
     private $nome;

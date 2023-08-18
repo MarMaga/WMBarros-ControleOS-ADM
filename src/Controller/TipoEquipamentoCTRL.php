@@ -4,6 +4,7 @@ namespace Src\Controller;
 
 use Src\Model\TipoEquipamentoMODEL;
 use Src\VO\TipoEquipamentoVO;
+use Src\_Public\Util;
 
 class TipoEquipamentoCTRL
 {
@@ -20,6 +21,9 @@ class TipoEquipamentoCTRL
         if (empty($voTipoEq->getNomeTipoEquipamento()))
             return 0;
 
+        $voTipoEq->setCodLogado(Util::CodigoLogado());
+        $voTipoEq->setFuncaoErro(CADASTRAR_TIPO_EQUIPAMENTO);
+
         return $this->modTipoEq->CadastrarTipoEquipamentoMODEL($voTipoEq);
     }
 
@@ -35,11 +39,17 @@ class TipoEquipamentoCTRL
 
     public function AlterarTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
     {
+        $voTipoEq->setCodLogado(Util::CodigoLogado());
+        $voTipoEq->setFuncaoErro(ALTERAR_TIPO_EQUIPAMENTO);
+
         return $this->modTipoEq->AlterarTipoEquipamentoMODEL($voTipoEq);
     }
 
     public function ExcluirTipoEquipamentoCTRL(TipoEquipamentoVO $voTipoEq): int
     {
+        $voTipoEq->setCodLogado(Util::CodigoLogado());
+        $voTipoEq->setFuncaoErro(EXCLUIR_TIPO_EQUIPAMENTO);
+        
         return $this->modTipoEq->ExcluiTipoEquipamentoMODEL($voTipoEq);
     }
 }
