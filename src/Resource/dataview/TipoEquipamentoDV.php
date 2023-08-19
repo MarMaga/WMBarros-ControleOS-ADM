@@ -13,8 +13,6 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $voTipoEq = new TipoEquipamentoVO();
 
-    $inclusao = $_POST['novo'];
-
     $voTipoEq->setNomeTipoEquipamento($_POST['tipo']);
 
     // consulta se o tipo já está cadastrado
@@ -27,24 +25,12 @@ if (isset($_POST['btn_cadastrar'])) {
 
     } else {
 
-        if ($inclusao == 'S') {
+        $ret = $ctrlTipoEq->CadastrarTipoEquipamentoCTRL($voTipoEq);
 
-            $ret = $ctrlTipoEq->CadastrarTipoEquipamentoCTRL($voTipoEq);
-
-        } else {
-
-            if ($_POST['h_tipo'] == $_POST['tipo']) {
-
-                $ret = -2;
-
-            } else {
-
-                $voTipoEq->setIdTipoEquipamento($_POST['h_id_alt']);
-
-                $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
-            }
-        }
     }
+
+    if ($_POST['btn_cadastrar'] == 'ajx')
+        echo $ret;
 
 } elseif (isset($_POST['btn_alterar'])) {
 
@@ -90,8 +76,8 @@ if (isset($_POST['btn_filtrar'])) {
 
         $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
         $filtroAtivado = false;
-        
-    }    
+
+    }
 
 } elseif (isset($_POST['btn_limparFiltro'])) {
 

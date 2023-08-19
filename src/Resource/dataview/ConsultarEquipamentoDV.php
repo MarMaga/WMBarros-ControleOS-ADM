@@ -31,7 +31,7 @@ if(isset($_POST['btn_buscar'])){
 
 
     $voConsultaEqPorTipo = new EquipamentoVO();
-    $ctrlConsultaEqPorTipo = new ConsultaEquipamentoCTRL();
+    $ctrlConsultaEqPorTipo = new ConsultarEquipamentoCTRL();
 
     $voConsultaEqPorTipo->setIdTipoEquipamento(intval($_POST['tipo']));
 

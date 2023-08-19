@@ -6,7 +6,7 @@ class TIPO_EQUIPAMENTO_SQL
 {
     public static function INSERIR_TIPO_EQUIPAMENTO(): string
     {
-        $sql = 'INSERT INTO tb_tipoequipamentof (tipo_equipamento) VALUES (?)';
+        $sql = 'INSERT INTO tb_tipoequipamento (tipo_equipamento) VALUES (?)';
 
         return $sql;
     }

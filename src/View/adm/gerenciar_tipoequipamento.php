@@ -48,7 +48,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                 <input class="form-control obg" name="tipo" id="tipo" onkeyup="Maiuscula('tipo')"
                                     placeholder="Digite aqui...">
                             </div>
-                            <button onclick="return NotificarCampos('formTipo')" class="btn btn-success"
+                            <button type="button" onclick="CadastrarTipoEquipamento('formTipo')" class="btn btn-success"
                                 name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
@@ -61,13 +61,13 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <?php } else if ($filtroAtivado == false && count($tipos) > 0) { ?>
                                     <div class="card-header bg-info">
                                         <h3 class="card-title">Tipos cadastrados</h3>
-                                    <?php } else if ($filtroAtivado == true && count($tipos) == 0) { ?>
+                                <?php } else if ($filtroAtivado == true && count($tipos) == 0) { ?>
                                             <div class="card-header bg-danger">
                                                 <h3 class="card-title">A pesquisa retornou vazia</h3>
-                                            <?php } else if ($filtroAtivado == true && count($tipos) > 0) { ?>
+                                    <?php } else if ($filtroAtivado == true && count($tipos) > 0) { ?>
                                                     <div class="card-header bg-success">
                                                         <h3 class="card-title">Tipos filtrados</h3>
-                                                    <?php } ?>
+                                        <?php } ?>
                                         <div class="card-tools">
                                             <div class="input-group input-group-sm" style="width: 200px;">
                                                 <input type="hidden" name="filtroAtivado"
@@ -160,6 +160,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
         AjustarMenu("Gerenciar tipo de equipamento", "menuEquipamentos", "tiposEquipamentos");
         $("#tipo").focus();
     </script>
+
+    <script src="../../Resource/ajax/TipoEquipamentoAJAX.js"></script>
 
 </body>
 

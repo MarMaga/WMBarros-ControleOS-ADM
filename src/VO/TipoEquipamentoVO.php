@@ -23,7 +23,7 @@ class TipoEquipamentoVO extends LogErroVO
     // SET e GET tipo_equipamento
     public function setNomeTipoEquipamento(string $nome): void
     {
-        $this->nome = Util::TratarDadosGeral($nome);
+        $this->nome = Util::RemoverTags($nome);
     }
     public function getNomeTipoEquipamento(): string
     {
