@@ -47,7 +47,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                                 <input class="form-control obg" name="modelo" id="modelo" onkeyup="Maiuscula('modelo')"
                                     placeholder="Digite aqui...">
                             </div>
-                            <button onclick="return NotificarCampos('formModelo')" class="btn btn-success"
+                            <button type="button" onclick="CadastrarModeloEquipamento('formModelo')" class="btn btn-success"
                                 name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
@@ -161,6 +161,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
         AjustarMenu("Gerenciar modelo de equipamento", "menuEquipamentos", "modelosEquipamentos");
         $("#modelo").focus();
     </script>
+
+    <script src="../../Resource/ajax/ModeloEquipamentoAJAX.js"></script>
 
 </body>
 

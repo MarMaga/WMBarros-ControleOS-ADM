@@ -28,6 +28,10 @@ if (isset($_POST['btn_cadastrar'])) {
         $ret = $ctrlModeloEq->CadastrarModeloEquipamentoCTRL($voModeloEq);
     }
 
+    if($_POST['btn_cadastrar'] == 'ajx'){
+        return $ret;
+    }
+    
 } elseif (isset($_POST['btn_alterar'])) {
 
     $ModeloOriginal = $_POST['modelo_original_alterar'];
