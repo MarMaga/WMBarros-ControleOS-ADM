@@ -55,46 +55,36 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                 </div>
                 <div class="card">
                     <form action="gerenciar_tipoequipamento.php" method="post">
-                        <?php if ($filtroAtivado == false && count($tipos) == 0) { ?>
-                            <div class="card-header bg-warning">
-                                <h3 class="card-title">Nenhum tipo cadastrado</h3>
-                            <?php } else if ($filtroAtivado == false && count($tipos) > 0) { ?>
-                                    <div class="card-header bg-info">
-                                        <h3 class="card-title">Tipos cadastrados</h3>
-                                <?php } else if ($filtroAtivado == true && count($tipos) == 0) { ?>
-                                            <div class="card-header bg-danger">
-                                                <h3 class="card-title">A pesquisa retornou vazia</h3>
-                                    <?php } else if ($filtroAtivado == true && count($tipos) > 0) { ?>
-                                                    <div class="card-header bg-success">
-                                                        <h3 class="card-title">Tipos filtrados</h3>
-                                        <?php } ?>
-                                        <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 200px;">
-                                                <input type="hidden" name="filtroAtivado"
-                                                    value="<?php $filtroAtivado ?>">
-                                                <?php if (count($tipos) > 0 || $filtroAtivado == true) { ?>
-                                                    <input type="text" name="filtroTipo" id="filtroTipo"
-                                                        onkeyup="Maiuscula('filtroTipo')" class="form-control float-right"
-                                                        placeholder="Pesquise por..." value="<?= $filtro ?>">
-                                                    <div class="input-group-append">
-                                                        <button name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
-                                                            onclick="return FiltrarTipoEquipamento()"
-                                                            class="btn btn-default btn-sm"><i
-                                                                class="fas fa-search"></i></button>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <button <?php echo ($filtroAtivado == false && count($tipos) == 0) ? 'type="hidden"' : '' ?> name="btn_limparFiltro"
-                                                            class="btn btn-info btn-sm" title="Limpar filtro"
-                                                            onclick="return LimparFiltroTipoEquipamento()"><i
-                                                                class="fas fa-times"></i></button>
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
+                        <div class="card-header" id="barraTituloFiltro">
+                            <h3 class="card-title" id="tituloFiltro">Tipos Cadastrados</h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="hidden" name="filtroAtivado" value="<?php $filtroAtivado ?>">
+                                    <?php if (count($tipos) > 0 || $filtroAtivado == true) { ?>
+                                        <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Filtrar()"
+                                            class="form-control float-right" placeholder="Pesquise por..."
+                                            value="<?= $filtro ?>">
+                                        <div class="input-group-append">
+                                            <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
+                                                onclick="Filtrar()" class="btn btn-default btn-sm"><i
+                                                    class="fas fa-search"></i></button>
+                                            <!--<button name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
+                                                    onclick="return FiltrarTipoEquipamento()"
+                                                    class="btn btn-default btn-sm"><i
+                                                    class="fas fa-search"></i></button>-->
                                         </div>
-                                    </div>
+                                        <div class="input-group-append">
+                                            <button name="btn_limparFiltro" type="button"
+                                                class="btn btn-info btn-sm" title="Limpar filtro"
+                                                onclick="ConsultarTipo()"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                     <?php if (count($tipos) > 0) { ?>
-                        <div class="card-body">
+                        <div class="card-body" id="AltereOuExclua">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
@@ -104,7 +94,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                         <!-- /.card-header -->
                                         <div class="card-body table-responsive p-0">
                                             <table class="table table-hover" id="tableResult">
-                                            
+
                                             </table>
                                         </div>
                                         <!-- /.card-body -->

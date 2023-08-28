@@ -41,16 +41,19 @@ if (isset($_POST['btn_cadastrar'])) {
 
     if ($tipoOriginal == $tipo) {
         $ret = -2;
+    } else {
+
+        $voTipoEq = new TipoEquipamentoVO();
+
+        $voTipoEq->setIdTipoEquipamento($_POST['id_tipo_alterar']);
+        $voTipoEq->setNomeTipoEquipamento($tipo);
+
+        $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
     }
 
-    $voTipoEq = new TipoEquipamentoVO();
-
-    $voTipoEq->setIdTipoEquipamento($_POST['id_tipo_alterar']);
-    $voTipoEq->setNomeTipoEquipamento($tipo);
-
-    $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
-
-    if($_POST['']){}
+    if ($_POST['btn_alterar'] == 'ajx') {
+        echo $ret;
+    }
 
 } elseif (isset($_POST['btn_excluir'])) {
 
@@ -60,6 +63,9 @@ if (isset($_POST['btn_cadastrar'])) {
 
     $ret = $ctrlTipoEq->ExcluirTipoEquipamentoCTRL($voTipoEq);
 
+    if ($_POST['btn_excluir'] == 'ajx') {
+        echo $ret;
+    }
 }
 
 if (isset($_POST['btn_filtrar'])) {
@@ -83,6 +89,16 @@ if (isset($_POST['btn_filtrar'])) {
 
     }
 
+    if ($_POST['btn_filtrar'] == 'ajx') {
+
+        if (count($tipos) > 0) {
+            include_once PATH . 'view/adm/tabelas/TipoEquipamentoTABLE.php';
+        } else {
+            $tipos = 'NADA';
+            echo $tipos;
+        }
+    }
+
 } elseif (isset($_POST['btn_limparFiltro'])) {
 
     $filtro = "";
@@ -93,31 +109,6 @@ if (isset($_POST['btn_filtrar'])) {
 
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
-    ?>
+    include_once PATH . 'view/adm/tabelas/TipoEquipamentoTABLE.php';
 
-    <thead>
-        <tr>
-            <th>Ação</th>
-            <th>Tipo do equipamento</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php for ($i = 0; $i < count($tipos); $i++) { ?>
-            <tr>
-                <td>
-                    <a href="#"
-                        onclick="return ModalAlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
-                        class="btn btn-warning btn-xs" data-toggle="modal" data-target="#alterarTipo">Alterar</a>
-                    <a href="#"
-                        onclick="return CarregarExcluir('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
-                        class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalExcluir">Excluir</a>
-                </td>
-                <td>
-                    <input type="hidden" name="id" id="id" value="<?= $tipos[$i]['id'] ?>" />
-                    <?= $tipos[$i]['tipo_equipamento'] ?>
-                </td>
-            </tr>
-        <?php } ?>
-    </tbody>
-
-<?php } ?>
+} 
