@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '8f96edc1d49f28ba88a88a7404f3349b' => $baseDir . '/src/Config/fixos.php',
+    '8900d157b8c092c013198ec9f23936e0' => $baseDir . '/src/Config/FuncoesAmbiente.php',
 );

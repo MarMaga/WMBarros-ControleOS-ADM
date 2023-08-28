@@ -8,6 +8,7 @@ include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 $ctrlTipoEq = new TipoEquipamentoCTRL();
 $filtro = "";
 $filtroAtivado = false;
+$tipos[] = "";
 
 if (isset($_POST['btn_cadastrar'])) {
 
@@ -29,8 +30,9 @@ if (isset($_POST['btn_cadastrar'])) {
 
     }
 
-    if ($_POST['btn_cadastrar'] == 'ajx')
+    if ($_POST['btn_cadastrar'] == 'ajx') {
         echo $ret;
+    }
 
 } elseif (isset($_POST['btn_alterar'])) {
 
@@ -47,6 +49,8 @@ if (isset($_POST['btn_cadastrar'])) {
     $voTipoEq->setNomeTipoEquipamento($tipo);
 
     $ret = $ctrlTipoEq->AlterarTipoEquipamentoCTRL($voTipoEq);
+
+    if($_POST['']){}
 
 } elseif (isset($_POST['btn_excluir'])) {
 
@@ -85,10 +89,35 @@ if (isset($_POST['btn_filtrar'])) {
     $filtroAtivado = false;
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
-} else {
+} elseif (isset($_POST['consultar_tipo'])) {
 
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
-}
+    ?>
 
-?>
+    <thead>
+        <tr>
+            <th>Ação</th>
+            <th>Tipo do equipamento</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php for ($i = 0; $i < count($tipos); $i++) { ?>
+            <tr>
+                <td>
+                    <a href="#"
+                        onclick="return ModalAlterarTipoEquipamento('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                        class="btn btn-warning btn-xs" data-toggle="modal" data-target="#alterarTipo">Alterar</a>
+                    <a href="#"
+                        onclick="return CarregarExcluir('<?= $tipos[$i]['id'] ?>', '<?= $tipos[$i]['tipo_equipamento'] ?>')"
+                        class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalExcluir">Excluir</a>
+                </td>
+                <td>
+                    <input type="hidden" name="id" id="id" value="<?= $tipos[$i]['id'] ?>" />
+                    <?= $tipos[$i]['tipo_equipamento'] ?>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+
+<?php } ?>

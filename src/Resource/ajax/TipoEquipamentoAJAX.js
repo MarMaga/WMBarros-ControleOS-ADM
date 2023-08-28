@@ -13,8 +13,23 @@ function CadastrarTipoEquipamento(formID)
             },
             success: function(ret){
                 MostrarMensagem(ret);
+                ConsultarTipo();
                 LimparNotificacoes(formID);
             }
         })
     }
+}
+
+function ConsultarTipo(){
+
+    $.ajax({
+        type: "post",
+        url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
+        data: {
+            consultar_tipo: 'ajx'
+        },
+        success: function(dados){
+            $("#tableResult").html(dados);
+        }
+    })
 }

@@ -8,6 +8,7 @@ class ComposerStaticInite4d1e01385ff8d6ecadd9a874a42cbe3
 {
     public static $files = array (
         '8f96edc1d49f28ba88a88a7404f3349b' => __DIR__ . '/../..' . '/src/Config/fixos.php',
+        '8900d157b8c092c013198ec9f23936e0' => __DIR__ . '/../..' . '/src/Config/FuncoesAmbiente.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -60,6 +61,7 @@ class ComposerStaticInite4d1e01385ff8d6ecadd9a874a42cbe3
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
