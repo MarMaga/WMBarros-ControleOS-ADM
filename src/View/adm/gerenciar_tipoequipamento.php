@@ -46,21 +46,20 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                 <label>Tipo de equipamento</label>
                                 <input name="novo" id="novo" type="hidden" value="S">
                                 <input class="form-control obg" name="tipo" id="tipo" onkeyup="Maiuscula('tipo')"
-                                    placeholder="Digite aqui...">
+                                onkeypress="TratarEnterCadastroTipo()" placeholder="Digite aqui...">
                             </div>
                             <button type="button" onclick="CadastrarTipoEquipamento('formTipo')" class="btn btn-success"
-                                name="btn_cadastrar">Cadastrar</button>
+                                name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
                 <div class="card">
                     <form action="gerenciar_tipoequipamento.php" method="post">
-                        <div class="card-header bg-info" id="barraTituloFiltro">
+                        <div class="card-header bg-info d-none" id="barraTituloFiltro">
                             <h3 class="card-title" id="tituloFiltro">Tipos Cadastrados</h3>
                             <div class="card-tools" id="pesquisa">
                                 <div class="input-group input-group-sm" style="width: 200px;">
-                                    <input type="hidden" name="filtroAtivado" value="<?php $filtroAtivado ?>">
-                                    <?php if (count($tipos) > 0 || $filtroAtivado == true) { ?>
+                                    <input type="hidden" name="filtroAtivado">
                                         <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Filtrar()"
                                             class="form-control float-right" placeholder="Pesquise por..."
                                             value="<?= $filtro ?>">
@@ -68,22 +67,17 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                             <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
                                                 onclick="Filtrar()" class="btn btn-default btn-sm"><i
                                                     class="fas fa-search"></i></button>
-                                            <!--<button name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
-                                                    onclick="return FiltrarTipoEquipamento()"
-                                                    class="btn btn-default btn-sm"><i
-                                                    class="fas fa-search"></i></button>-->
                                         </div>
                                         <div class="input-group-append">
                                             <button name="btn_limparFiltro" type="button" class="btn btn-info btn-sm"
                                                 title="Limpar filtro" onclick="ConsultarTipo()"><i
                                                     class="fas fa-times"></i></button>
                                         </div>
-                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div class="card-body" id="AltereOuExclua">
+                    <div class="card-body d-none" id="AltereOuExclua">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -115,6 +109,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
 
         <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
 
+        <script>
+            FocarInputModal('alterarTipo', 'tipo_alterar');
+        </script>
     </div>
     <!-- ./wrapper -->
 

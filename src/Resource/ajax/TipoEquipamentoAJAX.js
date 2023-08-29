@@ -14,6 +14,7 @@ function CadastrarTipoEquipamento(formID) {
                 MostrarMensagem(ret);
                 ConsultarTipo();
                 LimparNotificacoes(formID);
+                $("#tipo").focus();
             }
         })
     }
@@ -29,17 +30,17 @@ function ConsultarTipo() {
         },
         success: function (tipos) {
             if (tipos == 'NADA') {
-                $("#barraTituloFiltro").addClass("bg-warning").removeClass("bg-info").removeClass("bg-success").removeClass("bg-danger");
+                $("#barraTituloFiltro").addClass("d-block").removeClass("d-none").addClass("bg-warning").removeClass("bg-info").removeClass("bg-success").removeClass("bg-danger");
                 $("#tituloFiltro").html("Nenhum tipo cadastrado");
                 $("#pesquisa").hide();
-                $("#AltereOuExclua").hide();
+                $("#AltereOuExclua").addClass("d-none").removeClass("d-block");
                 $("#tableResult").hide();
             } else {
                 $("#filtroTipo").val('');
-                $("#barraTituloFiltro").addClass("bg-info").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-danger");
+                $("#barraTituloFiltro").addClass("d-block").removeClass("d-none").addClass("bg-info").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-danger");
                 $("#tituloFiltro").html("Tipos cadastrados");
                 $("#pesquisa").show();
-                $("#AltereOuExclua").show();
+                $("#AltereOuExclua").addClass("d-block").removeClass("d-none");
                 $("#tableResult").show();
                 $("#tableResult").html(tipos);
             }
@@ -65,13 +66,13 @@ function TabelaFiltrada() {
                 $("#barraTituloFiltro").addClass("bg-danger").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-info");
                 $("#tituloFiltro").html("A pesquisa não retornou resultados");
                 $("#pesquisa").show();
-                $("#AltereOuExclua").hide();
+                $("#AltereOuExclua").addClass("d-none").removeClass("d-block");
                 $("#tableResult").hide();
             } else {
                 $("#barraTituloFiltro").addClass("bg-success").removeClass("bg-warning").removeClass("bg-danger").removeClass("bg-info");
                 $("#tituloFiltro").html("Tipos filtrados");
                 $("#pesquisa").show();
-                $("#AltereOuExclua").show();
+                $("#AltereOuExclua").addClass("d-block").removeClass("d-none");
                 $("#tableResult").show();
                 $("#tableResult").html(tipos);
             }

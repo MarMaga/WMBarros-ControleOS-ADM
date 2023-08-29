@@ -1,8 +1,8 @@
-function BASE_URL_DATAVIEW(dataview){
+function BASE_URL_DATAVIEW(dataview) {
     return '../../Resource/dataview/' + dataview + '.php';
 }
 
-function LimparNotificacoes(formID){
+function LimparNotificacoes(formID) {
 
     $("#" + formID + " input, #" + formID + " textarea, #" + formID + " select").each(function () {
         $(this).val('');
@@ -59,19 +59,48 @@ function AjustarMenu(titulo, menu, item) {
     $("#" + item).addClass("active");
 }
 
-function TratarEnter() {
+function TratarEnterAlteracaoTipo() {
     $(document.body).on('keypress', function (e) {
         //o 13 é o Codigo do ENTER
         if (e.keyCode === 13) {
 
-            e.preventDefault();
-            GravarAlteracaoTipoEquipamento();
-            $("#btn_alterar").click();
+            e.keyCode = ''; // limpa a tecla clicada porque chama o clique do botão mais de uma vez
+            $("#tipo_alterar").focus();
+            //e.preventDefault();
+            //GravarAlteracaoTipoEquipamento();
+            //$("#btn_alterar").click();
             //document.getElementById("btn_alterar").click();
         }
     });
 }
 
+function TratarEnterCadastroTipo() {
+    $(document.body).on('keypress', function (e) {
+        //o 13 é o Codigo do ENTER
+        if (e.keyCode === 13) {
+
+            e.keyCode = ''; // limpa a tecla clicada porque chama o clique do botão mais de uma vez
+            e.preventDefault();
+            MouseClick("btn_cadastrar");
+
+            //var btn = document.getElementById("btn_cadastrar");
+            //btn.onclick.call(btn);
+            //CadastrarTipoEquipamento('formTipo');
+            //document.getElementById("btn_cadastrar").click();
+        }
+    });
+}
+
+function MouseClick(ID){
+    $("#" + ID).click();
+    //var clickEvent = new MouseEvent("click", {
+    //    "view": window,
+    //    "bubbles": true,
+    //    "cancelable": false
+    //});
+
+    //$("#" + ID).dispatchEvent(clickEvent);
+}
 // TIPO DE EQUIPAMENTO
 function AlterarTipoEquipamento(id, nome) {
     $("#novo").val("N");
@@ -83,8 +112,8 @@ function AlterarTipoEquipamento(id, nome) {
     return false;
 }
 
-function LimparFiltroTipoEquipamento(){
-    if($("#filtroTipo").val() == ""){
+function LimparFiltroTipoEquipamento() {
+    if ($("#filtroTipo").val() == "") {
         $("#tipo").focus();
         return false;
     }
@@ -101,9 +130,18 @@ function AlterarModeloEquipamento(id, nome) {
     return false;
 }
 
-function LimparFiltroModeloEquipamento(){
-    if($("#filtroModelo").val() == ""){
+function LimparFiltroModeloEquipamento() {
+    if ($("#filtroModelo").val() == "") {
         $("#modelo").focus();
         return false;
     }
+}
+
+function FocarInputModal(IDModal, IDInput) {
+    $(document).ready(function () {
+        $(document).on('shown.bs.modal', '#' + IDModal, function () {
+            //$('#' + IDInput).trigger('focus');
+            $('#' + IDInput).focus();
+        });
+    });
 }
