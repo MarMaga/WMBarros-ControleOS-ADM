@@ -28,10 +28,21 @@ function ConsultarTipo() {
             consultar_tipo: 'ajx'
         },
         success: function (tipos) {
-            $("#filtroTipo").val('');
-            $("#barraTituloFiltro").addClass("bg-info").removeClass("bg-success").removeClass("bg-danger");
-            $("#tituloFiltro").html("Tipos cadastrados");
-            $("#tableResult").html(tipos);
+            if (tipos == 'NADA') {
+                $("#barraTituloFiltro").addClass("bg-warning").removeClass("bg-info").removeClass("bg-success").removeClass("bg-danger");
+                $("#tituloFiltro").html("Nenhum tipo cadastrado");
+                $("#pesquisa").hide();
+                $("#AltereOuExclua").hide();
+                $("#tableResult").hide();
+            } else {
+                $("#filtroTipo").val('');
+                $("#barraTituloFiltro").addClass("bg-info").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-danger");
+                $("#tituloFiltro").html("Tipos cadastrados");
+                $("#pesquisa").show();
+                $("#AltereOuExclua").show();
+                $("#tableResult").show();
+                $("#tableResult").html(tipos);
+            }
         }
     })
 }
@@ -48,16 +59,18 @@ function TabelaFiltrada() {
             filtroTipo: filtro
         },
         success: function (tipos) {
-            if (filtro == ''){
+            if (filtro == '') {
                 ConsultarTipo();
             } else if (tipos == 'NADA') {
-                $("#barraTituloFiltro").addClass("bg-danger").removeClass("bg-success").removeClass("bg-info");
+                $("#barraTituloFiltro").addClass("bg-danger").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-info");
                 $("#tituloFiltro").html("A pesquisa não retornou resultados");
+                $("#pesquisa").show();
                 $("#AltereOuExclua").hide();
                 $("#tableResult").hide();
             } else {
-                $("#barraTituloFiltro").addClass("bg-success").removeClass("bg-danger").removeClass("bg-info");
+                $("#barraTituloFiltro").addClass("bg-success").removeClass("bg-warning").removeClass("bg-danger").removeClass("bg-info");
                 $("#tituloFiltro").html("Tipos filtrados");
+                $("#pesquisa").show();
                 $("#AltereOuExclua").show();
                 $("#tableResult").show();
                 $("#tableResult").html(tipos);

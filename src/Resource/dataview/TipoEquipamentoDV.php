@@ -94,8 +94,7 @@ if (isset($_POST['btn_filtrar'])) {
         if (count($tipos) > 0) {
             include_once PATH . 'view/adm/tabelas/TipoEquipamentoTABLE.php';
         } else {
-            $tipos = 'NADA';
-            echo $tipos;
+            echo 'NADA';
         }
     }
 
@@ -105,10 +104,17 @@ if (isset($_POST['btn_filtrar'])) {
     $filtroAtivado = false;
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
+    if (count($tipos) == 0) {
+        echo 'NADA';
+    }
+
 } elseif (isset($_POST['consultar_tipo'])) {
 
     $tipos = $ctrlTipoEq->ConsultarTipoEquipamentoCTRL();
 
-    include_once PATH . 'view/adm/tabelas/TipoEquipamentoTABLE.php';
-
+    if (count($tipos) > 0) {
+        include_once PATH . 'view/adm/tabelas/TipoEquipamentoTABLE.php';
+    } else {
+        echo 'NADA';
+    }
 } 

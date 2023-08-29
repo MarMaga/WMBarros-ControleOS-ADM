@@ -25,7 +25,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h2 class="text-primary">Gerenciar tipo de equipamento</h2>
+                            <h2 class="text-primary">Gerenciar tipos de equipamentos</h2>
                             <a>Aqui você gerencia todos os tipos de equipamentos</a>
                         </div>
                     </div>
@@ -55,9 +55,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                 </div>
                 <div class="card">
                     <form action="gerenciar_tipoequipamento.php" method="post">
-                        <div class="card-header" id="barraTituloFiltro">
+                        <div class="card-header bg-info" id="barraTituloFiltro">
                             <h3 class="card-title" id="tituloFiltro">Tipos Cadastrados</h3>
-                            <div class="card-tools">
+                            <div class="card-tools" id="pesquisa">
                                 <div class="input-group input-group-sm" style="width: 200px;">
                                     <input type="hidden" name="filtroAtivado" value="<?php $filtroAtivado ?>">
                                     <?php if (count($tipos) > 0 || $filtroAtivado == true) { ?>
@@ -74,36 +74,34 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                                     class="fas fa-search"></i></button>-->
                                         </div>
                                         <div class="input-group-append">
-                                            <button name="btn_limparFiltro" type="button"
-                                                class="btn btn-info btn-sm" title="Limpar filtro"
-                                                onclick="ConsultarTipo()"><i class="fas fa-times"></i></button>
+                                            <button name="btn_limparFiltro" type="button" class="btn btn-info btn-sm"
+                                                title="Limpar filtro" onclick="ConsultarTipo()"><i
+                                                    class="fas fa-times"></i></button>
                                         </div>
                                     <?php } ?>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <?php if (count($tipos) > 0) { ?>
-                        <div class="card-body" id="AltereOuExclua">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Altere ou exclua os registros</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-0">
-                                            <table class="table table-hover" id="tableResult">
-
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
+                    <div class="card-body" id="AltereOuExclua">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Altere ou exclua os registros</h3>
                                     </div>
-                                    <!-- /.card -->
+                                    <!-- /.card-header -->
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover" id="tableResult">
+
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
+                                <!-- /.card -->
                             </div>
                         </div>
-                    <?php } ?>
+                    </div>
                 </div>
                 <!-- /.card -->
                 <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
