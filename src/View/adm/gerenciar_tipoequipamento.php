@@ -46,10 +46,10 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                 <label>Tipo de equipamento</label>
                                 <input name="novo" id="novo" type="hidden" value="S">
                                 <input class="form-control obg" name="tipo" id="tipo" onkeyup="Maiuscula('tipo')"
-                                onkeypress="TratarEnterCadastroTipo()" placeholder="Digite aqui...">
+                                    onkeypress="TratarEnter(document)" placeholder="Digite aqui...">
                             </div>
-                            <button type="button" onclick="CadastrarTipoEquipamento('formTipo')" class="btn btn-success"
-                                name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
+                            <button type="button" onclick="CadastrarTipoEquipamentoAJAX('formTipo')"
+                                class="btn btn-success" name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
@@ -60,19 +60,19 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <div class="card-tools" id="pesquisa">
                                 <div class="input-group input-group-sm" style="width: 200px;">
                                     <input type="hidden" name="filtroAtivado">
-                                        <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Filtrar()"
-                                            class="form-control float-right" placeholder="Pesquise por..."
-                                            value="<?= $filtro ?>">
-                                        <div class="input-group-append">
-                                            <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
-                                                onclick="Filtrar()" class="btn btn-default btn-sm"><i
-                                                    class="fas fa-search"></i></button>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <button name="btn_limparFiltro" type="button" class="btn btn-info btn-sm"
-                                                title="Limpar filtro" onclick="ConsultarTipo()"><i
-                                                    class="fas fa-times"></i></button>
-                                        </div>
+                                    <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Filtrar()"
+                                        class="form-control float-right" placeholder="Pesquise por..."
+                                        value="<?= $filtro ?>">
+                                    <div class="input-group-append">
+                                        <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
+                                            onclick="Filtrar()" class="btn btn-default btn-sm"><i
+                                                class="fas fa-search"></i></button>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button name="btn_limparFiltro" type="button" class="btn btn-info btn-sm"
+                                            title="Limpar filtro" onclick="ConsultarTipo()"><i
+                                                class="fas fa-times"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,25 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
 
     <script src="../../Resource/ajax/TipoEquipamentoAJAX.js"></script>
 
-    <script> ConsultarTipo(); </script>
+    <script>
+        ConsultarTipo();
+
+        //$("#alterarTipo.in").on("keydown", function (e) {
+        //    if (e.which == 13) {
+        //        AlterarTipoEquipamentoAJAX('formAlt');
+        //    }
+        //});
+
+        //to prevent multiple binding
+        //$(document).unbind("keyup").keyup(function (e) {
+        //    var code = e.which; // recommended to use e.which, it's normalized across browsers
+        //    if (code == 13) {
+        //        $("#tipo").val("a");
+        //        $("#btn_alterar").click();
+        //        $("#tipo").val("");
+        //    }
+        //});
+    </script>
 
 </body>
 

@@ -47,10 +47,9 @@ function VerificaCampoVazio(id) {
     }
 }
 
-function Maiuscula(id) {
-    var campo = document.getElementById(id);
-
-    campo.value = campo.value.toUpperCase();
+function Maiuscula(ID) {
+    var campo = $("#" + ID);
+    campo.val(campo.val().toUpperCase());
 }
 
 function AjustarMenu(titulo, menu, item) {
@@ -59,57 +58,22 @@ function AjustarMenu(titulo, menu, item) {
     $("#" + item).addClass("active");
 }
 
-function TratarEnterAlteracaoTipo() {
-    $(document.body).on('keypress', function (e) {
+function TratarEnter(FormOuModal) {
+
+    $(FormOuModal).on('keypress', function (e) {
         //o 13 é o Codigo do ENTER
         if (e.keyCode === 13) {
-
-            e.keyCode = ''; // limpa a tecla clicada porque chama o clique do botão mais de uma vez
-            $("#tipo_alterar").focus();
-            //e.preventDefault();
-            //GravarAlteracaoTipoEquipamento();
-            //$("#btn_alterar").click();
-            //document.getElementById("btn_alterar").click();
-        }
-    });
-}
-
-function TratarEnterCadastroTipo() {
-    $(document.body).on('keypress', function (e) {
-        //o 13 é o Codigo do ENTER
-        if (e.keyCode === 13) {
-
-            e.keyCode = ''; // limpa a tecla clicada porque chama o clique do botão mais de uma vez
+ 
             e.preventDefault();
-            MouseClick("btn_cadastrar");
+            e.keyCode = ''; // limpa a tecla clicada porque chama o clique do botão mais de uma vez
 
-            //var btn = document.getElementById("btn_cadastrar");
-            //btn.onclick.call(btn);
-            //CadastrarTipoEquipamento('formTipo');
-            //document.getElementById("btn_cadastrar").click();
+            if (FormOuModal == document){
+                CadastrarTipoEquipamentoAJAX('formTipo');
+            } else if (FormOuModal == '#alterarTipo'){
+                AlterarTipoEquipamentoAJAX('formAlt');
+            }
         }
     });
-}
-
-function MouseClick(ID){
-    $("#" + ID).click();
-    //var clickEvent = new MouseEvent("click", {
-    //    "view": window,
-    //    "bubbles": true,
-    //    "cancelable": false
-    //});
-
-    //$("#" + ID).dispatchEvent(clickEvent);
-}
-// TIPO DE EQUIPAMENTO
-function AlterarTipoEquipamento(id, nome) {
-    $("#novo").val("N");
-    $("#h_id_alt").val(id);
-    $("#h_tipo").val(nome);
-    $("#tipo").val(nome);
-    $("#tipo").focus();
-
-    return false;
 }
 
 function LimparFiltroTipoEquipamento() {

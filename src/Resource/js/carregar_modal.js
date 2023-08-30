@@ -11,17 +11,6 @@ function ModalAlterarTipoEquipamento(ID,nome){
     $("#tipo_original_alterar").val(nome);
 }
 
-function GravarAlteracaoTipoEquipamento(){
-    if(!NotificarCampos('formAlt')){
-        return false;
-    }
-
-    if($("#tipo_alterar").val() == $("#tipo_original_alterar").val()){
-        MostrarMensagem(-2);
-        return false;
-    }
-}
-
 // MODELO DE EQUIPAMENTO
 function ModalAlterarModeloEquipamento(ID,nome){
     $("#id_modelo_alterar").val(ID);

@@ -1,4 +1,5 @@
-function CadastrarTipoEquipamento(formID) {
+function CadastrarTipoEquipamentoAJAX(formID) {
+
     if (NotificarCampos(formID)) {
 
         let nome = $("#tipo").val();
@@ -18,6 +19,7 @@ function CadastrarTipoEquipamento(formID) {
             }
         })
     }
+    alert("Ret do Cadastro: " + ret);
 }
 
 function ConsultarTipo() {
@@ -80,7 +82,7 @@ function TabelaFiltrada() {
     })
 }
 
-function AlterarTipoEquipamento(formID) {
+function AlterarTipoEquipamentoAJAX(formID) {
 
     if (NotificarCampos(formID)) {
         let id = $("#id_tipo_alterar").val();

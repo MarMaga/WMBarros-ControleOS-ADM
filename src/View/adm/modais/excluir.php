@@ -15,7 +15,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="Excluir()" class="btn btn-primary" name="btn_excluir" onclick="">Sim</button>
+                <button type="button" onclick="Excluir()" class="btn btn-primary" name="btn_excluir"
+                    onclick="">Sim</button>
             </div>
         </div>
     </div>

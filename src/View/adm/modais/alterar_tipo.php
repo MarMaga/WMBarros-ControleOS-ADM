@@ -10,13 +10,13 @@
                 <label>Tipo de equipamento</label>
                 <input name="id_tipo_alterar" id="id_tipo_alterar" type="hidden">
                 <input class="form-control obg" name="tipo_alterar" id="tipo_alterar" style="width: 100%"
-                    onkeypress="TratarEnterAlteracaoTipo()" onkeyup="Maiuscula('tipo_alterar')">
+                    onkeypress="TratarEnter('#alterarTipo')" onkeyup="Maiuscula('tipo_alterar')">
                 <input name="tipo_original_alterar" id="tipo_original_alterar" style="width: 100%" type="hidden">
             </div>
             <div class="modal-footer justify-content-between">
                 <button name="btn_cancelar" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="AlterarTipoEquipamento('formAlt')" name="btn_alterar" id="btn_alterar"
-                    class="btn btn-outline-dark">Gravar</button>
+                <button type="button" onclick="AlterarTipoEquipamentoAJAX('formAlt')" name="btn_alterar"
+                    id="btn_alterar" class="btn btn-outline-dark">Gravar</button>
             </div>
         </div>
         <!-- /.modal-content -->
