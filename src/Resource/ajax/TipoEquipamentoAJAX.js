@@ -19,7 +19,6 @@ function CadastrarTipoEquipamentoAJAX(formID) {
             }
         })
     }
-    alert("Ret do Cadastro: " + ret);
 }
 
 function ConsultarTipo() {

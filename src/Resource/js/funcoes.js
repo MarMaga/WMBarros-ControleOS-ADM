@@ -58,24 +58,6 @@ function AjustarMenu(titulo, menu, item) {
     $("#" + item).addClass("active");
 }
 
-function TratarEnter(FormOuModal) {
-
-    $(FormOuModal).on('keypress', function (e) {
-        //o 13 é o Codigo do ENTER
-        if (e.keyCode === 13) {
- 
-            e.preventDefault();
-            e.keyCode = ''; // limpa a tecla clicada porque chama o clique do botão mais de uma vez
-
-            if (FormOuModal == document){
-                CadastrarTipoEquipamentoAJAX('formTipo');
-            } else if (FormOuModal == '#alterarTipo'){
-                AlterarTipoEquipamentoAJAX('formAlt');
-            }
-        }
-    });
-}
-
 function LimparFiltroTipoEquipamento() {
     if ($("#filtroTipo").val() == "") {
         $("#tipo").focus();
@@ -109,3 +91,8 @@ function FocarInputModal(IDModal, IDInput) {
         });
     });
 }
+
+// converte tudo o que for digitado para maiúscula
+document.addEventListener('keyup', (e) => {
+    e.target.value = e.target.value.toUpperCase();
+})

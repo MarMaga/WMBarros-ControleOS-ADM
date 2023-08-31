@@ -45,8 +45,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
                                 <input name="novo" id="novo" type="hidden" value="S">
-                                <input class="form-control obg" name="tipo" id="tipo" onkeyup="Maiuscula('tipo')"
-                                    onkeypress="TratarEnter(document)" placeholder="Digite aqui...">
+                                <input class="form-control obg" name="tipo" id="tipo" placeholder="Digite aqui...">
                             </div>
                             <button type="button" onclick="CadastrarTipoEquipamentoAJAX('formTipo')"
                                 class="btn btn-success" name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
@@ -121,6 +120,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
     </script>
 
     <script src="../../Resource/ajax/TipoEquipamentoAJAX.js"></script>
+    <script src="../../Resource/listeners/TipoEquipamentoLIS.js"></script>
 
     <script>
         ConsultarTipo();
