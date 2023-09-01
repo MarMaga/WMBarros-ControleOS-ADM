@@ -9,12 +9,13 @@
             <div class="modal-body">
                 <label>Modelo de equipamento</label>
                 <input name="id_modelo_alterar" id="id_modelo_alterar" type="hidden">
-                <input class="form-control obg" name="modelo_alterar" id="modelo_alterar" style="width: 100%" onkeypress="TratarEnter()" onkeyup="Maiuscula('modelo_alterar')">
+                <input class="form-control obg" name="modelo_alterar" id="modelo_alterar" style="width: 100%">
                 <input name="modelo_original_alterar" id="modelo_original_alterar" style="width: 100%" type="hidden">
             </div>
             <div class="modal-footer justify-content-between">
                 <button name="btn_cancelar" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
-                <button onclick="return GravarAlteracaoModeloEquipamento()" name="btn_alterar" id="btn_alterar" class="btn btn-outline-dark">Gravar</button>
+                <button type="button" onclick="AlterarModeloEquipamentoAJAX()" name="btn_alterar" id="btn_alterar"
+                    class="btn btn-outline-dark">Gravar</button>
             </div>
         </div>
         <!-- /.modal-content -->

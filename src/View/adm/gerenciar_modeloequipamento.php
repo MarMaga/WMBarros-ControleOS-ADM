@@ -44,109 +44,60 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
                         <form id="formModelo" method="post" action="gerenciar_modeloequipamento.php">
                             <div class="form-group">
                                 <label>Modelo de equipamento</label>
-                                <input class="form-control obg" name="modelo" id="modelo" onkeyup="Maiuscula('modelo')"
-                                    placeholder="Digite aqui...">
+                                <input class="form-control obg" name="modelo" id="modelo" placeholder="Digite aqui...">
                             </div>
-                            <button type="button" onclick="CadastrarModeloEquipamento('formModelo')" class="btn btn-success"
-                                name="btn_cadastrar">Cadastrar</button>
+                            <button type="button" onclick="CadastrarModeloEquipamentoAJAX('formModelo')"
+                                class="btn btn-success" name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
                 <div class="card">
                     <form action="gerenciar_modeloequipamento.php" method="post">
-                        <?php if ($filtroAtivado == false && count($modelos) == 0) { ?>
-                            <div class="card-header bg-warning">
-                                <h3 class="card-title">Nenhum modelo cadastrado</h3>
-                            <?php } else if ($filtroAtivado == false && count($modelos) > 0) { ?>
-                                    <div class="card-header bg-info">
-                                        <h3 class="card-title">Modelos cadastrados</h3>
-                                    <?php } else if ($filtroAtivado == true && count($modelos) == 0) { ?>
-                                            <div class="card-header bg-danger">
-                                                <h3 class="card-title">A pesquisa retornou vazia</h3>
-                                            <?php } else if ($filtroAtivado == true && count($modelos) > 0) { ?>
-                                                    <div class="card-header bg-success">
-                                                        <h3 class="card-title">Modelos filtrados</h3>
-                                                    <?php } ?>
-                                        <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 200px;">
-                                                <input type="hidden" name="filtroAtivado"
-                                                    value="<?php $filtroAtivado ?>">
-                                                <?php if (count($modelos) > 0 || $filtroAtivado == true) { ?>
-                                                    <input type="text" name="filtroModelo" id="filtroModelo"
-                                                        onkeyup="Maiuscula('filtroModelo')" class="form-control float-right"
-                                                        placeholder="Pesquise por..." value="<?= $filtro ?>">
-                                                    <div class="input-group-append">
-                                                        <button name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
-                                                            onclick="return FiltrarModeloEquipamento()"
-                                                            class="btn btn-default btn-sm"><i
-                                                                class="fas fa-search"></i></button>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <button <?php echo ($filtroAtivado == false && count($modelos) == 0) ? 'type="hidden"' : '' ?> name="btn_limparFiltro"
-                                                            class="btn btn-info btn-sm" title="Limpar filtro"
-                                                            onclick="return LimparFiltroModeloEquipamento()"><i
-                                                                class="fas fa-times"></i></button>
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
-                                        </div>
+                        <div class="card-header bg-info d-none" id="barraTituloFiltro">
+                            <h3 class="card-title" id="tituloFiltro">Tipos Cadastrados</h3>
+                            <div class="card-tools" id="pesquisa">
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="text" name="filtroModelo" id="filtroModelo" onkeyup="Filtrar()"
+                                        class="form-control float-right" placeholder="Pesquise por...">
+                                    <div class="input-group-append">
+                                        <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
+                                            onclick="Filtrar()" class="btn btn-default btn-sm"><i
+                                                class="fas fa-search"></i></button>
                                     </div>
-                    </form>
-                    <?php if (count($modelos) > 0) { ?>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Altere ou exclua os registros</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-0">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Ação</th>
-                                                        <th>Modelo de equipamento</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php for ($i = 0; $i < count($modelos); $i++) { ?>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#"
-                                                                    onclick="return ModalAlterarModeloEquipamento('<?= $modelos[$i]['id'] ?>', '<?= $modelos[$i]['nome_modelo'] ?>')"
-                                                                    class="btn btn-warning btn-xs" data-toggle="modal"
-                                                                    data-target="#alterarModelo">Alterar</a>
-                                                                <a href="#"
-                                                                    onclick="return CarregarExcluir('<?= $modelos[$i]['id'] ?>', '<?= $modelos[$i]['nome_modelo'] ?>')"
-                                                                    class="btn btn-danger btn-xs" data-toggle="modal"
-                                                                    data-target="#modalExcluir">Excluir</a>
-                                                            </td>
-                                                            <td>
-                                                                <input type="hidden" name="id" id="id"
-                                                                    value="<?= $modelos[$i]['id'] ?>" />
-                                                                <?= $modelos[$i]['nome_modelo'] ?>
-                                                            </td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
+                                    <div class="input-group-append">
+                                        <button name="btn_limparFiltro" type="button" class="btn btn-info btn-sm"
+                                            title="Limpar filtro" onclick="ConsultarModelo()"><i
+                                                class="fas fa-times"></i></button>
                                     </div>
-                                    <!-- /.card -->
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    </form>
+                    <div class="card-body d-none" id="AltereOuExclua">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Altere ou exclua os registros</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover" id="tableResult">
+
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card -->
                 <form action="gerenciar_modeloequipamento.php" method="post" id="formAlt">
                     <?php include_once 'modais/alterar_modelo.php'; ?>
                 </form>
-                <form action="gerenciar_modeloequipamento.php" method="post">
-                    <?php include_once 'modais/excluir.php'; ?>
-                </form>
+                <?php include_once 'modais/excluir.php'; ?>
             </section>
             <!-- /.content -->
         </div>
@@ -154,6 +105,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
 
         <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
 
+        <script>
+            FocarInputModal('alterarModelo', 'modelo_alterar');
+        </script>
     </div>
     <!-- ./wrapper -->
 
@@ -163,6 +117,11 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ModeloEquipamentoDV.php';
     </script>
 
     <script src="../../Resource/ajax/ModeloEquipamentoAJAX.js"></script>
+    <script src="../../Resource/listeners/ModeloEquipamentoLIS.js"></script>
+
+    <script>
+        ConsultarModelo();
+    </script>
 
 </body>
 

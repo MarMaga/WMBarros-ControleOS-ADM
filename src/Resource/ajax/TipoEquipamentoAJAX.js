@@ -132,8 +132,6 @@ function Excluir() {
 
 function Filtrar() {
 
-    Maiuscula('filtroTipo');
-
     let filtro = $('#filtroTipo').val();
 
     $.ajax({
@@ -143,20 +141,12 @@ function Filtrar() {
             btn_filtrar: 'ajx',
             filtroTipo: filtro
         },
-        success: function (filtroAtivado, tipos) {
+        success: function (filtroAtivado) {
             if (filtroAtivado == false) {
                 ConsultarTipo();
             } else {
                 TabelaFiltrada();
             }
-            //alert(tipos.length);
-            //if(tipos.length == 0){
-            //$("#barraTituloFiltro").addclass("bg-danger");
-            //$("#tituloFiltro").val('A pesquisa retornou vazia');
-            //} elseif(tipos.length > 0){
-            //$("#barraTituloFiltro").addclass("bg-success");
-            //$("#tituloFiltro").val('Tipos filtrados');
-            //}
         }
     })
 }

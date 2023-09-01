@@ -28,10 +28,10 @@ if (isset($_POST['btn_cadastrar'])) {
         $ret = $ctrlModeloEq->CadastrarModeloEquipamentoCTRL($voModeloEq);
     }
 
-    if($_POST['btn_cadastrar'] == 'ajx'){
-        return $ret;
+    if ($_POST['btn_cadastrar'] == 'ajx') {
+        echo $ret;
     }
-    
+
 } elseif (isset($_POST['btn_alterar'])) {
 
     $ModeloOriginal = $_POST['modelo_original_alterar'];
@@ -39,23 +39,31 @@ if (isset($_POST['btn_cadastrar'])) {
 
     if ($ModeloOriginal == $Modelo) {
         $ret = -2;
+    } else {
+
+        $voModeloEq = new ModeloVO();
+
+        $voModeloEq->setIdModelo($_POST['id_modelo_alterar']);
+        $voModeloEq->setNomeModelo($Modelo);
+
+        $ret = $ctrlModeloEq->AlterarModeloEquipamentoCTRL($voModeloEq);
     }
 
-    $voModeloEq = new ModeloVO();
-
-    $voModeloEq->setIdModelo($_POST['id_modelo_alterar']);
-    $voModeloEq->setNomeModelo($Modelo);
-
-    $ret = $ctrlModeloEq->AlterarModeloEquipamentoCTRL($voModeloEq);
+    if ($_POST['btn_alterar'] == 'ajx') {
+        echo $ret;
+    }
 
 } elseif (isset($_POST['btn_excluir'])) {
 
     $voModeloEq = new ModeloVO();
 
-    $voModeloEq->setIdModelo($_POST['id_modelo_excluir']);
+    $voModeloEq->setIdModelo($_POST['id_excluir']);
 
     $ret = $ctrlModeloEq->ExcluirModeloEquipamentoCTRL($voModeloEq);
 
+    if ($_POST['btn_excluir'] == 'ajx') {
+        echo $ret;
+    }
 }
 
 if (isset($_POST['btn_filtrar'])) {
@@ -76,8 +84,17 @@ if (isset($_POST['btn_filtrar'])) {
 
         $modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
         $filtroAtivado = false;
-        
-    }    
+
+    }
+
+    if ($_POST['btn_filtrar'] == 'ajx') {
+
+        if (count($modelos) > 0) {
+            include_once PATH . 'view/adm/tabelas/ModeloEquipamentoTABLE.php';
+        } else {
+            echo 'NADA';
+        }
+    }
 
 } elseif (isset($_POST['btn_limparFiltro'])) {
 
@@ -85,10 +102,19 @@ if (isset($_POST['btn_filtrar'])) {
     $filtroAtivado = false;
     $modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
 
-} else {
+    if (count($modelos) == 0) {
+        echo 'NADA';
+    }
+
+} elseif (isset($_POST['consultar_modelo'])) {
 
     $modelos = $ctrlModeloEq->ConsultarModeloEquipamentoCTRL();
 
+    if (count($modelos) > 0) {
+        include_once PATH . 'view/adm/tabelas/ModeloEquipamentoTABLE.php';
+    } else {
+        echo 'NADA';
+    }
 }
 
 ?>

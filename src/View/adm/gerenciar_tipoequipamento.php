@@ -44,7 +44,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                         <form id="formTipo" method="post" action="gerenciar_tipoequipamento.php">
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
-                                <input name="novo" id="novo" type="hidden" value="S">
                                 <input class="form-control obg" name="tipo" id="tipo" placeholder="Digite aqui...">
                             </div>
                             <button type="button" onclick="CadastrarTipoEquipamentoAJAX('formTipo')"
@@ -58,10 +57,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <h3 class="card-title" id="tituloFiltro">Tipos Cadastrados</h3>
                             <div class="card-tools" id="pesquisa">
                                 <div class="input-group input-group-sm" style="width: 200px;">
-                                    <input type="hidden" name="filtroAtivado">
                                     <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Filtrar()"
-                                        class="form-control float-right" placeholder="Pesquise por..."
-                                        value="<?= $filtro ?>">
+                                        class="form-control float-right" placeholder="Pesquise por...">
                                     <div class="input-group-append">
                                         <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
                                             onclick="Filtrar()" class="btn btn-default btn-sm"><i
@@ -75,42 +72,43 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    <div class="card-body d-none" id="AltereOuExclua">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Altere ou exclua os registros</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover" id="tableResult">
-
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
+                </div>
+                </form>
+                <div class="card-body d-none" id="AltereOuExclua">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Altere ou exclua os registros</h3>
                                 </div>
-                                <!-- /.card -->
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover" id="tableResult">
+
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
                             </div>
+                            <!-- /.card -->
                         </div>
                     </div>
                 </div>
-                <!-- /.card -->
-                <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
-                    <?php include_once 'modais/alterar_tipo.php'; ?>
-                    <?php include_once 'modais/excluir.php'; ?>
-                </form>
-            </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper <-->
+        <!-- /.card -->
+        <form action="gerenciar_tipoequipamento.php" method="post" id="formAlt">
+            <?php include_once 'modais/alterar_tipo.php'; ?>
+        </form>
+        <?php include_once 'modais/excluir.php'; ?>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper <-->
 
-        <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
+    <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
 
-        <script>
-            FocarInputModal('alterarTipo', 'tipo_alterar');
-        </script>
+    <script>
+        FocarInputModal('alterarTipo', 'tipo_alterar');
+    </script>
     </div>
     <!-- ./wrapper -->
 
@@ -124,22 +122,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
 
     <script>
         ConsultarTipo();
-
-        //$("#alterarTipo.in").on("keydown", function (e) {
-        //    if (e.which == 13) {
-        //        AlterarTipoEquipamentoAJAX('formAlt');
-        //    }
-        //});
-
-        //to prevent multiple binding
-        //$(document).unbind("keyup").keyup(function (e) {
-        //    var code = e.which; // recommended to use e.which, it's normalized across browsers
-        //    if (code == 13) {
-        //        $("#tipo").val("a");
-        //        $("#btn_alterar").click();
-        //        $("#tipo").val("");
-        //    }
-        //});
     </script>
 
 </body>
