@@ -2,6 +2,7 @@
 
 namespace Src\Controller;
 
+use Src\_Public\Util;
 use Src\Model\ModeloEquipamentoMODEL;
 use Src\VO\ModeloVO;
 
@@ -20,9 +21,10 @@ class ModeloEquipamentoCTRL
         if (empty($voMod->getNomeModelo()))
             return 0;
         
-        $ret = $this->modModelo->CadastrarModeloEquipamentoMODEL($voMod);
+        $voMod->setCodLogado(Util::CodigoLogado());
+        $voMod->setFuncaoErro(CADASTRAR_MODELO_EQUIPAMENTO);
 
-        return $ret;
+        return $this->modModelo->CadastrarModeloEquipamentoMODEL($voMod);
     }
 
     public function ConsultarModeloEquipamentoCTRL(): int|array
@@ -37,11 +39,17 @@ class ModeloEquipamentoCTRL
 
     public function AlterarModeloEquipamentoCTRL(ModeloVO $voMod): int
     {
+        $voMod->setCodLogado(Util::CodigoLogado());
+        $voMod->setFuncaoErro(ALTERAR_MODELO_EQUIPAMENTO);
+
         return $this->modModelo->AlterarModeloEquipamentoMODEL($voMod);
     }
 
     public function ExcluirModeloEquipamentoCTRL(ModeloVO $voMod): int
     {
+        $voMod->setCodLogado(Util::CodigoLogado());
+        $voMod->setFuncaoErro(EXCLUIR_MODELO_EQUIPAMENTO);
+        
         return $this->modModelo->ExcluirModeloEquipamentoMODEL($voMod);
     }
 }

@@ -61,7 +61,7 @@ if (isset($_POST['btn_cadastrar'])) {
             $ret = -4; // Registro já cadastrado com outra descrição
 
         } else {
-            
+
             $ret = -3; // Registro já cadastrado
         }
 
@@ -79,10 +79,31 @@ if (isset($_POST['btn_cadastrar'])) {
     }
 }
 
+if (isset($_POST['consultar_tipo'])) {
+    $tipos = $ctrlTipo->ConsultarTipoEquipamentoCTRL();
+    ?>
+
+    <option value="" <?= ($tipoSelected == '') ? 'selected="selected"' : '' ?>>Selecione </option>
+    <?php foreach ($tipos as $item) { ?>
+        <option value="<?= $item['tipo_equipamento'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>>
+            <?= $item['tipo_equipamento'] ?></option>
+    <?php }
+}
+
+if (isset($_POST['consultar_modelo'])) {
+    $modelos = $ctrlModelo->ConsultarModeloEquipamentoCTRL();
+    ?>
+
+    <option value="" <?= ($modeloSelected == '') ? 'selected="selected"' : '' ?>>Selecione </option>
+    <?php foreach ($modelos as $item) { ?>
+        <option value="<?= $item['nome_modelo'] ?>" <?= $item['nome_modelo'] ?>         <?= ($modeloSelected == $item['nome_modelo']) ? 'selected="selected"' : '' ?>><?= $item['nome_modelo'] ?></option>
+    <?php }
+}
+
 // CONSULTA TIPOS
-$tipos = $ctrlTipo->ConsultarTipoEquipamentoCTRL();
+//$tipos = $ctrlTipo->ConsultarTipoEquipamentoCTRL();
 
 // CONSULTA MODELOS
-$modelos = $ctrlModelo->ConsultarModeloEquipamentoCTRL();
+//$modelos = $ctrlModelo->ConsultarModeloEquipamentoCTRL();
 
 ?>
