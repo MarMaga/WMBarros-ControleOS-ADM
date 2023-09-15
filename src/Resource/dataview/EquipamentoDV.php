@@ -19,38 +19,38 @@ $ctrlModelo = new ModeloEquipamentoCTRL();
 
 if (isset($_POST['btn_cadastrar'])) {
 
-    $tipoSelected = $_POST['tipo'];
-    $modeloSelected = $_POST['modelo'];
+    $tipo = $_POST['tipo'];
+    $modelo = $_POST['modelo'];
     $identificacao = $_POST['identificacao'];
     $descricao = $_POST['descricao'];
 
     // busca o ID do tipo
-    $tipo = $_POST['tipo'];
+    //$tipo = $_POST['tipo'];
 
-    $tipoVO = new TipoEquipamentoVO();
+    //$tipoVO = new TipoEquipamentoVO();
 
-    $tipoVO->setNomeTipoEquipamento($tipo);
+    //$tipoVO->setNomeTipoEquipamento($tipo);
 
-    $idTipo = $ctrlTipo->FiltrarTipoEquipamentoCTRL($tipoVO, "C")[0]['id'];
+    //$idTipo = $ctrlTipo->FiltrarTipoEquipamentoCTRL($tipoVO, "C")[0]['id'];
 
     // busca o ID do modelo
-    $modelo = $_POST['modelo'];
+    //$modelo = $_POST['modelo'];
 
-    $modeloVO = new ModeloVO();
+    //$modeloVO = new ModeloVO();
 
-    $modeloVO->setNomeModelo($modelo);
+    //$modeloVO->setNomeModelo($modelo);
 
-    $idModelo = $ctrlModelo->FiltrarModeloEquipamentoCTRL($modeloVO, "C")[0]['id'];
+    //$idModelo = $ctrlModelo->FiltrarModeloEquipamentoCTRL($modeloVO, "C")[0]['id'];
 
     // verifica a existência do equipamento digitado no cadastro
     // confere apenas tipo, modelo e identificação. não confere a descrição
     $voEq = new EquipamentoVO();
     $ctrlEq = new EquipamentoCTRL();
 
-    $voEq->setIdTipoEquipamento((int) $idTipo);
-    $voEq->setIdModelo(intval($idModelo));
-    $voEq->setIdentificacaoEquipamento(trim($_POST['identificacao']));
-    $voEq->setDescricaoEquipamento(trim($_POST['descricao']));
+    $voEq->setIdTipoEquipamento((int) $tipo);
+    $voEq->setIdModelo(intval($modelo));
+    $voEq->setIdentificacaoEquipamento(trim($identificacao));
+    $voEq->setDescricaoEquipamento(trim($descricao));
 
     $ret = $ctrlEq->FiltrarEquipamentoCTRL($voEq, "C");
 

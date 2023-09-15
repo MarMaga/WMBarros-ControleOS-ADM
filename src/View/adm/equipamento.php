@@ -48,7 +48,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                                 <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
                                     <option value="" <?= ($tipoSelected == '') ? 'selected="selected"' : '' ?>>Selecione</option>
                                 <?php foreach($tipos as $item) { ?>
-                                    <option value="<?= $item['tipo_equipamento'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>><?= $item['tipo_equipamento'] ?></option>
+                                    <option value="<?= $item['id'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>><?= $item['tipo_equipamento'] ?></option>
                                 <?php } ?>
                                 </select>
                             </div>
@@ -58,7 +58,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                                 <select class="form-control select2 obg" name="modelo" id="modelo" style="width: 100%;">
                                     <option value="" <?= ($modeloSelected == '') ? 'selected="selected"' : '' ?>>Selecione</option>
                                 <?php foreach($modelos as $item) { ?>
-                                    <option value="<?= $item['nome_modelo'] ?>" <?= $item['nome_modelo'] ?> <?= ($modeloSelected == $item['nome_modelo']) ? 'selected="selected"' : '' ?>><?= $item['nome_modelo'] ?></option>
+                                    <option value="<?= $item['id'] ?>" <?= $item['nome_modelo'] ?> <?= ($modeloSelected == $item['nome_modelo']) ? 'selected="selected"' : '' ?>><?= $item['nome_modelo'] ?></option>
                                 <?php } ?>   
                                 </select>
                             </div>
@@ -71,7 +71,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                                 <label>Descrição</label>
                                 <textarea class="form-control obg" rows="3" name="descricao" id="descricao" onkeyup="Maiuscula('descricao')" <?= ($descricao == '') ? 'value="" placeholder="Digite aqui..."' : '' ?>><?= ($descricao != '') ? $descricao : '' ?></textarea>
                             </div>
-                            <button onclick="return NotificarCampos('formNovoEq')" class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
+                            <button type="button" onclick="CadastrarEquipamentoAJAX('formNovoEq')" class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>
@@ -91,6 +91,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
         AjustarMenu("Novo equipamento", "menuEquipamentos", "novoEquipamento");
         $("#tipo").focus();
     </script>
+
+    <script src="../../Resource/ajax/EquipamentoAJAX.js"></script>
 
 </body>
 

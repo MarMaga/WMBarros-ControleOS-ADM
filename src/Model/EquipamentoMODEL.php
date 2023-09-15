@@ -61,7 +61,7 @@ class EquipamentoMODEL extends Conexao
             $sql->bindValue($i++, $voEq->getIdModelo());
             $sql->bindValue($i++, $voEq->getIdentificacaoEquipamento());
         }
-
+        
         try{
             $sql->setFetchMode(\PDO::FETCH_ASSOC);
             $sql->execute();
