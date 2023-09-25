@@ -50,7 +50,8 @@ class Util
 
     public static function ChamarPagina($pag)
     {
-        header("location: " . $pag);
+        header("location: $pag.php");
+        exit;
     }
 
     public function AjustaCasasDecimais($campo, $qtd)
@@ -236,6 +237,23 @@ class Util
             self::ChamarPagina('login.php');
             exit;
         }
+    }
+
+    public static function MostrarSituacao(int $sit): string
+    {
+        $situacao = '';
+
+        switch ($sit) {
+            case SITUACAO_ATIVO:
+                $situacao = 'ATIVO';
+                break;
+            
+            case SITUACAO_INATIVO:
+                $situacao = 'INATIVO';
+                break;
+        }
+
+        return $situacao;
     }
 }
 

@@ -8,4 +8,8 @@ const CADASTRAR_MODELO_EQUIPAMENTO = 'CadastrarModeloEquipamento';
 const ALTERAR_MODELO_EQUIPAMENTO = 'AlterarModeloEquipamento';
 const EXCLUIR_MODELO_EQUIPAMENTO = 'ExcluirModeloEquipamento';
 
+const CADASTRAR_EQUIPAMENTO = 'CadastrarEquipamento';
+const ALTERAR_EQUIPAMENTO = 'AlterarEquipamento';
+const EXCLUIR_EQUIPAMENTO = 'ExcluirEquipamento';
+
 ?>

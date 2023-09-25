@@ -42,16 +42,24 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                     </div>
                     <div class="card-body">
                         <form id="formConsEq" method="post" action="consultar_equipamento.php">
-                            <div class="form-group">
-                                <label>Pesquisar por Tipo</label>
-                                <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
-                                    <option value="" <?= ($tipoSelected == '') ? 'selected="selected"' : '' ?>>Selecione</option>
-                                    <?php foreach($tipos as $item){ ?>
-                                        <option value="<?= $item['tipo_equipamento'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>><?= $item['tipo_equipamento'] ?></option>
-                                    <?php } ?>
-                                </select>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Tipo</label>
+                                    <input type="hidden" name="tipoSelected" value="<?= $tipoSelected ?>">
+                                    <select class="form-control select2" name="tipo" id="tipo"
+                                        onchange="FiltrarEquipamentos()">
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Modelo</label>
+                                    <input type="hidden" name="modeloSelected" value="<?= $modeloSelected ?>">
+                                    <select class="form-control select2" name="modelo" id="modelo"
+                                        onchange="FiltrarEquipamentos()">
+
+                                    </select>
+                                </div>
                             </div>
-                            <button onclick="return NotificarCampos('formConsEq')" class="btn btn-success" name="btn_buscar">Buscar</button>
                         </form>
                     </div>
                 </div>
@@ -80,31 +88,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ação</th>
-                                                    <th>Tipo</th>
-                                                    <th>Modelo</th>
-                                                    <th>Identificação</th>
-                                                    <th>Descrição</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php for($i = 0; $i < count($equipamentos); $i++) { ?>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-xs">Alterar</a>
-                                                        <a href="#" class="btn btn-danger btn-xs">Excluir</a>
-                                                    </td>
-                                                    <td><input type="hidden" name="id" id="id"
-                                                                    value="<?= $equipamentos[$i]['id'] ?>" /><?= $equipamentos[$i]['tipo_equipamento'] ?></td>
-                                                    <td><?= $equipamentos[$i]['nome_modelo'] ?></td>
-                                                    <td><?= $equipamentos[$i]['ident_equipamento'] ?></td>
-                                                    <td><?= $equipamentos[$i]['desc_equipamento'] ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </tbody>
+                                        <table class="table table-hover" id="tableResult">
+
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
@@ -125,12 +110,25 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
 
     </div>
     <!-- ./wrapper -->
-    
+
     <script>
         AjustarMenu("Consultar equipamento", "menuEquipamentos", "consultarEquipamento");
         $("#tipo").focus();
+
     </script>
 
+    <script src="../../Resource/ajax/EquipamentoAJAX.js"></script>
+    <!-- <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script> -->
+
+    <script>
+        CarregarTipos();
+        CarregarModelos();
+        FiltrarEquipamentos();
+        // $(document).ready(function () {
+        //     $("#tipo").editableSelect();
+        //     $("#modelo").editableSelect();
+        // });
+    </script>
 </body>
 
 </html>

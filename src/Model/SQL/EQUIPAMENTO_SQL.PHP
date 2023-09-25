@@ -17,6 +17,47 @@ class EQUIPAMENTO_SQL
         return $sql;
     }
 
+    public static function DETALHAR_EQUIPAMENTO()
+    {
+        $sql = 'SELECT id,
+                       ident_equipamento,
+                       desc_equipamento,
+                       situacao,
+                       tipoequipamento_id, 
+                       modelo_id
+                  FROM tb_equipamento
+                 WHERE id = ?';
+
+        return $sql;
+    }
+
+    public static function FILTRAR_EQUIPAMENTO($idTipo, $idModelo)
+    {
+        $sql = 'SELECT eq.id as equipamento_id,
+                       ident_equipamento,
+                       desc_equipamento,
+                       situacao,
+                       data_descarte,
+                       motivo_descarte,
+                       tipo_equipamento,
+                       nome_modelo
+                  FROM tb_equipamento as eq
+            INNER JOIN tb_tipoequipamento as ti
+                    ON eq.tipoequipamento_id = ti.id
+            INNER JOIN tb_modelo as mo
+                    ON eq.modelo_id = mo.id';
+
+        if ($idTipo != '' && $idModelo != ''){
+            $sql .= ' WHERE eq.tipoequipamento_id = ? AND eq.modelo_id = ?';
+        } else if ($idTipo == '' && $idModelo != ''){
+            $sql .= ' WHERE eq.modelo_id = ?';
+        } else if ($idTipo != '' && $idModelo == ''){
+            $sql .= ' WHERE eq.tipoequipamento_id = ?';
+        }
+
+        return $sql;
+    }
+
     public static function SELECIONAR_EQUIPAMENTO(string $comFiltro): string
     {
         if ($comFiltro == "N") { // N de Não: sem filtro; busca todos os registros
@@ -84,9 +125,6 @@ class EQUIPAMENTO_SQL
         $sql = 'UPDATE tb_equipamento 
                    SET ident_equipamento = ?, 
                        desc_equipamento = ?, 
-                       situacao = ?, 
-                       data_descarte = ?, 
-                       motivo_descarte = ?, 
                        tipoequipamento_id = ?, 
                        modelo_id = ? 
                  WHERE id = ?';
@@ -96,7 +134,9 @@ class EQUIPAMENTO_SQL
 
     public static function EXCLUIR_EQUIPAMENTO(): string
     {
-        $sql = 'DELETE FROM tb_equipamento WHERE id = ?';
+        $sql = 'DELETE
+                  FROM tb_equipamento
+                 WHERE id = ?';
 
         return $sql;
     }
