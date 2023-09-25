@@ -1,5 +1,7 @@
 <?php
 include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
+
+$titulo = isset($equipamento) ? ESTADO_TELA_ALTERAR : ESTADO_TELA_NOVO;
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +27,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h2 class="text-primary">Novo equipamento</h2>
-                            <a>Aqui você poderá cadastrar seus equipamentos</a>
+                            <h2 class="text-primary"><?= $titulo ?> equipamento</h2>
+                            <!-- <a>Aqui você poderá cadastrar seus equipamentos</a> -->
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -38,54 +40,39 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Cadastre aqui os seus equipamentos</h3>
+                        <h3 class="card-title"><?= $titulo ?> equipamento</h3>
                     </div>
                     <div class="card-body">
                         <form id="formNovoEq" method="post" action="equipamento.php">
-                            <div class="form-group">
-                                <label>Tipo</label>
-                                <input type="hidden" name="tipoSelected" value="<?= $tipoSelected ?>">
-                                <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
-<<<<<<< HEAD
-                                    <option value="" <?= ($tipoSelected == '') ? 'selected="selected"' : '' ?>>Selecione</option>
-                                <?php foreach($tipos as $item) { ?>
-                                    <option value="<?= $item['id'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>><?= $item['tipo_equipamento'] ?></option>
-                                <?php } ?>
-=======
+                            <input type="hidden" id="idTipo" value="<?= isset($equipamento) ? $equipamento[''] : '' ?>">
+                            <input type="hidden" id="idModelo" value="<?= isset($equipamento) ? $equipamento[''] : '' ?>">
+                            <input type="hidden" id="idEquipamento" value="<?= isset($equipamento) ? $equipamento['equipamento_id'] : '' ?>">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Tipo</label>
+                                    <select class="form-control select2 obg" name="tipo" id="tipo" style="width: 100%;">
 
->>>>>>> 961738b44d8f33429afaebaed9326ab4db67d175
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Modelo</label>
-                                <input type="hidden" name="modeloSelected" value="<?= $modeloSelected ?>">
-                                <select class="form-control select2 obg" name="modelo" id="modelo" style="width: 100%;">
-<<<<<<< HEAD
-                                    <option value="" <?= ($modeloSelected == '') ? 'selected="selected"' : '' ?>>Selecione</option>
-                                <?php foreach($modelos as $item) { ?>
-                                    <option value="<?= $item['id'] ?>" <?= $item['nome_modelo'] ?> <?= ($modeloSelected == $item['nome_modelo']) ? 'selected="selected"' : '' ?>><?= $item['nome_modelo'] ?></option>
-                                <?php } ?>   
-=======
-                                    
->>>>>>> 961738b44d8f33429afaebaed9326ab4db67d175
-                                </select>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Modelo</label>
+                                    <select class="form-control select2 obg" name="modelo" id="modelo" style="width: 100%;">
+
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Identificação</label>
                                 <input type="text" name="identificacao" id="identificacao" class="form-control obg"
-                                    onkeyup="Maiuscula('identificacao')" <?= ($identificacao == '') ? 'value="" placeholder="Digite aqui..."' : 'value="' . $identificacao . '"' ?>>
+                                    onkeyup="Maiuscula('identificacao')" value="<?= $titulo == ESTADO_TELA_ALTERAR ? $equipamento['ident_equipamento'] : '' ?>">
                             </div>
                             <div class="form-group">
                                 <label>Descrição</label>
                                 <textarea class="form-control obg" rows="3" name="descricao" id="descricao"
-                                    onkeyup="Maiuscula('descricao')" <?= ($descricao == '') ? 'value="" placeholder="Digite aqui..."' : '' ?>><?= ($descricao != '') ? $descricao : '' ?></textarea>
+                                    onkeyup="Maiuscula('descricao')"><?= (isset($equipamento)) ? $equipamento['desc_equipamento'] : '' ?></textarea>
                             </div>
-<<<<<<< HEAD
-                            <button type="button" onclick="CadastrarEquipamentoAJAX('formNovoEq')" class="btn btn-success" name="btn_cadastrar">Cadastrar</button>
-=======
-                            <button onclick="return NotificarCampos('formNovoEq')" class="btn btn-success"
-                                name="btn_cadastrar">Cadastrar</button>
->>>>>>> 961738b44d8f33429afaebaed9326ab4db67d175
+                            <button type="button" onclick="GravarEquipamento('formNovoEq')" class="btn btn-success"
+                                name="btn_gravar"><?= $titulo ?></button>
                         </form>
                     </div>
                 </div>
@@ -107,14 +94,11 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
     </script>
 
     <script src="../../Resource/ajax/EquipamentoAJAX.js"></script>
-<<<<<<< HEAD
-=======
-    
+
     <script>
         CarregarTipos();
         CarregarModelos();
     </script>
->>>>>>> 961738b44d8f33429afaebaed9326ab4db67d175
 
 </body>
 

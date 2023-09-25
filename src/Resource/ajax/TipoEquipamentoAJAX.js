@@ -5,6 +5,9 @@ function CadastrarTipoEquipamentoAJAX(formID) {
         let nome = $("#tipo").val();
 
         $.ajax({
+            beforeSend: function(){
+                Load();
+            },
             type: "post",
             url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
             data: {
@@ -16,6 +19,9 @@ function CadastrarTipoEquipamentoAJAX(formID) {
                 ConsultarTipo();
                 LimparNotificacoes(formID);
                 $("#tipo").focus();
+            },
+            complete: function(){
+                RemoverLoad();
             }
         })
     }
@@ -24,6 +30,9 @@ function CadastrarTipoEquipamentoAJAX(formID) {
 function ConsultarTipo() {
 
     $.ajax({
+        beforeSend: function(){
+            Load();
+        },
         type: "post",
         url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
         data: {
@@ -45,6 +54,9 @@ function ConsultarTipo() {
                 $("#tableResult").show();
                 $("#tableResult").html(tipos);
             }
+        },
+        complete: function(){
+            RemoverLoad();
         }
     })
 }
@@ -54,6 +66,9 @@ function TabelaFiltrada() {
     let filtro = $("#filtroTipo").val();
 
     $.ajax({
+        beforeSend: function(){
+            Load();
+        },
         type: "post",
         url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
         data: {
@@ -77,6 +92,9 @@ function TabelaFiltrada() {
                 $("#tableResult").show();
                 $("#tableResult").html(tipos);
             }
+        },
+        complete: function(){
+            RemoverLoad();
         }
     })
 }
@@ -89,6 +107,9 @@ function AlterarTipoEquipamentoAJAX(formID) {
         let tipo_original = $("#tipo_original_alterar").val();
 
         $.ajax({
+            beforeSend: function(){
+                Load();
+            },
             type: 'post',
             url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
             data: {
@@ -106,6 +127,9 @@ function AlterarTipoEquipamentoAJAX(formID) {
                     ConsultarTipo();
                     $("#alterarTipo").modal("hide");
                 }
+            },
+            complete: function(){
+                RemoverLoad();
             }
         })
     }
@@ -116,6 +140,9 @@ function Excluir() {
     let id = $("#id_excluir").val();
 
     $.ajax({
+        beforeSend: function(){
+            Load();
+        },
         type: 'post',
         url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
         data: {
@@ -126,6 +153,9 @@ function Excluir() {
             MostrarMensagem(ret);
             ConsultarTipo();
             $("#modalExcluir").modal("hide");
+        },
+        complete: function(){
+            RemoverLoad();
         }
     })
 }
@@ -135,6 +165,9 @@ function Filtrar() {
     let filtro = $('#filtroTipo').val();
 
     $.ajax({
+        beforeSend: function(){
+            Load();
+        },
         type: 'post',
         url: BASE_URL_DATAVIEW('TipoEquipamentoDV'),
         data: {
@@ -147,6 +180,9 @@ function Filtrar() {
             } else {
                 TabelaFiltrada();
             }
+        },
+        complete: function(){
+            RemoverLoad();
         }
     })
 }

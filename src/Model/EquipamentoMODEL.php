@@ -22,11 +22,11 @@ class EquipamentoMODEL extends Conexao
         $i = 1;
         $sql->bindValue($i++, $voEq->getIdentificacaoEquipamento());
         $sql->bindValue($i++, $voEq->getDescricaoEquipamento());
-        $sql->bindValue($i++, 1);
+        $sql->bindValue($i++, $voEq->getSituacao());
         $sql->bindValue($i++, $voEq->getIdTipoEquipamento());
         $sql->bindValue($i++, $voEq->getIdModelo());
 
-        try{
+        try {
             $sql->execute();
             return 1;
         } catch (Exception $ex) {
@@ -38,18 +38,18 @@ class EquipamentoMODEL extends Conexao
     {
         $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::SELECIONAR_EQUIPAMENTO($comFiltro));
 
-        try{
+        try {
             $sql->setFetchMode(\PDO::FETCH_ASSOC);
             $sql->execute();
             return $sql->fetchAll();
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             return -1;
         }
     }
 
-    public function FiltrarEquipamentoMODEL(EquipamentoVO $voEq, string $checarCadastro): int|array
+    public function PesquisarEquipamentoMODEL(EquipamentoVO $voEq, string $checarCadastro): int|array
     {
-        if($checarCadastro == "F"){
+        if ($checarCadastro == "F") {
             $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::SELECIONAR_EQUIPAMENTO("F"));
             $i = 1;
             $sql->bindValue($i++, $voEq->getIdentificacaoEquipamento());
@@ -61,14 +61,22 @@ class EquipamentoMODEL extends Conexao
             $sql->bindValue($i++, $voEq->getIdModelo());
             $sql->bindValue($i++, $voEq->getIdentificacaoEquipamento());
         }
-        
-        try{
+
+        try {
             $sql->setFetchMode(\PDO::FETCH_ASSOC);
             $sql->execute();
             return $sql->fetchAll();
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             return -1;
         }
+    }
+
+    public function DetalharEquipamentoMODEL(int $id): array | string
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::DETALHAR_EQUIPAMENTO());
+        $sql->bindValue(1, $id);
+        $sql->execute();
+        return $sql->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function AlterarEquipamentoMODEL(EquipamentoVO $voEq): int
@@ -77,19 +85,16 @@ class EquipamentoMODEL extends Conexao
         $i = 1;
         $sql->bindValue($i++, $voEq->getIdentificacaoEquipamento());
         $sql->bindValue($i++, $voEq->getDescricaoEquipamento());
-        $sql->bindValue($i++, $voEq->getSituacao());
-        $sql->bindValue($i++, $voEq->getDataDescarte());
-        $sql->bindValue($i++, $voEq->getMotivoDescarte());
         $sql->bindValue($i++, $voEq->getIdTipoEquipamento());
         $sql->bindValue($i++, $voEq->getIdModelo());
         $sql->bindValue($i++, $voEq->getId());
 
-        try{
+        try {
             $sql->execute();
             return 1;
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             return -1;
-        }      
+        }
     }
 
     public function ExcluirEquipamentoMODEL(EquipamentoVO $voEq): int
@@ -97,12 +102,29 @@ class EquipamentoMODEL extends Conexao
         $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::EXCLUIR_EQUIPAMENTO());
         $sql->bindValue(1, $voEq->getId());
 
-        try{
+        try {
             $sql->execute();
             return 1;
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             return -1;
         }
+    }
+
+    public function FiltrarEquipamentoMODEL($idTipo, $idModelo)
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::FILTRAR_EQUIPAMENTO($idTipo, $idModelo));
+
+        if ($idTipo != '' && $idModelo != ''){
+            $sql->bindValue(1, $idTipo);
+            $sql->bindValue(2, $idModelo);
+        } else if ($idTipo == '' && $idModelo != ''){
+            $sql->bindValue(1, $idModelo);
+        } else if ($idTipo != '' && $idModelo == ''){
+            $sql->bindValue(1, $idTipo);
+        }
+
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
 ?>

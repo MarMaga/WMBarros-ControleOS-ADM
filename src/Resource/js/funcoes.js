@@ -96,3 +96,11 @@ function FocarInputModal(IDModal, IDInput) {
 document.addEventListener('keyup', (e) => {
     e.target.value = e.target.value.toUpperCase();
 })
+
+function Load(){
+    $(".loader").addClass("is-active");
+}
+
+function RemoverLoad(){
+    $(".loader").removeClass("is-active");
+}

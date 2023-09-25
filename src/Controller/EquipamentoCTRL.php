@@ -2,6 +2,7 @@
 
 namespace Src\Controller;
 
+use Src\_Public\Util;
 use Src\VO\EquipamentoVO;
 use Src\Model\EquipamentoMODEL;
 
@@ -17,33 +18,59 @@ class EquipamentoCTRL
     public function CadastrarEquipamentoCTRL(EquipamentoVO $voEq): int
     {
 
-        if ($voEq->getIdTipoEquipamento() == 0)
-            return 0;
-        if ($voEq->getIdModelo() == 0)
-            return 0;
-        if ($voEq->getIdentificacaoEquipamento() == "")
-            return 0;
-        if ($voEq->getDescricaoEquipamento() == "")
+        if ($voEq->getIdTipoEquipamento() == 0 || $voEq->getIdModelo() == 0 ||
+            $voEq->getIdentificacaoEquipamento() == "" || $voEq->getDescricaoEquipamento() == "")
             return 0;
 
-        $ret = $this->modEq->CadastrarEquipamentoMODEL($voEq);
-
-        return $ret;
+        $voEq->setSituacao(SITUACAO_ATIVO);
+        $voEq->setFuncaoErro(CADASTRAR_EQUIPAMENTO);
+        $voEq->setCodLogado(Util::CodigoLogado());
+        
+        return $this->modEq->CadastrarEquipamentoMODEL($voEq);
     }
 
-    public function FiltrarEquipamentoCTRL(EquipamentoVO $voEq, $checarCadastro): int|array
+    public function AlterarEquipamentoCTRL(EquipamentoVO $voEq): int
     {
-        $ret = $this->modEq->FiltrarEquipamentoMODEL($voEq, $checarCadastro);
 
-        return $ret;
+        if ($voEq->getIdTipoEquipamento() == 0 || $voEq->getIdModelo() == 0 ||
+            $voEq->getIdentificacaoEquipamento() == "" || $voEq->getDescricaoEquipamento() == "")
+            return 0;
+
+        $voEq->setFuncaoErro(ALTERAR_EQUIPAMENTO);
+        $voEq->setCodLogado(Util::CodigoLogado());
+        
+        return $this->modEq->AlterarEquipamentoMODEL($voEq);
+    }
+
+    public function DetalharEquipamentoCTRL(int $id): array | string
+    {
+        return $this->modEq->DetalharEquipamentoMODEL($id);
+    }
+
+    public function PesquisarEquipamentoCTRL(EquipamentoVO $voEq, $checarCadastro): int|array
+    {
+        return $this->modEq->PesquisarEquipamentoMODEL($voEq, $checarCadastro);
     }
 
     public function ConsultarEquipamentoCTRL(string $comFiltro): int|array
     {
-        $ret = $this->modEq->ConsultarEquipamentoMODEL($comFiltro);
+        return $this->modEq->ConsultarEquipamentoMODEL($comFiltro);
+    }
 
-        return $ret;
+    public function ExcluirEquipamentoCTRL(EquipamentoVO $voEq): int
+    {
+        if (empty($voEq->getId()))
+            return 0;
+
+        $voEq->setCodLogado(Util::CodigoLogado());
+        $voEq->setFuncaoErro(EXCLUIR_EQUIPAMENTO);
+        
+        return $this->modEq->ExcluirEquipamentoMODEL($voEq);
+    }
+
+    public function FiltrarEquipamentoCTRL($idTipo, $idModelo): array
+    {
+        return $this->modEq->FiltrarEquipamentoMODEL($idTipo, $idModelo);
     }
 }
-
 ?>
