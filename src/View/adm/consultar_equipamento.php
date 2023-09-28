@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Tipo</label>
-                                    <input type="hidden" name="tipoSelected" value="<?= $tipoSelected ?>">
+                                    <input type="hidden" name="tipoSelected" value="">
                                     <select class="form-control select2" name="tipo" id="tipo"
                                         onchange="FiltrarEquipamentos()">
 
@@ -53,7 +53,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Modelo</label>
-                                    <input type="hidden" name="modeloSelected" value="<?= $modeloSelected ?>">
+                                    <input type="hidden" name="modeloSelected" value="">
                                     <select class="form-control select2" name="modelo" id="modelo"
                                         onchange="FiltrarEquipamentos()">
 
@@ -100,7 +100,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarEquipamentoDV.ph
                     </div>
                 </div>
                 <!-- /.card -->
-
+                <?php include_once 'modais/excluir.php'; ?>
             </section>
             <!-- /.content -->
         </div>

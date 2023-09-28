@@ -1,45 +1,47 @@
-function CarregarTipos(){
+function CarregarTipos() {
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: 'post',
         url: BASE_URL_DATAVIEW('EquipamentoDV'),
         data: {
-            consultar_tipo: 'ajx'
+            consultar_tipo: 'ajx',
+            tipo_id: $("#idTipo").val()
         },
-        success: function(tipos){
+        success: function (tipos) {
             $("#tipo").html(tipos)
         },
-        complete: function(){
+        complete: function () {
             RemoverLoad();
         }
     })
 }
 
-function CarregarModelos(){
+function CarregarModelos() {
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: 'post',
         url: BASE_URL_DATAVIEW('EquipamentoDV'),
         data: {
-            consultar_modelo: 'ajx'
+            consultar_modelo: 'ajx',
+            modelo_id: $("#idModelo").val()
         },
-        success: function(modelos){
+        success: function (modelos) {
             $("#modelo").html(modelos)
         },
-        complete: function(){
+        complete: function () {
             RemoverLoad();
         }
     })
 }
 
-function GravarEquipamento(formID){
+function GravarEquipamento(formID) {
 
-    if(NotificarCampos(formID)){
-       
+    if (NotificarCampos(formID)) {
+
         let idEquipamento = $("#idEquipamento").val();
         let tipo = $("#tipo").val();
         let modelo = $("#modelo").val();
@@ -47,37 +49,46 @@ function GravarEquipamento(formID){
         let descricao = $("#descricao").val();
 
         $.ajax({
-            beforeSend: function(){
-                Load;
+            beforeSend: function () {
+                Load();
             },
             type: "post",
             url: BASE_URL_DATAVIEW("EquipamentoDV"),
-            data:{
+            data: {
                 id: idEquipamento,
                 tipo: tipo,
                 modelo: modelo,
                 identificacao: identificacao,
                 descricao: descricao,
-                btn_gravar: $("#equipamentoID").val() == '' ? 'cadastrar' : 'alterar'
+                btn_gravar: $("#idEquipamento").val() == '' ? 'cadastrar' : 'alterar'
             },
-            success: function(ret){
+            success: function (ret) {
                 MostrarMensagem(ret);
-                if(ret == 1){
+                eqId = '';
+                if (ret == 1) {
+                    eqId = $("#idEquipamento").val();
                     LimparNotificacoes(formID);
                 }
-                $("#tipo").focus();
+                if (eqId == '') {
+                    $("#tipo").focus();
+                } else {
+                    window.location.href = "consultar_equipamento.php";
+                }
+            },
+            complete: function () {
+                RemoverLoad();
             }
         })
     }
 }
 
-function FiltrarEquipamentos(){
+function FiltrarEquipamentos() {
 
     let idTipo = $("#tipo").val();
     let idModelo = $("#modelo").val();
 
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: 'post',
@@ -87,10 +98,34 @@ function FiltrarEquipamentos(){
             tipo: idTipo,
             modelo: idModelo
         },
-        success: function(dados){
+        success: function (dados) {
             $("#tableResult").html(dados);
         },
-        complete: function(){
+        complete: function () {
+            RemoverLoad();
+        }
+    })
+}
+
+function Excluir(){
+    let equipamentoID = $("#id_excluir").val();
+
+    $.ajax({
+        beforeSend: function () {
+            Load();
+        },
+        type: 'post',
+        url: BASE_URL_DATAVIEW('equipamentoDV'),
+        data: {
+            btn_excluir: 'ajx',
+            equipamentoID: equipamentoID
+        },
+        success: function(ret){
+            MostrarMensagem(ret);
+            FiltrarEquipamentos();
+            $("#modalExcluir").modal("hide");
+        },
+        complete: function () {
             RemoverLoad();
         }
     })

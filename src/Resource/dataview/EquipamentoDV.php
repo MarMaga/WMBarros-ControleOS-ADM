@@ -8,11 +8,6 @@ use Src\Controller\ModeloEquipamentoCTRL;
 
 include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
-$tipoSelected = '';
-$modeloSelected = '';
-$identificacao = '';
-$descricao = '';
-
 $ctrlTipo = new TipoEquipamentoCTRL();
 $ctrlModelo = new ModeloEquipamentoCTRL();
 $ctrlEq = new EquipamentoCTRL();
@@ -37,52 +32,37 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
 
     if (count($ret) == 1) {
 
-        if ($ret[0]['desc_equipamento'] != $descricao) {
-
-            $ret = -4; // Registro já cadastrado com outra descrição
-
-        } else {
-
-            $ret = -3; // Registro já cadastrado
-        }
-
+        $ret[0]['desc_equipamento'] != $descricao ? $ret = -4 : $ret = -3;
+        // -4: Registro já cadastrado com outra descrição
+        // -3: Registro já cadastrado
     } else {
-
         $ctrlEq->CadastrarEquipamentoCTRL($voEq);
-
-        $tipoSelected = '';
-        $modeloSelected = '';
-        $identificacao = '';
-        $descricao = '';
-
-        $ret = 1;
-
     }
 
-    if ($_POST['btn_gravar'] == 'ajx') {
+    if ($_POST['btn_gravar'] != '') {
         echo $ret;
     }
 
 } else if (isset($_POST['consultar_tipo'])) {
     $tipos = $ctrlTipo->ConsultarTipoEquipamentoCTRL();
-    $idTipo = isset($titulo) ? ($titulo == ESTADO_TELA_ALTERAR ? $equipamento['tipoequipamento_id'] : '') : '';
+    $idTipo = isset($_POST['tipo_id']) ? $_POST['tipo_id'] : '';
     ?>
 
-        <option value="" <?= ($tipoSelected == '') ? 'selected="selected"' : '' ?>>Selecione </option>
+        <option value="">Selecione </option>
     <?php foreach ($tipos as $item) { ?>
-            <option value="<?= $item['id'] ?>" <?= ($tipoSelected == $item['tipo_equipamento']) ? 'selected="selected"' : '' ?>>
+            <option <?= $idTipo == $item['id'] ? 'selected ' : '' ?> value="<?= $item['id'] ?>">
             <?= $item['tipo_equipamento'] ?>
             </option>
     <?php }
 
 } else if (isset($_POST['consultar_modelo'])) {
     $modelos = $ctrlModelo->ConsultarModeloEquipamentoCTRL();
-    $idModelo = isset($titulo) ? ($titulo == ESTADO_TELA_ALTERAR ? $equipamento['modelo_id'] : '') : '';
+    $idModelo = isset($_POST['modelo_id']) ? $_POST['modelo_id'] : '';
     ?>
 
-            <option value="" <?= ($modeloSelected == '') ? 'selected="selected"' : '' ?>>Selecione </option>
+            <option value="">Selecione </option>
     <?php foreach ($modelos as $item) { ?>
-                <option value="<?= $item['id'] ?>" <?= $item['nome_modelo'] ?>         <?= ($modeloSelected == $item['nome_modelo']) ? 'selected="selected"' : '' ?>>
+                <option <?= $idModelo == $item['id'] ? 'selected ' : '' ?> value="<?= $item['id'] ?>" <?= $item['nome_modelo'] ?>>
             <?= $item['nome_modelo'] ?>
                 </option>
     <?php }
@@ -107,8 +87,11 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
         <?php for ($i = 0; $i < count($equipamentos); $i++) { ?>
                         <tr>
                             <td>
-                                <a href="equipamento.php?id= <?= $equipamentos[$i]['equipamento_id'] ?>" class="btn btn-warning btn-xs">Alterar</a>
-                                <a href="#" class="btn btn-danger btn-xs">Excluir</a>
+                                <a href="equipamento.php?id=<?= $equipamentos[$i]['equipamento_id'] ?>"
+                                    class="btn btn-warning btn-xs">Alterar</a>
+                                <a href="#"
+                                    onclick="return CarregarExcluir('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento']?>')"
+                                    class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalExcluir">Excluir</a>
                             </td>
                             <td><input type="hidden" name="id" id="id" value="<?= $equipamentos[$i]['equipamento_id'] ?>" />
                     <?= $equipamentos[$i]['tipo_equipamento'] ?>
@@ -130,16 +113,19 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
         <?php } ?>
                 </tbody>
 
-<?php } else if (isset($_GET['id'])){
+<?php } else if (isset($_GET['id'])) {
+
+    if (!is_numeric($_GET['id']))
+        Util::ChamarPagina('consultar_equipamento');
 
     $equipamento = $ctrlEq->DetalharEquipamentoCTRL($_GET['id']);
 
-    if(empty($equipamento))
+    if (empty($equipamento))
         Util::ChamarPagina('consultar_equipamento');
 
-} else if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'alterar'){
-    
-    $equipamentoID = $_POST['equipamento_id'];
+} else if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'alterar') {
+
+    $equipamentoID = $_POST['id'];
     $tipo = $_POST['tipo'];
     $modelo = $_POST['modelo'];
     $identificacao = $_POST['identificacao'];
@@ -153,9 +139,32 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
     $voEq->setIdentificacaoEquipamento(trim($identificacao));
     $voEq->setDescricaoEquipamento(trim($descricao));
 
-    $ret = $ctrlEq->AlterarEquipamentoCTRL($voEq);
+    $ret = $ctrlEq->PesquisarEquipamentoCTRL($voEq, "C");
 
-    if ($_POST['btn_gravar'] == 'ajx'){
+    if (count($ret) == 1) {
+
+        $ret[0]['desc_equipamento'] != $descricao ? $ret = -4 : $ret = -3;
+        // -4: Registro já cadastrado com outra descrição
+        // -3: Registro já cadastrado
+    } else {
+        $ret = $ctrlEq->AlterarEquipamentoCTRL($voEq);
+    }
+
+    if ($_POST['btn_gravar'] != '') {
+        echo $ret;
+    }
+
+} else if (isset($_POST['btn_excluir'])){
+
+    $equipamentoID = $_POST['equipamentoID'];
+    
+    $voEq = new EquipamentoVO();
+    
+    $voEq->setId((int) $equipamentoID);
+
+    $ret = $ctrlEq->ExcluirEquipamentoCTRL($voEq);
+
+    if ($_POST['btn_excluir'] == 'ajx') {
         echo $ret;
     }
 }

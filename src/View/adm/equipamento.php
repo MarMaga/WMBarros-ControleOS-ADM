@@ -1,6 +1,7 @@
 <?php
 include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
 
+// variável que armazena o estado da tela (ver dataview - DV)
 $titulo = isset($equipamento) ? ESTADO_TELA_ALTERAR : ESTADO_TELA_NOVO;
 ?>
 
@@ -44,9 +45,9 @@ $titulo = isset($equipamento) ? ESTADO_TELA_ALTERAR : ESTADO_TELA_NOVO;
                     </div>
                     <div class="card-body">
                         <form id="formNovoEq" method="post" action="equipamento.php">
-                            <input type="hidden" id="idTipo" value="<?= isset($equipamento) ? $equipamento[''] : '' ?>">
-                            <input type="hidden" id="idModelo" value="<?= isset($equipamento) ? $equipamento[''] : '' ?>">
-                            <input type="hidden" id="idEquipamento" value="<?= isset($equipamento) ? $equipamento['equipamento_id'] : '' ?>">
+                            <input type="hidden" id="idTipo" value="<?= isset($equipamento) ? $equipamento['tipoequipamento_id'] : '' ?>">
+                            <input type="hidden" id="idModelo" value="<?= isset($equipamento) ? $equipamento['modelo_id'] : '' ?>">
+                            <input type="hidden" id="idEquipamento" value="<?= isset($equipamento) ? $_GET['id'] : '' ?>">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Tipo</label>
@@ -76,7 +77,7 @@ $titulo = isset($equipamento) ? ESTADO_TELA_ALTERAR : ESTADO_TELA_NOVO;
                         </form>
                     </div>
                 </div>
-
+                
             </section>
             <!-- /.content -->
 
