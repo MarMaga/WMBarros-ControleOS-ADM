@@ -72,5 +72,10 @@ class EquipamentoCTRL
     {
         return $this->modEq->FiltrarEquipamentoMODEL($idTipo, $idModelo);
     }
+
+    public function AtivarInativarEquipamentoCTRL(EquipamentoVO $voEq): int
+    {
+        return $this->modEq->AtivarInativarEquipamentoMODEL($voEq);
+    }
 }
 ?>

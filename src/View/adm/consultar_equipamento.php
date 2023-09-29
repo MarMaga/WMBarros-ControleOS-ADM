@@ -101,6 +101,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                 </div>
                 <!-- /.card -->
                 <?php include_once 'modais/excluir.php'; ?>
+                <?php include_once 'modais/inativar_equipamento.php'; ?>
+                <?php include_once 'modais/ativar_equipamento.php'; ?>
+                <?php include_once 'modais/dados_equipamento_inativo.php'; ?>
             </section>
             <!-- /.content -->
         </div>

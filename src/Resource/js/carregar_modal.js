@@ -4,6 +4,22 @@ function CarregarExcluir(ID, nome){
     $("#nome_excluir").html(nome);
 }
 
+function CarregarInativar(ID, nome){
+    $("#id_inativar").val(ID);
+    $("#nome_inativar").html(nome);
+}
+
+function CarregarAtivar(ID, nome){
+    $("#id_ativar").val(ID);
+    $("#nome_ativar").html(nome);
+}
+
+function CarregarDadosInativo(equipamento, data, motivo){
+    $("#equipamento").text(equipamento);
+    $("#data").text(data);
+    $("#motivo").text(motivo);
+}
+
 // TIPO DE EQUIPAMENTO
 function ModalAlterarTipoEquipamento(ID,nome){
     $("#id_tipo_alterar").val(ID);

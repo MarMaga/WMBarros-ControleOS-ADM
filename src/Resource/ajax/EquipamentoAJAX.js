@@ -107,7 +107,7 @@ function FiltrarEquipamentos() {
     })
 }
 
-function Excluir(){
+function Excluir() {
     let equipamentoID = $("#id_excluir").val();
 
     $.ajax({
@@ -120,10 +120,66 @@ function Excluir(){
             btn_excluir: 'ajx',
             equipamentoID: equipamentoID
         },
-        success: function(ret){
+        success: function (ret) {
             MostrarMensagem(ret);
             FiltrarEquipamentos();
             $("#modalExcluir").modal("hide");
+        },
+        complete: function () {
+            RemoverLoad();
+        }
+    })
+}
+
+function InativarEquipamento(formID) {
+
+    if (NotificarCampos(formID)) {
+
+        let equipamentoID = $("#id_inativar").val();
+        let dataInativar = $("#dataInativar").val();
+        let motivoInativar = $("#motivoInativar").val();
+
+        $.ajax({
+            beforeSend: function () {
+                Load();
+            },
+            type: 'post',
+            url: BASE_URL_DATAVIEW('equipamentoDV'),
+            data: {
+                btn_inativar: 'ajx',
+                dataInativar: dataInativar,
+                motivoInativar: motivoInativar,
+                equipamentoID: equipamentoID
+            },
+            success: function (ret) {
+                MostrarMensagem(ret);
+                FiltrarEquipamentos();
+                $("#modalInativar").modal("hide");
+            },
+            complete: function () {
+                RemoverLoad();
+            }
+        })
+    }
+}
+
+function AtivarEquipamento() {
+    let equipamentoID = $("#id_ativar").val();
+
+    $.ajax({
+        beforeSend: function () {
+            Load();
+        },
+        type: 'post',
+        url: BASE_URL_DATAVIEW('equipamentoDV'),
+        data: {
+            btn_ativar: 'ajx',
+            equipamentoID: equipamentoID
+        },
+        success: function (ret) {
+            MostrarMensagem(ret);
+            FiltrarEquipamentos();
+            $("#modalAtivar").modal("hide");
         },
         complete: function () {
             RemoverLoad();

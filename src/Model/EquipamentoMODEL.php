@@ -71,7 +71,7 @@ class EquipamentoMODEL extends Conexao
         }
     }
 
-    public function DetalharEquipamentoMODEL(int $id): array | string
+    public function DetalharEquipamentoMODEL(int $id): array|string
     {
         $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::DETALHAR_EQUIPAMENTO());
         $sql->bindValue(1, $id);
@@ -114,17 +114,40 @@ class EquipamentoMODEL extends Conexao
     {
         $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::FILTRAR_EQUIPAMENTO($idTipo, $idModelo));
 
-        if ($idTipo != '' && $idModelo != ''){
+        if ($idTipo != '' && $idModelo != '') {
             $sql->bindValue(1, $idTipo);
             $sql->bindValue(2, $idModelo);
-        } else if ($idTipo == '' && $idModelo != ''){
+        } else if ($idTipo == '' && $idModelo != '') {
             $sql->bindValue(1, $idModelo);
-        } else if ($idTipo != '' && $idModelo == ''){
+        } else if ($idTipo != '' && $idModelo == '') {
             $sql->bindValue(1, $idTipo);
         }
 
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function AtivarInativarEquipamentoMODEL(EquipamentoVO $voEq): int
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::ATIVAR_INATIVAR_EQUIPAMENTO());
+
+        $i = 1;
+        $sql->bindValue($i++, $voEq->getSituacao());
+        if ($voEq->getDataDescarte() == '') {
+            $sql->bindValue($i++, null);
+        } else {
+            $sql->bindValue($i++, $voEq->getDataDescarte());
+        }
+        $sql->bindValue($i++, $voEq->getMotivoDescarte());
+        $sql->bindValue($i++, $voEq->getId());
+
+        try {
+            $sql->execute();
+            return 1;
+        } catch (Exception $ex) {
+            return -1;
+        }
+
     }
 }
 ?>
