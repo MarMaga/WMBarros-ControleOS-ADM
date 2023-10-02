@@ -29,7 +29,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
     $voEq->setDescricaoEquipamento(trim($descricao));
 
     $ret = $ctrlEq->PesquisarEquipamentoCTRL($voEq, "C");
-
+    // se já está cadastrado
     if (count($ret) == 1) {
 
         $ret[0]['desc_equipamento'] != $descricao ? $ret = -4 : $ret = -3;
@@ -89,7 +89,10 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                             <td>
                                 <a href="equipamento.php?id=<?= $equipamentos[$i]['equipamento_id'] ?>"
                                     class="btn btn-warning btn-xs">Alterar</a>
-                    <?php if ($equipamentos[$i]['situacao'] == 1) { ?>
+                    <?php
+                    echo $equipamentos[$i]['esta_alocado'];
+                    if ($equipamentos[$i]['esta_alocado'] == 0) {
+                    if ($equipamentos[$i]['situacao'] == 1) { ?>
                                     <a href="#"
                                         onclick="return CarregarInativar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
                                         class="btn bg-gradient-info btn-xs" data-toggle="modal" data-target="#modalInativar"
@@ -99,7 +102,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                                         onclick="return CarregarAtivar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
                                         class="btn btn-success btn-xs" data-toggle="modal" data-target="#modalAtivar"
                                         style="width: 50px">Ativar</a>
-                    <?php } ?>
+                    <?php } } ?>
                             </td>
                             <td><input type="hidden" name="id" id="id" value="<?= $equipamentos[$i]['equipamento_id'] ?>" />
                     <?= $equipamentos[$i]['tipo_equipamento'] ?>

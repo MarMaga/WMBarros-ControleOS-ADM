@@ -11,21 +11,21 @@
             <form id="formInativarEq" action="inativar_equipamento.php" method="post">
                 <div class="modal-body">
                     <input name="id_inativar" id="id_inativar" type="hidden" />
-                    <div class="formgroup">
+                        <strong><a>Equipamento:</a></strong>
+                        <br>
+                        <b><label class="text-info" name="nome_inativarr" id="nome_inativar"></label></b>
+                    <div class="form-group">
                         <strong><a>Data da inativação:</a></strong>
                         <input name="dataInativar" id="dataInativar" type="date" class="form-control data obg"
                             data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="">
                     </div>
-                    <br>
-                    <div class="formgroup">
+                    <div class="form-group">
                         <strong><a>Motivo da inativação:</a></strong>
-                        <textarea name="motivoInativar" id="motivoInativar" class="form-control obg" rows="3"
-                            style="text-transform: uppercase" placeholder="Digite o motivo ..."></textarea>
+                        <textarea maxlength="100" name="motivoInativar" id="motivoInativar" class="form-control obg"
+                            rows="3" style="text-transform: uppercase" placeholder="Digite o motivo ..."></textarea>
                     </div>
-                    <hr>
                     <div class="formgroup">
-                        <strong>Confirma a inativação do equipamento abaixo?</strong><br>
-                        <b><label class="text-info" name="nome_inativarr" id="nome_inativar"></label></b>
+                        <strong>Confirma a inativação do equipamento?</strong><br>
                     </div>
                 </div>
                 <div class="modal-footer">
