@@ -40,7 +40,11 @@ class EQUIPAMENTO_SQL
                        data_descarte,
                        motivo_descarte,
                        tipo_equipamento,
-                       nome_modelo
+                       nome_modelo,
+                       (SELECT count(*)
+                          FROM tb_alocacao as al
+                         WHERE al.equipamento_id = equipamento_id
+                           AND al.situacao != ?) as esta_alocado
                   FROM tb_equipamento as eq
             INNER JOIN tb_tipoequipamento as ti
                     ON eq.tipoequipamento_id = ti.id

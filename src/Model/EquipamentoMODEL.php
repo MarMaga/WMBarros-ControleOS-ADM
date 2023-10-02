@@ -110,17 +110,19 @@ class EquipamentoMODEL extends Conexao
         }
     }
 
-    public function FiltrarEquipamentoMODEL($idTipo, $idModelo)
+    public function FiltrarEquipamentoMODEL($idTipo, $idModelo, $situacao)
     {
         $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::FILTRAR_EQUIPAMENTO($idTipo, $idModelo));
 
+        $i = 1;
+        $sql->bindValue($i++, $situacao);
         if ($idTipo != '' && $idModelo != '') {
-            $sql->bindValue(1, $idTipo);
-            $sql->bindValue(2, $idModelo);
+            $sql->bindValue($i++, $idTipo);
+            $sql->bindValue($i++, $idModelo);
         } else if ($idTipo == '' && $idModelo != '') {
-            $sql->bindValue(1, $idModelo);
+            $sql->bindValue($i++, $idModelo);
         } else if ($idTipo != '' && $idModelo == '') {
-            $sql->bindValue(1, $idTipo);
+            $sql->bindValue($i++, $idTipo);
         }
 
         $sql->execute();

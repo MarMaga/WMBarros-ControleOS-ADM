@@ -10,6 +10,7 @@ class AlocarVO extends LogErroVO
     private $id;
     private $id_equipamento;
     private $id_setor;
+    private $situacao;
 
     // SET e GET id
     public function setId(int $id): void
@@ -19,18 +20,6 @@ class AlocarVO extends LogErroVO
     public function getId(): int
     {
         return $this->id;
-    }
-
-    // GET data_alocacao
-    public function getDataAlocacao(): string
-    {
-        return Util::DataAtual();
-    }
-
-    // GET data_remocao
-    public function getDataRemocao(): string
-    {
-        return Util::DataAtual();
     }
 
     // SET e GET id_equipamento
@@ -52,6 +41,29 @@ class AlocarVO extends LogErroVO
     {
         return $this->id_setor;
     }
+
+    // SET e GET situacao
+    public function setSitucao(int $situacao): void
+    {
+        $this->situacao = $situacao;
+    }
+    public function getSituacao(): int
+    {
+        return $this->situacao;
+    }
+
+    // GET data_alocacao
+    public function getDataAlocacao(): string
+    {
+        return Util::DataAtual();
+    }
+
+    // GET data_remocao
+    public function getDataRemocao(): string
+    {
+        return Util::DataAtual();
+    }
+
 }
 
 ?>
