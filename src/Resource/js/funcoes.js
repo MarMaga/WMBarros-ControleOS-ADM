@@ -92,15 +92,23 @@ function FocarInputModal(IDModal, IDInput) {
     });
 }
 
-// converte tudo o que for digitado para maiúscula
-document.addEventListener('keyup', (e) => {
-    e.target.value = e.target.value.toUpperCase();
-})
+function FecharModal(modal) {
+    $(modal).modal("hide");
+}
 
-function Load(){
+// converte tudo o que for digitado para maiúscula
+// ao invés da função abaixo, todo input que deve ser
+// em maiúscula contém style="text-transform: uppercase"
+// document.addEventListener('keyup', (e) => {
+//     // não atua nos campos de data
+//     if (e.target.type != 'date')
+//         e.target.value = e.target.value.toUpperCase();
+// })
+
+function Load() {
     $(".loader").addClass("is-active");
 }
 
-function RemoverLoad(){
+function RemoverLoad() {
     $(".loader").removeClass("is-active");
 }

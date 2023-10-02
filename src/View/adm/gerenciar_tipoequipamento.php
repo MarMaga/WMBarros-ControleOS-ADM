@@ -44,7 +44,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                         <form id="formTipo" method="post" action="gerenciar_tipoequipamento.php">
                             <div class="form-group">
                                 <label>Tipo de equipamento</label>
-                                <input class="form-control obg" name="tipo" id="tipo" placeholder="Digite aqui...">
+                                <input class="form-control obg" name="tipo" id="tipo" style="text-transform: uppercase"
+                                    placeholder="Digite aqui...">
                             </div>
                             <button type="button" onclick="CadastrarTipoEquipamentoAJAX('formTipo')"
                                 class="btn btn-success" name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
@@ -58,7 +59,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/TipoEquipamentoDV.php';
                             <div class="card-tools" id="pesquisa">
                                 <div class="input-group input-group-sm" style="width: 200px;">
                                     <input type="text" name="filtroTipo" id="filtroTipo" onkeyup="Filtrar()"
-                                        class="form-control float-right" placeholder="Pesquise por...">
+                                        class="form-control float-right" style="text-transform: uppercase"
+                                        style="text-transform: uppercase" placeholder="Pesquise por...">
                                     <div class="input-group-append">
                                         <button type="button" name="btn_filtrar" id="btn_filtrar" title="Pesquisar"
                                             onclick="Filtrar()" class="btn btn-default btn-sm"><i

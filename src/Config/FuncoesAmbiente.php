@@ -7,6 +7,7 @@ const EXCLUIR_TIPO_EQUIPAMENTO = 'ExcluirTipoEquipamento';
 const CADASTRAR_MODELO_EQUIPAMENTO = 'CadastrarModeloEquipamento';
 const ALTERAR_MODELO_EQUIPAMENTO = 'AlterarModeloEquipamento';
 const EXCLUIR_MODELO_EQUIPAMENTO = 'ExcluirModeloEquipamento';
+const ATIVAR_INATIVAR_EQUIPAMENTO = 'AtivarInativarEquipamento';
 
 const CADASTRAR_EQUIPAMENTO = 'CadastrarEquipamento';
 const ALTERAR_EQUIPAMENTO = 'AlterarEquipamento';

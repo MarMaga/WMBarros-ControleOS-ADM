@@ -75,6 +75,15 @@ class EquipamentoCTRL
 
     public function AtivarInativarEquipamentoCTRL(EquipamentoVO $voEq): int
     {
+        if ($voEq->getIdTipoEquipamento() == 0 || 
+            $voEq->getIdModelo() == 0 ||
+            $voEq->getIdentificacaoEquipamento() == "" ||
+            $voEq->getDescricaoEquipamento() == "")
+            return 0;
+
+        $voEq->setFuncaoErro(ATIVAR_INATIVAR_EQUIPAMENTO);
+        $voEq->setCodLogado(Util::CodigoLogado());
+        
         return $this->modEq->AtivarInativarEquipamentoMODEL($voEq);
     }
 }

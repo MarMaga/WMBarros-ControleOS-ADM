@@ -77,7 +77,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                                         <div class="card-tools">
                                             <div class="input-group input-group-sm" style="width: 150px;">
                                                 <input type="text" name="table_search" class="form-control float-right"
-                                                    placeholder="Pesquise por...">
+                                                    style="text-transform: uppercase" placeholder="Pesquise por...">
 
                                                 <div class="input-group-append">
                                                     <button type="submit" class="btn btn-default"><i
@@ -100,10 +100,12 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                     </div>
                 </div>
                 <!-- /.card -->
-                <?php include_once 'modais/excluir.php'; ?>
-                <?php include_once 'modais/inativar_equipamento.php'; ?>
-                <?php include_once 'modais/ativar_equipamento.php'; ?>
-                <?php include_once 'modais/dados_equipamento_inativo.php'; ?>
+                <?php
+                include_once 'modais/excluir.php';
+                include_once 'modais/inativar_equipamento.php';
+                include_once 'modais/ativar_equipamento.php';
+                include_once 'modais/dados_equipamento_inativo.php';
+                ?>
             </section>
             <!-- /.content -->
         </div>

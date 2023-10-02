@@ -135,10 +135,6 @@ function InativarEquipamento(formID) {
 
     if (NotificarCampos(formID)) {
 
-        let equipamentoID = $("#id_inativar").val();
-        let dataInativar = $("#dataInativar").val();
-        let motivoInativar = $("#motivoInativar").val();
-
         $.ajax({
             beforeSend: function () {
                 Load();
@@ -147,14 +143,14 @@ function InativarEquipamento(formID) {
             url: BASE_URL_DATAVIEW('equipamentoDV'),
             data: {
                 btn_inativar: 'ajx',
-                dataInativar: dataInativar,
-                motivoInativar: motivoInativar,
-                equipamentoID: equipamentoID
+                dataInativar: $("#dataInativar").val(),
+                motivoInativar: $("#motivoInativar").val(),
+                equipamentoID: $("#id_inativar").val()
             },
             success: function (ret) {
                 MostrarMensagem(ret);
                 FiltrarEquipamentos();
-                $("#modalInativar").modal("hide");
+                FecharModal("#modalInativar");
             },
             complete: function () {
                 RemoverLoad();
@@ -164,7 +160,6 @@ function InativarEquipamento(formID) {
 }
 
 function AtivarEquipamento() {
-    let equipamentoID = $("#id_ativar").val();
 
     $.ajax({
         beforeSend: function () {
@@ -174,7 +169,7 @@ function AtivarEquipamento() {
         url: BASE_URL_DATAVIEW('equipamentoDV'),
         data: {
             btn_ativar: 'ajx',
-            equipamentoID: equipamentoID
+            equipamentoID: $("#id_ativar").val()
         },
         success: function (ret) {
             MostrarMensagem(ret);

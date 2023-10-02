@@ -89,9 +89,6 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                             <td>
                                 <a href="equipamento.php?id=<?= $equipamentos[$i]['equipamento_id'] ?>"
                                     class="btn btn-warning btn-xs">Alterar</a>
-                                <a href="#"
-                                    onclick="return CarregarExcluir('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
-                                    class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalExcluir">Excluir</a>
                     <?php if ($equipamentos[$i]['situacao'] == 1) { ?>
                                     <a href="#"
                                         onclick="return CarregarInativar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
