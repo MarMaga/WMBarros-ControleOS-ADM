@@ -255,6 +255,12 @@ class Util
 
         return $situacao;
     }
+
+    public static function MostrarDadosArray($array){
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+    }
 }
 
 ?>

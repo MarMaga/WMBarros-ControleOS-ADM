@@ -70,7 +70,7 @@ class EquipamentoCTRL
 
     public function FiltrarEquipamentoCTRL($idTipo, $idModelo): array
     {
-        return $this->modEq->FiltrarEquipamentoMODEL($idTipo, $idModelo, SITUACAO_EQUIPAMENTO_REMOVIDO);
+        return $this->modEq->FiltrarEquipamentoMODEL($idTipo, $idModelo, SITUACAO_EQUIPAMENTO_DESALOCADO);
     }
 
     public function AtivarInativarEquipamentoCTRL(EquipamentoVO $voEq): int

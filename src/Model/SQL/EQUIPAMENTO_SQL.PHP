@@ -43,7 +43,7 @@ class EQUIPAMENTO_SQL
                        nome_modelo,
                        (SELECT count(*)
                           FROM tb_alocacao as al
-                         WHERE al.equipamento_id = equipamento_id
+                         WHERE al.equipamento_id = eq.id
                            AND al.situacao != ?) as esta_alocado
                   FROM tb_equipamento as eq
             INNER JOIN tb_tipoequipamento as ti

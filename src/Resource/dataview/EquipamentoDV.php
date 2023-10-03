@@ -89,20 +89,24 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                             <td>
                                 <a href="equipamento.php?id=<?= $equipamentos[$i]['equipamento_id'] ?>"
                                     class="btn btn-warning btn-xs">Alterar</a>
-                    <?php
-                    echo $equipamentos[$i]['esta_alocado'];
-                    if ($equipamentos[$i]['esta_alocado'] == 0) {
-                    if ($equipamentos[$i]['situacao'] == 1) { ?>
-                                    <a href="#"
-                                        onclick="return CarregarInativar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
-                                        class="btn bg-gradient-info btn-xs" data-toggle="modal" data-target="#modalInativar"
-                                        style="width: 50px">Inativar</a>
-                    <?php } else { ?>
-                                    <a href="#"
-                                        onclick="return CarregarAtivar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
-                                        class="btn btn-success btn-xs" data-toggle="modal" data-target="#modalAtivar"
-                                        style="width: 50px">Ativar</a>
-                    <?php } } ?>
+                        <?php
+                        // zero se o equipamento não estiver alocado nem em manutenção, ou seja,
+                        // se estiver desalocado
+                        // somente pode ser inativado se estiver desalocado
+                        if ($equipamentos[$i]['esta_alocado'] == 0) {
+                            // situação: 1=ativo; 2=inativo
+                            if ($equipamentos[$i]['situacao'] == 1) { ?>
+                                        <a href="#"
+                                            onclick="return CarregarInativar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
+                                            class="btn bg-gradient-info btn-xs" data-toggle="modal" data-target="#modalInativar"
+                                            style="width: 50px" title="Somente é possível inativar equipamentos desalocados">Inativar</a>
+                        <?php } else { ?>
+                                        <a href="#"
+                                            onclick="return CarregarAtivar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
+                                            class="btn btn-success btn-xs" data-toggle="modal" data-target="#modalAtivar"
+                                            style="width: 50px">Ativar</a>
+                        <?php }
+                        } ?>
                             </td>
                             <td><input type="hidden" name="id" id="id" value="<?= $equipamentos[$i]['equipamento_id'] ?>" />
                     <?= $equipamentos[$i]['tipo_equipamento'] ?>
@@ -119,10 +123,10 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                             <td>
                     <?php if (Util::MostrarSituacao($equipamentos[$i]['situacao']) == 'ATIVO') {
                         echo 'ATIVO';
-                    } else { 
+                    } else {
                         $eq = $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'];
                         $time = strtotime($equipamentos[$i]['data_descarte']);
-                        $data = date('d-m-Y',$time);
+                        $data = date('d-m-Y', $time);
                         $motivo = $equipamentos[$i]['motivo_descarte'];
                         ?>
                                     <a href="#" data-toggle="modal" data-target="#modalDadosInativo"
