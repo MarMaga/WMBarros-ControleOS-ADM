@@ -151,5 +151,24 @@ class EquipamentoMODEL extends Conexao
         }
 
     }
+
+    public function ListarEquipamentoAlocacaoMODEL($idTipo, $idModelo): array
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::LISTAR_EQUIPAMENTO_ALOCACAO($idTipo, $idModelo));
+
+        $i = 1;
+        if ($idTipo != '' && $idModelo != '') {
+            $sql->bindValue($i++, $idTipo);
+            $sql->bindValue($i++, $idModelo);
+        } else if ($idTipo == '' && $idModelo != '') {
+            $sql->bindValue($i++, $idModelo);
+        } else if ($idTipo != '' && $idModelo == '') {
+            $sql->bindValue($i++, $idTipo);
+        }
+        
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }
 ?>

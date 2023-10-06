@@ -43,7 +43,7 @@ class AlocarVO extends LogErroVO
     }
 
     // SET e GET situacao
-    public function setSitucao(int $situacao): void
+    public function setSituacao(int $situacao): void
     {
         $this->situacao = $situacao;
     }

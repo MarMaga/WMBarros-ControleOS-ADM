@@ -86,5 +86,10 @@ class EquipamentoCTRL
         
         return $this->modEq->AtivarInativarEquipamentoMODEL($voEq);
     }
+
+    public function ListarEquipamentoAlocacaoCTRL($idTipo, $idModelo): array
+    {
+        return $this->modEq->ListarEquipamentoAlocacaoMODEL($idTipo, $idModelo);
+    }
 }
 ?>

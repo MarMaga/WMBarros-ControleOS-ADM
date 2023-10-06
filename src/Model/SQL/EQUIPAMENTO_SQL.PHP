@@ -155,5 +155,40 @@ class EQUIPAMENTO_SQL
 
         return $sql;
     }
+
+    public static function LISTAR_EQUIPAMENTO_ALOCACAO($idTipo, $idModelo): string
+    {
+        $sql = 'SELECT eq.id, 
+                       ident_equipamento,
+                       desc_equipamento,
+                       eq.situacao as ativo,
+                       data_descarte,
+                       motivo_descarte,
+                       tipo_equipamento,
+                       nome_modelo,
+                       al.situacao as situacao_alocacao,
+                       al.data_alocacao,
+                       al.data_remocao,
+                       al.setor_id,
+                       st.nome_setor 
+                  FROM tb_equipamento as eq 
+             LEFT JOIN tb_alocacao as al ON eq.id = al.equipamento_id
+             LEFT JOIN tb_setor as st ON al.setor_id = st.id
+            INNER JOIN tb_tipoequipamento as ti
+                    ON eq.tipoequipamento_id = ti.id
+            INNER JOIN tb_modelo as mo
+                    ON eq.modelo_id = mo.id';
+
+        if ($idTipo != '' && $idModelo != '') {
+            $sql .= ' WHERE eq.tipoequipamento_id = ? AND eq.modelo_id = ?';
+        } else if ($idTipo == '' && $idModelo != '') {
+            $sql .= ' WHERE eq.modelo_id = ?';
+        } else if ($idTipo != '' && $idModelo == '') {
+            $sql .= ' WHERE eq.tipoequipamento_id = ?';
+        }
+
+        return $sql;
+    }
+
 }
 ?>

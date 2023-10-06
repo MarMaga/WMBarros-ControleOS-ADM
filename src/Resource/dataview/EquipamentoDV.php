@@ -5,12 +5,14 @@ use Src\VO\EquipamentoVO;
 use Src\Controller\EquipamentoCTRL;
 use Src\Controller\TipoEquipamentoCTRL;
 use Src\Controller\ModeloEquipamentoCTRL;
+use Src\Controller\SetorCTRL;
 
 include_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
 $ctrlTipo = new TipoEquipamentoCTRL();
 $ctrlModelo = new ModeloEquipamentoCTRL();
 $ctrlEq = new EquipamentoCTRL();
+$ctrlSt = new SetorCTRL();
 
 if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
 

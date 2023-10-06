@@ -4,6 +4,13 @@ function CarregarExcluir(ID, nome){
     $("#nome_excluir").html(nome);
 }
 
+function CarregarAlocacao(eqID, setorID, novoSetorID, eq){
+    $("#equipamento_id").val(eqID);
+    $("#setor_id").val(setorID);
+    $("#novo_setor_id").val(novoSetorID);
+    $("#nome_alocar").html(eq);
+}
+
 function CarregarInativar(ID, nome){
     $("#id_inativar").val(ID);
     $("#nome_inativar").html(nome);

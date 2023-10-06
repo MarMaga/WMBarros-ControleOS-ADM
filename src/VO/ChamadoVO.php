@@ -11,7 +11,7 @@ class ChamadoVO extends LogErroVO
     private $problema;
     private $laudo;
     private $id_setor;
-    private $id_equipamento;
+    private $id_alocar;
     private $id_funcionario;
     private $id_tecnico_atendimento;
     private $id_tecnico_encerramento;
@@ -93,14 +93,14 @@ class ChamadoVO extends LogErroVO
         return $this->id_setor;
     }
 
-    // SET e GET id_equipamento
-    public function setIdEquipamento(int $id_equipamento): void
+    // SET e GET id_alocar
+    public function setIdAlocar(int $id_alocar): void
     {
-        $this->id_equipamento = $id_equipamento;
+        $this->id_alocar = $id_alocar;
     }
-    public function getIdEquipamento(): int
+    public function getIdAlocar(): int
     {
-        return $this->id_equipamento;
+        return $this->id_alocar;
     }
 
     // SET e GET id_funcionario

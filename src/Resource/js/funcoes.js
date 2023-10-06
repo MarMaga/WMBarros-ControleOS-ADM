@@ -112,3 +112,15 @@ function Load() {
 function RemoverLoad() {
     $(".loader").removeClass("is-active");
 }
+
+function AtivaInativaBotaoAlocacao(btnID, setorDoEq, selectID){
+    // ativa o botão Alterar somente se houver alteração de setor
+
+    selectEscolhido = $("#" + selectID).val();
+
+    if (setorDoEq == selectEscolhido){
+        $("#" + btnID).attr("hidden", true);
+    } else {
+        $("#" + btnID).removeAttr("hidden");
+    }
+}

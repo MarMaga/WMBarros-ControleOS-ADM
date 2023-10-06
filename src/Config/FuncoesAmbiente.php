@@ -13,4 +13,11 @@ const CADASTRAR_EQUIPAMENTO = 'CadastrarEquipamento';
 const ALTERAR_EQUIPAMENTO = 'AlterarEquipamento';
 const EXCLUIR_EQUIPAMENTO = 'ExcluirEquipamento';
 
+const CADASTRAR_SETOR = 'CadastrarSetor';
+const ALTERAR_SETOR = 'AlterarSetor';
+const EXCLUIR_SETOR = 'ExcluirSetor';
+
+const INSERIR_ALOCACAO = 'InserirAlocacao';
+const ALTERAR_ALOCACAO = 'AlterarAlocacao';
+
 ?>
