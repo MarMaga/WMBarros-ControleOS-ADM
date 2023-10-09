@@ -48,7 +48,7 @@ function InserirAlterarAlocacao(){
     let eqID = $("#equipamento_id").val();
     let setorID = $("#setor_id").val();
     let selectSetorID = $("#novo_setor_id").val();
-
+alert($("#novo_setor_id").val());
     $.ajax({
         beforeSend: function(){
             Load();
@@ -62,6 +62,7 @@ function InserirAlterarAlocacao(){
             novo_setor_id: selectSetorID
         },
         success: function(ret){
+            FecharModal('#modalAloc');
             MostrarMensagem(ret);
             ListarEquipamentos();
         },

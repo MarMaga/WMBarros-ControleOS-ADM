@@ -17,7 +17,7 @@ class AlocarEquipamentoMODEL extends Conexao
         $this->conexao = parent::retornarConexao();
     }
 
-    public function InserirAlocacaoMODEL(AlocarVO $voAloc): int
+    public function AlocarMODEL(AlocarVO $voAloc): int
     {
         $sql = $this->conexao->prepare(ALOCACAO_SQL::INSERIR_ALOCACAO());
 
@@ -35,22 +35,14 @@ class AlocarEquipamentoMODEL extends Conexao
         }
     }
 
-    public function AlterarAlocacaoMODEL(AlocarVO $voAloc, string $lancaDataAlocacaoRemocao): int
+    public function DesalocarMODEL(AlocarVO $voAloc): int
     {
-        if ($lancaDataAlocacaoRemocao == 'A') {
-            $sql = $this->conexao->prepare(ALOCACAO_SQL::ALTERAR_ALOCACAO(ALOCAR));
-        } else {
-            $sql = $this->conexao->prepare(ALOCACAO_SQL::ALTERAR_ALOCACAO(DESALOCAR));
-        }
+        $sql = $this->conexao->prepare(ALOCACAO_SQL::ALTERAR_ALOCACAO(DESALOCAR));
 
         $i = 1;
         $sql->bindValue($i++, $voAloc->getIdSetor());
         $sql->bindValue($i++, $voAloc->getSituacao());
-        if ($lancaDataAlocacaoRemocao == 'A') {
-            $sql->bindValue($i++, $voAloc->getDataAlocacao());
-        } else {
-            $sql->bindValue($i++, $voAloc->getDataRemocao());
-        }
+        $sql->bindValue($i++, $voAloc->getDataRemocao());
         $sql->bindValue($i++, $voAloc->getIdEquipamento());
 
         try {

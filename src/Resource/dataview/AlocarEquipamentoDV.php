@@ -1,5 +1,6 @@
 <?php
 
+use Src\_Public\Util;
 use Src\VO\AlocarVO;
 use Src\Controller\EquipamentoCTRL;
 use Src\Controller\AlocarEquipamentoCTRL;
@@ -19,35 +20,54 @@ if (isset($_POST['inserir_alterar_alocacao'])){
     $voAloc = new AlocarVO();
     $ctrlAloc = new AlocarEquipamentoCTRL();
 
-    $voAloc->setIdEquipamento(intval($equipamentoID));
+    $voAloc->setIDEquipamento(intval($equipamentoID));
     
+    if ($setor_id == 0 || $setor_id == ''){
+        // setor_id == 0 ou == '' se não houver cadastro do equipamento em tb_alocacao
+        // neste caso, deve inserir um registro novo
+        $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_ALOCADO);
+        $voAloc->setIDSetor(intval($novo_setor_id));
+
+        echo $ctrlAloc->AlocarCTRL($voAloc);
+
+    } else {
+        // setor_id > 0 quando já houver registro de alocação deste equipamento
+        // se o último registro deste equipamento conter data_remocao, deve inserir outro registro
+
+        if($novo_setor_id > 0) {
+        // $novo_setor_id > 0 quando está desalocado e o usuário escolhe outro setor (>0)
+        // deve inserir outro registro
+
+            $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_ALOCADO);
+            $voAloc->setIDSetor(intval($novo_setor_id));
+
+            echo $ctrlAloc->AlocarCTRL($voAloc);
+
+        } else {
+        // neste caso, deve alterar o registro existente
+
+            $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_DESALOCADO);
+            $voAloc->setIDSetor(intval($setor_id));
+
+            echo $ctrlAloc->DesalocarCTRL($voAloc);
+        }
+    }
+
     if($novo_setor_id == 0) {
         // quando estiver desalocando, não muda o setor (envia o mesmo)
         // situação: 1=alocado, 2=desalocado, 3=manutenção
         $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_DESALOCADO);
-        $voAloc->setIdSetor(intval($setor_id));
+        $voAloc->setIDSetor(intval($setor_id));
         $lancaDataAlocacaoRemocao = 'R';
 
     } else {
         // quando estiver alocando, muda o setor
         // situação: 1=alocado, 2=desalocado, 3=manutenção
         $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_ALOCADO);
-        $voAloc->setIdSetor(intval($novo_setor_id));
+        $voAloc->setIDSetor(intval($novo_setor_id));
         $lancaDataAlocacaoRemocao = 'A';
     }
     
-    if ($setor_id == 0){
-        // setor_id == 0 se não houver cadastro do equipamento em tb_alocacao
-        // neste caso, deve inserir um registro novo
-        return $ctrlAloc->InserirAlocacaoCTRL($voAloc);
-
-    } else {
-        // setor_id > 0 quando já houver registro de alocação deste equipamento
-        // neste caso, deve alterar o registro existente
-
-        return $ctrlAloc->AlterarAlocacaoCTRL($voAloc, $lancaDataAlocacaoRemocao);
-    }
-
 } else if (isset($_POST['listar_equipamentos_alocacao'])) {
 
     $tipoId = '';
@@ -74,75 +94,146 @@ if (isset($_POST['inserir_alterar_alocacao'])){
     <?php for ($i = 0; $i < count($equipamentos); $i++) { ?>
         <tr>
         <?php
-        // 1=ativo; 0=inativo
-        // mostra apenas os equipamentos ativos
-        if ($equipamentos[$i]['ativo'] == SITUACAO_ATIVO) { ?>            
-            <td style="vertical-align: middle">
-                <?php
+        $eqID = $equipamentos[$i]['id'];
+        $setorID = $equipamentos[$i]['setor_id'];
+        $dataAlo = $equipamentos[$i]['data_alocacao'];
+        $dataRem = $equipamentos[$i]['data_remocao'];
+        $tipo = $equipamentos[$i]['tipo_equipamento'];
+        $modelo = $equipamentos[$i]['nome_modelo'];
+        $ident = $equipamentos[$i]['ident_equipamento'];
+        $colDesde = ''; ?>
+
+        <td style="vertical-align: middle">
+            <?php
+            // 1=ativo; 0=inativo
+            if ($equipamentos[$i]['ativo'] == SITUACAO_INATIVO) { ?>
+
+                <label class="text-danger">INATIVO</label>
+                <?php 
+                $time = strtotime($equipamentos[$i]['data_descarte']);
+                $colDesde = date('d-m-Y', $time);
+
+            } else {
+            // se o equipamento estiver ATIVO
+
                 // 1=alocado; 2=desalocado; 3=manutenção
                 if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_MANUTENCAO) { ?>
-                    <label>Em manutenção</label>
-                <!-- se estiver alocado ou desalocado, mostra o botão Alterar -->
-                <?php } else { 
-                    $eqID = $equipamentos[$i]['id'];
-                    $data = '';
-                    if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_ALOCADO && !empty($equipamentos[$i]['data_alocacao'])) {
-                        $time = strtotime($equipamentos[$i]['data_alocacao']);
-                        $data = date('d-m-Y', $time);
-                    } else if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_DESALOCADO && !empty($equipamentos[$i]['data_remocao'])) {
-                        $time = strtotime($equipamentos[$i]['data_remocao']);
-                        $data = date('d-m-Y', $time);
-                    } ?>
-                    <a href="#" hidden id="btn<?= $equipamentos[$i]['id'] ?>"
-                    onclick="CarregarAlocacao('<?= $equipamentos[$i]['id'] ?>','<?= $equipamentos[$i]['setor_id'] ?>','<?= 'alt' . $equipamentos[$i]['id'] ?>','<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
+
+                    <label class="text-info">Em manutenção</label>
+
+                <!-- se estiver alocado ou desalocado, cria e não mostra o botão Alterar -->
+                <?php } else { ?>
+
+                    <span id="altere<?= $eqID ?>">Altere o setor</span>
+
+                    <a href="#" hidden id="btn<?= $eqID ?>"
+                    onclick="CarregarAlocacao('<?= $eqID ?>','<?= $setorID ?>','<?= 'alt' . $eqID ?>','<?= $tipo . ' / ' . $modelo . ' / ' . $ident ?>')"
                     class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalAloc"
                     style="width: 50px">Alterar</a>
-                <?php } ?>
-            </td>
-            <td style="vertical-align: middle">
-                <input type="hidden" name="equipamento_id" id="setor_id" value="<?= $eqID ?>" />
-                        <?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>
-            </td>
-            <td>
-                <?php if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_MANUTENCAO) {
+
+                <?php }
+            } ?>
+        </td>
+
+        <td style="vertical-align: middle">
+
+            <input type="hidden" name="equipamento_id" id="equipamento_id" value="<?= $eqID ?>" />
+
+            <?= $tipo . ' / ' . $modelo . ' / ' . $ident ?>
+                
+        </td>
+
+        <td>
+            <?php
+            if ($equipamentos[$i]['ativo'] == SITUACAO_ATIVO) {
+
+                if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_MANUTENCAO) {
+
                     foreach($setores as $setor) { ?>
-                        <?php if ($setor['id'] == $equipamentos[$i]['setor_id']) { ?>
+
+                        <?php if ($setor['id'] == $setorID) { ?>
+
                             <select disabled class="form-control select2">
                             <option selected><?= $setor['nome_setor'] ?></option>
                             </select>
+
                         <?php } 
+
                     } ?>
+
                 <?php } else if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_DESALOCADO) { ?>
-                    <select class="form-control select2" name="alt<?= $equipamentos[$i]['id'] ?>" id="alt<?= $equipamentos[$i]['id'] ?>" onchange="AtivaInativaBotaoAlocacao('btn<?= $equipamentos[$i]['id'] ?>','<?= $equipamentos[$i]['setor_id'] == '' ? 0 : $equipamentos[$i]['setor_id'] ?>','<?= 'alt' . $equipamentos[$i]['id'] ?>')">
+
+                    <select class="form-control select2" name="alt<?= $eqID ?>" id="alt<?= $eqID ?>" onchange="AtivaInativaBotaoAlocacao('btn<?= $eqID ?>','<?= $setorID == '' ? 0 : $setorID ?>','<?= 'alt' . $eqID ?>','altere<?= $eqID ?>')">
                     <option selected value="0">Desalocado</option>
+
                     <?php foreach($setores as $setor) { ?>
                         <option value="<?= $setor['id'] ?>"><?= $setor['nome_setor'] ?></option>
                     <?php } ?>
+
                     </select>
+                    
                 <?php } else { ?>
-                    <select class="form-control select2" name="alt<?= $equipamentos[$i]['id'] ?>" id="alt<?= $equipamentos[$i]['id'] ?>" onchange="AtivaInativaBotaoAlocacao('btn<?= $equipamentos[$i]['id'] ?>','<?= $equipamentos[$i]['setor_id'] == '' ? 0 : $equipamentos[$i]['setor_id'] ?>','<?= 'alt' . $equipamentos[$i]['id'] ?>')">
+
+                    <select class="form-control select2" name="alt<?= $eqID ?>" id="alt<?= $eqID ?>" onchange="AtivaInativaBotaoAlocacao('btn<?= $eqID ?>','<?= $setorID == '' ? 0 : $setorID ?>','<?= 'alt' . $eqID ?>','altere<?= $eqID ?>')">
+
                     <?php $alocado = false;
+
                     foreach($setores as $setor) {
-                        if ($setor['id'] == $equipamentos[$i]['setor_id']) { ?>
+
+                        if ($setor['id'] == $setorID) { ?>
+
                             <option value="0">Desalocar</option>
                             <option selected value="<?= $setor['id'] ?>"><?= $setor['nome_setor'] ?></option>
+
                             <?php $alocado = true;
+
                         }
                     }
+
                     if (!$alocado) { ?>
+
                         <option value="0">Desalocado</option>
+
                         <?php foreach($setores as $setor) { ?>
+
                             <option value="<?= $setor['id'] ?>"><?= $setor['nome_setor'] ?></option>
+
                         <?php }
                     } ?>
+
                     </select>
-                <?php } ?>
-            </td>
-            <td style="vertical-align: middle">
-                <span><?= isset($data) ? $data : '' ?></span>
-            </td>
-        <?php } ?>
+
+                <?php }
+            } ?>
+        </td>
+
+        <td style="vertical-align: middle">
+            <?php
+
+            if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_ALOCADO) {
+                        
+                $time = strtotime($dataAlo);
+                $colDesde = date('d-m-Y', $time);
+
+            } else if ($equipamentos[$i]['situacao_alocacao'] == SITUACAO_EQUIPAMENTO_DESALOCADO && !empty($dataRem)) {
+
+                $time = strtotime($dataRem);
+                $colDesde = date('d-m-Y', $time);
+
+            } else {
+            // se não existe cadastro em tb_alocacao
+            // e se não está em manutenção
+
+                if ($equipamentos[$i]['ativo'] == SITUACAO_ATIVO && $equipamentos[$i]['situacao_alocacao'] != SITUACAO_EQUIPAMENTO_MANUTENCAO) {
+                    $colDesde = 'Nunca foi alocado';
+                }
+            } ?>
+
+            <span><?= $colDesde ?></span>
+            
+        </td>
+
     <?php } ?>
     </tr>
-    </tbody>
 <?php } ?>
+</tbody>

@@ -113,14 +113,16 @@ function RemoverLoad() {
     $(".loader").removeClass("is-active");
 }
 
-function AtivaInativaBotaoAlocacao(btnID, setorDoEq, selectID){
+function AtivaInativaBotaoAlocacao(btnID, setorDoEq, selectID, col1){
     // ativa o botão Alterar somente se houver alteração de setor
 
     selectEscolhido = $("#" + selectID).val();
 
     if (setorDoEq == selectEscolhido){
+        $("#" + col1).show();
         $("#" + btnID).attr("hidden", true);
     } else {
+        $("#" + col1).hide();
         $("#" + btnID).removeAttr("hidden");
     }
 }

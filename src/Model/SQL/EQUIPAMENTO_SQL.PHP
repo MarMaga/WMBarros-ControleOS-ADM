@@ -166,18 +166,19 @@ class EQUIPAMENTO_SQL
                        motivo_descarte,
                        tipo_equipamento,
                        nome_modelo,
-                       al.situacao as situacao_alocacao,
-                       al.data_alocacao,
-                       al.data_remocao,
-                       al.setor_id,
-                       st.nome_setor 
+                       max(al.situacao) as situacao_alocacao,
+                       max(al.data_alocacao) as data_alocacao,
+                       max(al.data_remocao) as data_remocao,
+                       max(al.setor_id) as setor_id,
+                       max(st.nome_setor) as nome_setor
                   FROM tb_equipamento as eq 
              LEFT JOIN tb_alocacao as al ON eq.id = al.equipamento_id
              LEFT JOIN tb_setor as st ON al.setor_id = st.id
             INNER JOIN tb_tipoequipamento as ti
                     ON eq.tipoequipamento_id = ti.id
             INNER JOIN tb_modelo as mo
-                    ON eq.modelo_id = mo.id';
+                    ON eq.modelo_id = mo.id
+              GROUP BY eq.id';
 
         if ($idTipo != '' && $idModelo != '') {
             $sql .= ' WHERE eq.tipoequipamento_id = ? AND eq.modelo_id = ?';

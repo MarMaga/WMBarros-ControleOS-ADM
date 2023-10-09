@@ -7,7 +7,7 @@ function CarregarExcluir(ID, nome){
 function CarregarAlocacao(eqID, setorID, novoSetorID, eq){
     $("#equipamento_id").val(eqID);
     $("#setor_id").val(setorID);
-    $("#novo_setor_id").val(novoSetorID);
+    $("#novo_setor_id").val($("#" + novoSetorID).val());
     $("#nome_alocar").html(eq);
 }
 

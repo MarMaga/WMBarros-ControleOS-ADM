@@ -15,7 +15,7 @@ class AlocarEquipamentoCTRL
         $this->modAloc = new AlocarEquipamentoMODEL();
     }
     
-    public function InserirAlocacaoCTRL(AlocarVO $voAloc): int
+    public function AlocarCTRL(AlocarVO $voAloc): int
     {
 
         // if ($voAloc->getIdEquipamento() == 0 || $voAloc->getIdSetor() == 0)
@@ -24,10 +24,10 @@ class AlocarEquipamentoCTRL
         $voAloc->setFuncaoErro(INSERIR_ALOCACAO);
         $voAloc->setCodLogado(Util::CodigoLogado());
 
-        return $this->modAloc->InserirAlocacaoMODEL($voAloc);
+        return $this->modAloc->AlocarMODEL($voAloc);
     }
 
-    public function AlterarAlocacaoCTRL(AlocarVO $voAloc, string $lancaDataAlocacaoRemocao): int
+    public function DesalocarCTRL(AlocarVO $voAloc): int
     {
         // if ($voAloc->getIdEquipamento() == 0 || $voAloc->getIdSetor() == 0)
         //     return 0;
@@ -35,7 +35,7 @@ class AlocarEquipamentoCTRL
         $voAloc->setFuncaoErro(ALTERAR_ALOCACAO);
         $voAloc->setCodLogado(Util::CodigoLogado());
 
-        return $this->modAloc->AlterarAlocacaoMODEL($voAloc, $lancaDataAlocacaoRemocao);
+        return $this->modAloc->DesalocarMODEL($voAloc);
     }
 }
 
