@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <label>Setor</label>
                 <input name="id_setor_alterar" id="id_setor_alterar" type="hidden">
-                <input class="form-control obg" name="setor_alterar" id="setor_alterar" style="width: 100%">
+                <input class="form-control obg" name="setor_alterar" id="setor_alterar" style="width: 100%; text-transform: uppercase;">
                 <input name="setor_original_alterar" id="setor_original_alterar" style="width: 100%" type="hidden">
             </div>
             <div class="modal-footer justify-content-between">

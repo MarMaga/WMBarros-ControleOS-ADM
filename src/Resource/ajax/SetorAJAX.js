@@ -2,8 +2,8 @@ function CadastrarSetorAJAX(formID) {
 
     if (NotificarCampos(formID)) {
 
-        let nome = $("#setor").val();
-alert(nome);
+        let nome = $("#setor").val().toUpperCase();
+
         $.ajax({
             beforeSend: function(){
                 Load();
@@ -103,7 +103,7 @@ function AlterarSetorAJAX(formID) {
 
     if (NotificarCampos(formID)) {
         let id = $("#id_setor_alterar").val();
-        let setor = $("#setor_alterar").val();
+        let setor = $("#setor_alterar").val().toUpperCase();
         let setor_original = $("#setor_original_alterar").val();
 
         $.ajax({
