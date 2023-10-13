@@ -41,6 +41,13 @@ function ModalAlterarModeloEquipamento(ID,nome){
     $("#modelo_original_alterar").val(nome);
 }
 
+// SETOR
+function ModalAlterarSetor(ID,nome){
+    $("#id_setor_alterar").val(ID);
+    $("#setor_alterar").val(nome);
+    $("#setor_original_alterar").val(nome);
+}
+
 function GravarAlteracaoModeloEquipamento(){
     if(!NotificarCampos('formAlt')){
         return false;

@@ -6,13 +6,9 @@ class SETOR_SQL
 {
     public static function INSERIR_SETOR()
     {
-        $sql = 'INSERT INTO tb_equipamento
-                            (ident_equipamento, 
-                            desc_equipamento, 
-                            situacao, 
-                            tipoequipamento_id, 
-                            modelo_id)
-                     VALUES (?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO tb_setor
+                            (nome_setor)
+                     VALUES (?)';
 
         return $sql;
     }
@@ -71,11 +67,8 @@ class SETOR_SQL
 
     public static function ALTERAR_SETOR(): string
     {
-        $sql = 'UPDATE tb_equipamento 
-                   SET ident_equipamento = ?, 
-                       desc_equipamento = ?, 
-                       tipoequipamento_id = ?, 
-                       modelo_id = ? 
+        $sql = 'UPDATE tb_setor 
+                   SET nome_setor = ? 
                  WHERE id = ?';
 
         return $sql;
@@ -84,7 +77,7 @@ class SETOR_SQL
     public static function EXCLUIR_SETOR(): string
     {
         $sql = 'DELETE
-                  FROM tb_equipamento
+                  FROM tb_setor
                  WHERE id = ?';
 
         return $sql;

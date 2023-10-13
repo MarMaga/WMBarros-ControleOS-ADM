@@ -2,12 +2,29 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                <li id="menuGeral" class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Geral
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="gerenciar_setor.php" id="setores" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Setores</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li id="menuEquipamentos" class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

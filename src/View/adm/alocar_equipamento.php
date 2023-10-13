@@ -70,6 +70,20 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AlocarEquipamentoDV.php';
 
         <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
 
+        <script src="../../Resource/ajax/EquipamentoAJAX.js"></script>
+        <script src="../../Resource/ajax/AlocarEquipamentoAJAX.js"></script>
+        <!-- <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script> -->
+
+        <script>
+            CarregarTipos();
+            CarregarModelos();
+            ListarEquipamentos();
+            // $(document).ready(function () {
+            //     $("#tipo").editableSelect();
+            //     $("#modelo").editableSelect();
+            // });
+        </script>
+        
     </div>
     <!-- ./wrapper -->
 

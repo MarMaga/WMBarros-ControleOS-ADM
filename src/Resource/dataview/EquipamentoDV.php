@@ -101,16 +101,16 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                                         <a href="#"
                                             onclick="return CarregarInativar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
                                             class="btn bg-gradient-info btn-xs" data-toggle="modal" data-target="#modalInativar"
-                                            style="width: 50px">Inativar</a>
+                                            style="width: 60px">Inativar</a>
                         <?php } else { ?>
                                         <a href="#"
                                             onclick="return CarregarAtivar('<?= $equipamentos[$i]['equipamento_id'] ?>', '<?= $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / ' . $equipamentos[$i]['ident_equipamento'] ?>')"
                                             class="btn btn-success btn-xs" data-toggle="modal" data-target="#modalAtivar"
-                                            style="width: 50px">Ativar</a>
+                                            style="width: 60px">Ativar</a>
                         <?php }
                         } else { ?>
-                                    <a href="#" class="btn bg-secondary btn-xs" style="width: 50px"
-                                        title="Somente é possível inativar equipamentos desalocados">?</a>
+                                    <button type="button" class="btn bg-secondary btn-xs" style="width: 60px"
+                                        title="Somente é possível inativar equipamentos desalocados">Alocado</button>
                     <?php } ?>
                             </td>
                             <td><input type="hidden" name="id" id="id" value="<?= $equipamentos[$i]['equipamento_id'] ?>" />
