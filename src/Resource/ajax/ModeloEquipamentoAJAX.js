@@ -2,7 +2,7 @@ function CadastrarModeloEquipamentoAJAX(formID) {
 
     if (NotificarCampos(formID)) {
 
-        let nome = $("#modelo").val();
+        let nome = $("#modelo").val().toUpperCase();
 
         $.ajax({
             type: "post",
@@ -85,7 +85,7 @@ function AlterarModeloEquipamentoAJAX(formID) {
 
     if (NotificarCampos(formID)) {
         let id = $("#id_modelo_alterar").val();
-        let modelo = $("#modelo_alterar").val();
+        let modelo = $("#modelo_alterar").val().toUpperCase();
         let modelo_original = $("#modelo_original_alterar").val();
 
         $.ajax({
@@ -126,6 +126,7 @@ function Excluir() {
             MostrarMensagem(ret);
             ConsultarModelo();
             $("#modalExcluir").modal("hide");
+            $("#filtroModelo").val('');
         }
     })
 }

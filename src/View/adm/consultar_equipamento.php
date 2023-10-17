@@ -73,18 +73,6 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Altere, ative ou inative os registros</h3>
-
-                                        <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 150px;">
-                                                <input type="text" name="table_search" class="form-control float-right"
-                                                    style="text-transform: uppercase" placeholder="Pesquise por...">
-
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-default"><i
-                                                            class="fas fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
@@ -105,6 +93,8 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                 include_once 'modais/inativar_equipamento.php';
                 include_once 'modais/ativar_equipamento.php';
                 include_once 'modais/dados_equipamento_inativo.php';
+                include_once 'modais/dados_equipamento_ativo.php';
+                include_once 'modais/dados_equipamento_alocado.php';
                 ?>
             </section>
             <!-- /.content -->

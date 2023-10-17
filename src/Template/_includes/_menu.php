@@ -65,9 +65,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="remover_equipamento.php" id="removerEquipamento" class="nav-link">
+                            <a href="desalocar_equipamento.php" id="desalocarEquipamento" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Remover</p>
+                                <p>Desalocar</p>
                             </a>
                         </li>
                     </ul>

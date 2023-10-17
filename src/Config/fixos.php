@@ -15,6 +15,4 @@ const SITUACAO_EQUIPAMENTO_MANUTENCAO = 3;
 const ESTADO_TELA_NOVO = 'Novo';
 const ESTADO_TELA_ALTERAR = 'Alterar';
 
-const ALOCAR = 'ALOCAR';
-const DESALOCAR = 'DESALOCAR';
 ?>

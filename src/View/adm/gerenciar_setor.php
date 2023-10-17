@@ -42,13 +42,14 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/SetorDV.php';
                     </div>
                     <div class="card-body">
                         <form id="formSetor" method="post" action="gerenciar_setor.php">
+                            <input type="hidden" id="renderizar" value="TABLE">
                             <div class="form-group">
                                 <label>Setor</label>
-                                <input class="form-control obg" name="setor" id="setor" style="text-transform: uppercase"
-                                    placeholder="Digite aqui...">
+                                <input class="form-control obg" name="setor" id="setor"
+                                    style="text-transform: uppercase" placeholder="Digite aqui...">
                             </div>
-                            <button type="button" onclick="CadastrarSetorAJAX('formSetor')"
-                                class="btn btn-success" name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
+                            <button type="button" onclick="CadastrarSetorAJAX('formSetor')" class="btn btn-success"
+                                name="btn_cadastrar" id="btn_cadastrar">Cadastrar</button>
                         </form>
                     </div>
                 </div>

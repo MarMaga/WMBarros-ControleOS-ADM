@@ -110,8 +110,29 @@ if (isset($_POST['btn_filtrar'])) {
 
     $setores = $ctrlSetorEq->ConsultarSetorCTRL();
 
-    if (count($setores) > 0) {
-        include_once PATH . 'view/adm/tabelas/SetorTABLE.php';
+    if ($_POST['consultar_setor'] == 'TABLE') {
+        if (count($setores) > 0) {
+            include_once PATH . 'view/adm/tabelas/SetorTABLE.php';
+        } else {
+            echo 'NADA';
+        }
+    } else { ?>
+        <option value="" selected="selected">Selecione</option>
+        <?php
+        foreach ($setores as $item) { ?>
+            <option value="<?= $item['id'] ?>"><?= $item['nome_setor'] ?></option>
+        <?php }
+    }
+} elseif (isset($_POST['consultar_setores_com_equipamentos'])) {
+
+    $setores = $ctrlSetorEq->ConsultarSetoresComEquipamentosCTRL();
+
+    if (count($setores) > 0) { ?>
+        <option value="" selected="selected">Selecione</option>
+        <?php
+        foreach ($setores as $item) { ?>
+            <option value="<?= $item['setor_id'] ?>"><?= $item['nome_setor'] . ' - ' . $item['quantidade'] ?></option>
+        <?php }
     } else {
         echo 'NADA';
     }

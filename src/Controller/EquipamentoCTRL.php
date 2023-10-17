@@ -4,6 +4,7 @@ namespace Src\Controller;
 
 use Src\_Public\Util;
 use Src\VO\EquipamentoVO;
+use Src\VO\AlocarVO;
 use Src\Model\EquipamentoMODEL;
 
 class EquipamentoCTRL
@@ -87,9 +88,39 @@ class EquipamentoCTRL
         return $this->modEq->AtivarInativarEquipamentoMODEL($voEq);
     }
 
-    public function ListarEquipamentoAlocacaoCTRL($idTipo, $idModelo): array
+    public function SelecionarEquipamentosNaoAlocadosCTRL(): array | null
     {
-        return $this->modEq->ListarEquipamentoAlocacaoMODEL($idTipo, $idModelo);
+        return $this->modEq->SelecionarEquipamentosNaoAlocadosMODEL(SITUACAO_ATIVO, SITUACAO_EQUIPAMENTO_DESALOCADO);
+    }
+
+    public function FiltrarEquipamentosPorSetorCTRL(int $setorID): array | null
+    {
+        return $this->modEq->FiltrarEquipamentosPorSetorMODEL($setorID, SITUACAO_EQUIPAMENTO_ALOCADO);
+    }
+
+    public function AlocarEquipamentoCTRL(AlocarVO $voAloc): int
+    {
+
+        if ($voAloc->getIdEquipamento() == 0 || $voAloc->getIdSetor() == 0)
+            return 0;
+
+        $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_ALOCADO);
+        $voAloc->setFuncaoErro(ALOCAR_EQUIPAMENTO);
+        $voAloc->setCodLogado(Util::CodigoLogado());
+
+        return $this->modEq->AlocarEquipamentoMODEL($voAloc);
+    }
+
+    public function DesalocarEquipamentoCTRL(AlocarVO $voAloc): int
+    {
+        if ($voAloc->getId() == 0 || $voAloc->getSituacao() == '')
+            return 0;
+
+        $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_DESALOCADO);
+        $voAloc->setFuncaoErro(DESALOCAR_EQUIPAMENTO);
+        $voAloc->setCodLogado(Util::CodigoLogado());
+
+        return $this->modEq->DesalocarEquipamentoMODEL($voAloc);
     }
 }
 ?>

@@ -41,6 +41,7 @@ class EQUIPAMENTO_SQL
                        motivo_descarte,
                        tipo_equipamento,
                        nome_modelo,
+                       st.nome_setor
                        (SELECT count(*)
                           FROM tb_alocacao as al
                          WHERE al.equipamento_id = eq.id
@@ -49,7 +50,9 @@ class EQUIPAMENTO_SQL
             INNER JOIN tb_tipoequipamento as ti
                     ON eq.tipoequipamento_id = ti.id
             INNER JOIN tb_modelo as mo
-                    ON eq.modelo_id = mo.id';
+                    ON eq.modelo_id = mo.id
+            INNER JOIN tb_setor as st
+                    ON al.setor_id = st.id';
 
         if ($idTipo != '' && $idModelo != '') {
             $sql .= ' WHERE eq.tipoequipamento_id = ? AND eq.modelo_id = ?';
@@ -156,7 +159,27 @@ class EQUIPAMENTO_SQL
         return $sql;
     }
 
-    public static function LISTAR_EQUIPAMENTO_ALOCACAO($idTipo, $idModelo): string
+    public static function LISTAR_EQUIPAMENTO_ALOCACAO(): string
+    {
+        $sql = 'SELECT eq.id as equipamentoID,
+                       eq.ident_equipamento,
+                       ti.tipo_equipamento,
+                       mo.nome_modelo
+                  FROM tb_equipamento as eq
+            INNER JOIN tb_tipoequipamento as ti
+                    ON eq.tipoequipamento_id = ti.id
+            INNER JOIN tb_modelo as mo
+                    ON eq.modelo_id = mo.id
+                 WHERE eq.situacao = ?
+                   AND eq.id 
+                NOT IN (SELECT equipamento_id
+                          FROM tb_alocacao
+                         WHERE situacao != ?)';
+                        
+        return $sql;
+    }
+
+    public static function LISTAR_EQUIPAMENTO_ALOCACAO2($idTipo, $idModelo): string
     {
         $sql = 'SELECT eq.id, 
                        ident_equipamento,
@@ -191,5 +214,51 @@ class EQUIPAMENTO_SQL
         return $sql;
     }
 
+    public static function FILTRAR_EQUIPAMENTOS_POR_SETOR(): string
+    {
+        $sql = 'SELECT eq.id as equipamentoID,
+                       eq.ident_equipamento,
+                       ti.tipo_equipamento,
+                       mo.nome_modelo,
+                       al.id as alocacaoID,
+                       al.data_alocacao,
+                       st.nome_setor
+                  FROM tb_equipamento as eq
+            INNER JOIN tb_tipoequipamento as ti
+                    ON eq.tipoequipamento_id = ti.id
+            INNER JOIN tb_modelo as mo
+                    ON eq.modelo_id = mo.id
+            INNER JOIN tb_alocacao as al
+                    ON eq.id = al.equipamento_id
+            INNER JOIN tb_setor as st
+                    ON al.setor_id = st.id
+                 WHERE al.setor_id = ?
+                   AND al.situacao = ?
+                   AND data_remocao is null';
+
+        return $sql;
+    }
+
+    public static function INSERIR_ALOCACAO(): string
+    {
+        $sql = 'INSERT INTO tb_alocacao
+                            (equipamento_id, 
+                            setor_id,
+                            situacao, 
+                            data_alocacao)
+                     VALUES (?, ?, ?, ?)';
+
+        return $sql;
+    }
+
+    public static function DESALOCAR_EQUIPAMENTO(): string
+    {
+        $sql = 'UPDATE tb_alocacao 
+                   SET situacao = ?,
+                       data_remocao = ?
+                 WHERE id = ?';
+
+        return $sql;
+    }
 }
 ?>

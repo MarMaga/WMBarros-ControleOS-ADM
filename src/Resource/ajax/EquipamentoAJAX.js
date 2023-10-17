@@ -45,8 +45,8 @@ function GravarEquipamento(formID) {
         let idEquipamento = $("#idEquipamento").val();
         let tipo = $("#tipo").val();
         let modelo = $("#modelo").val();
-        let identificacao = $("#identificacao").val();
-        let descricao = $("#descricao").val();
+        let identificacao = $("#identificacao").val().toUpperCase();
+        let descricao = $("#descricao").val().toUpperCase();
 
         $.ajax({
             beforeSend: function () {
@@ -107,8 +107,44 @@ function FiltrarEquipamentos() {
     })
 }
 
+function FiltrarEquipamentosPorSetor(idSetor) {
+
+    if (idSetor == '') {
+
+        $("#divResultado").hide();
+
+    } else {
+
+        $("#divResultado").show();
+
+        $.ajax({
+            beforeSend: function () {
+                Load();
+            },
+            type: 'post',
+            url: BASE_URL_DATAVIEW('equipamentoDV'),
+            data: {
+                filtrar_equipamentos_por_setor: 'ajx',
+                idSetor: idSetor
+            },
+            success: function (equipamentos) {
+                $("#tableResult").html(equipamentos);
+            },
+            complete: function () {
+                RemoverLoad();
+            }
+        })
+    }
+}
+
 function Excluir() {
     let equipamentoID = $("#id_excluir").val();
+    // desalocar = '' quando o registro deve ser excluído
+    // desalocar = DESALOCAR quando o equipamento deve ser desalocado do setor
+    let desaloc = $("#desalocar").val();
+
+    if (desaloc == '')
+        desaloc = 'ajx';
 
     $.ajax({
         beforeSend: function () {
@@ -117,12 +153,22 @@ function Excluir() {
         type: 'post',
         url: BASE_URL_DATAVIEW('equipamentoDV'),
         data: {
-            btn_excluir: 'ajx',
+            btn_excluir: desaloc,
             equipamentoID: equipamentoID
         },
         success: function (ret) {
             MostrarMensagem(ret);
-            FiltrarEquipamentos();
+
+            if (desaloc == 'DESALOCAR') {
+
+                ConsultarSetoresComEquipamentos();
+                $("#divResultado").hide();
+
+            } else {
+
+                FiltrarEquipamentos();
+            }
+
             $("#modalExcluir").modal("hide");
         },
         complete: function () {
@@ -180,4 +226,55 @@ function AtivarEquipamento() {
             RemoverLoad();
         }
     })
+}
+
+function ListarEquipamentos() {
+
+    $.ajax({
+        beforeSend: function () {
+            Load();
+        },
+        type: 'post',
+        url: BASE_URL_DATAVIEW('EquipamentoDV'),
+        data: {
+            selecionar_equipamentos_nao_alocados: 'ajx',
+        },
+        success: function (equipamentos) {
+            console.log(equipamentos);
+            $("#equipamento").html(equipamentos);
+        },
+        complete: function () {
+            RemoverLoad();
+        }
+    })
+}
+
+function AlocarEquipamento(formID) {
+
+    if (NotificarCampos(formID)) {
+
+        let eqID = $("#equipamento").val();
+        let setorID = $("#idSetor").val();
+
+        $.ajax({
+            beforeSend: function () {
+                Load();
+            },
+            type: 'post',
+            url: BASE_URL_DATAVIEW('EquipamentoDV'),
+            data: {
+                alocar_equipamento: 'ajx',
+                equipamentoID: eqID,
+                setorID: setorID,
+            },
+            success: function (ret) {
+                MostrarMensagem(ret);
+                ListarEquipamentos();
+                LimparNotificacoes();
+            },
+            complete: function () {
+                RemoverLoad();
+            }
+        })
+    }
 }

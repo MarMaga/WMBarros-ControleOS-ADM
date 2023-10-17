@@ -2,6 +2,7 @@
 
 use Src\_Public\Util;
 use Src\VO\EquipamentoVO;
+use Src\VO\AlocarVO;
 use Src\Controller\EquipamentoCTRL;
 use Src\Controller\TipoEquipamentoCTRL;
 use Src\Controller\ModeloEquipamentoCTRL;
@@ -144,7 +145,69 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
         <?php } ?>
                 </tbody>
 
-<?php } else if (isset($_GET['id'])) {
+<?php } else if (isset($_POST['filtrar_equipamentos_por_setor'])) {
+
+    $idSetor = $_POST['idSetor'];
+
+    $equipamentos = $ctrlEq->FiltrarEquipamentosPorSetorCTRL($idSetor);
+    ?>
+                    <thead>
+                        <tr>
+                            <th>Ação</th>
+                            <th>Equipamento</th>
+                            <th>Data de alocação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        <?php for ($i = 0; $i < count($equipamentos); $i++) { 
+            $equipSetor = 'Identificação: ' . $equipamentos[$i]['ident_equipamento'] . ' / ' . $equipamentos[$i]['tipo_equipamento'] . ' / ' . $equipamentos[$i]['nome_modelo'] . ' / Setor: ' . $equipamentos[$i]['nome_setor'];
+            ?>
+                            <tr>
+                                <td>
+                                    <a href="#"
+                                        onclick="CarregarExcluirDesalocar('<?= $equipamentos[$i]['alocacaoID'] ?>','<?= $equipSetor ?>')"
+                                        class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalExcluir"
+                                        style="width: 60px">Desalocar</a>
+                                </td>
+                                <td>
+                    <?= 'Identificação: ' . $equipamentos[$i]['ident_equipamento'] . ' / ' .
+                        $equipamentos[$i]['tipo_equipamento'] . ' / ' .
+                        $equipamentos[$i]['nome_modelo'] ?>
+                                </td>
+                                <td>
+                    <?= $equipamentos[$i]['data_alocacao'] ?>
+                                </td>
+                            </tr>
+        <?php } ?>
+                    </tbody>
+
+<?php } else if (isset($_POST['alocar_equipamento'])) {
+
+    $equipamentoID = $_POST['equipamentoID'];
+    $setorID = $_POST['setorID'];
+
+    $voAloc = new AlocarVO();
+
+    $voAloc->setIdEquipamento(intval($equipamentoID));
+    $voAloc->setIdSetor(intval($setorID));
+    $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_ALOCADO);
+
+    echo $ctrlEq->AlocarEquipamentoCTRL($voAloc);
+
+} else if (isset($_POST['selecionar_equipamentos_nao_alocados'])) {
+
+    $equipamentos = $ctrlEq->SelecionarEquipamentosNaoAlocadosCTRL();
+    ?>
+                            <option value="">Selecione</option>
+        <?php
+        foreach ($equipamentos as $item) { ?>
+                                <option value="<?= $item['equipamentoID'] ?>">
+            <?= 'Identificação: ' . $item['ident_equipamento'] . ' / ' .
+                $item['tipo_equipamento'] . ' / ' .
+                $item['nome_modelo'] ?>
+                                </option>
+    <?php }
+} else if (isset($_GET['id'])) {
 
     if (!is_numeric($_GET['id']))
         Util::ChamarPagina('consultar_equipamento');
@@ -187,15 +250,29 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
 
 } else if (isset($_POST['btn_excluir'])) {
 
-    $equipamentoID = $_POST['equipamentoID'];
+    if ($_POST['btn_excluir'] == DESALOCAR) {
 
-    $voEq = new EquipamentoVO();
+        $alocacaoID = $_POST['equipamentoID'];
 
-    $voEq->setId((int) $equipamentoID);
+        $voAloc = new AlocarVO();
 
-    $ret = $ctrlEq->ExcluirEquipamentoCTRL($voEq);
+        $voAloc->setSituacao(SITUACAO_EQUIPAMENTO_DESALOCADO);
+        $voAloc->setId(intval($alocacaoID));
 
-    if ($_POST['btn_excluir'] == 'ajx') {
+        $ret = $ctrlEq->DesalocarEquipamentoCTRL($voAloc);
+
+    } else {
+
+        $equipamentoID = $_POST['equipamentoID'];
+
+        $voEq = new EquipamentoVO();
+
+        $voEq->setId((int) $equipamentoID);
+
+        $ret = $ctrlEq->ExcluirEquipamentoCTRL($voEq);
+    }
+
+    if ($_POST['btn_excluir'] == 'ajx' || $_POST['btn_excluir'] == DESALOCAR) {
         echo $ret;
     }
 
@@ -218,7 +295,6 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
         $voEq->setSituacao(1);
         $voEq->setDataDescarte('');
         $voEq->setMotivoDescarte('');
-
     }
 
     $ret = $ctrlEq->AtivarInativarEquipamentoCTRL($voEq);

@@ -4,12 +4,13 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">
                     Confirmação de
-                    exclusão</h4>
+                    remoção</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                 <input name="id_excluir" id="id_excluir" type="hidden" />
-                Deseja excluir o registro abaixo?<b><br>
+                <input name="desalocar" id="desalocar" type="hidden" />
+                Deseja remover o registro abaixo?<b><br>
                     <label class="text-info" name="nome_excluir" id="nome_excluir"></label>
                 </b>
             </div>

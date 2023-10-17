@@ -44,6 +44,21 @@ class SetorMODEL extends Conexao
         }
     }
 
+    public function ConsultarSetoresComEquipamentosMODEL(): int|array
+    {
+        $sql = $this->conexao->prepare(SETOR_SQL::CONSULTAR_SETORES_COM_EQUIPAMENTOS());
+
+        $sql->bindValue(1, SITUACAO_EQUIPAMENTO_ALOCADO);
+
+        try {
+            $sql->setFetchMode(\PDO::FETCH_ASSOC);
+            $sql->execute();
+            return $sql->fetchAll();
+        } catch (Exception $ex) {
+            return -1;
+        }
+    }
+
     public function FiltrarSetorMODEL(SetorVO $voSetor, string $checarCadastro): int|array
     {
         if ($checarCadastro == "F") {

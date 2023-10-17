@@ -2,7 +2,7 @@ function CadastrarTipoEquipamentoAJAX(formID) {
 
     if (NotificarCampos(formID)) {
 
-        let nome = $("#tipo").val();
+        let nome = $("#tipo").val().toUpperCase();
 
         $.ajax({
             beforeSend: function(){
@@ -103,7 +103,7 @@ function AlterarTipoEquipamentoAJAX(formID) {
 
     if (NotificarCampos(formID)) {
         let id = $("#id_tipo_alterar").val();
-        let tipo = $("#tipo_alterar").val();
+        let tipo = $("#tipo_alterar").val().toUpperCase();
         let tipo_original = $("#tipo_original_alterar").val();
 
         $.ajax({
@@ -153,6 +153,7 @@ function Excluir() {
             MostrarMensagem(ret);
             ConsultarTipo();
             $("#modalExcluir").modal("hide");
+            $("#filtroTipo").val('');
         },
         complete: function(){
             RemoverLoad();

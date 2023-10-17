@@ -5,7 +5,7 @@ function CadastrarSetorAJAX(formID) {
         let nome = $("#setor").val().toUpperCase();
 
         $.ajax({
-            beforeSend: function(){
+            beforeSend: function () {
                 Load();
             },
             type: "post",
@@ -20,7 +20,7 @@ function CadastrarSetorAJAX(formID) {
                 LimparNotificacoes(formID);
                 $("#setor").focus();
             },
-            complete: function(){
+            complete: function () {
                 RemoverLoad();
             }
         })
@@ -30,32 +30,56 @@ function CadastrarSetorAJAX(formID) {
 function ConsultarSetor() {
 
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: "post",
         url: BASE_URL_DATAVIEW('SetorDV'),
         data: {
-            consultar_setor: 'ajx'
+            consultar_setor: $("#renderizar").val() == 'TABLE' ? 'TABLE' : 'OPTION'
         },
         success: function (setores) {
-            if (setores == 'NADA') {
-                $("#barraTituloFiltro").addClass("d-block").removeClass("d-none").addClass("bg-warning").removeClass("bg-info").removeClass("bg-success").removeClass("bg-danger");
-                $("#tituloFiltro").html("Nenhum setor cadastrado");
-                $("#pesquisa").hide();
-                $("#AltereOuExclua").addClass("d-none").removeClass("d-block");
-                $("#tableResult").hide();
-            } else {
-                $("#filtroTipo").val('');
-                $("#barraTituloFiltro").addClass("d-block").removeClass("d-none").addClass("bg-info").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-danger");
-                $("#tituloFiltro").html("Setores cadastrados");
-                $("#pesquisa").show();
-                $("#AltereOuExclua").addClass("d-block").removeClass("d-none");
-                $("#tableResult").show();
-                $("#tableResult").html(setores);
+            if ($("#renderizar").val() == 'TABLE') {
+                if (setores == 'NADA') {
+                    $("#barraTituloFiltro").addClass("d-block").removeClass("d-none").addClass("bg-warning").removeClass("bg-info").removeClass("bg-success").removeClass("bg-danger");
+                    $("#tituloFiltro").html("Nenhum setor cadastrado");
+                    $("#pesquisa").hide();
+                    $("#AltereOuExclua").addClass("d-none").removeClass("d-block");
+                    $("#tableResult").hide();
+                } else {
+                    $("#filtroTipo").val('');
+                    $("#barraTituloFiltro").addClass("d-block").removeClass("d-none").addClass("bg-info").removeClass("bg-warning").removeClass("bg-success").removeClass("bg-danger");
+                    $("#tituloFiltro").html("Setores cadastrados");
+                    $("#pesquisa").show();
+                    $("#AltereOuExclua").addClass("d-block").removeClass("d-none");
+                    $("#tableResult").show();
+                    $("#tableResult").html(setores);
+                }
+            } else if ($("#renderizar").val() == 'OPTION') {
+                $('#idSetor').html(setores);
             }
         },
-        complete: function(){
+        complete: function () {
+            RemoverLoad();
+        }
+    })
+}
+
+function ConsultarSetoresComEquipamentos() {
+
+    $.ajax({
+        beforeSend: function () {
+            Load();
+        },
+        type: "post",
+        url: BASE_URL_DATAVIEW('SetorDV'),
+        data: {
+            consultar_setores_com_equipamentos: 'ajx'
+        },
+        success: function (setores) {
+            $('#idSetor').html(setores);
+        },
+        complete: function () {
             RemoverLoad();
         }
     })
@@ -66,7 +90,7 @@ function TabelaFiltrada() {
     let filtro = $("#filtroSetor").val();
 
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: "post",
@@ -93,7 +117,7 @@ function TabelaFiltrada() {
                 $("#tableResult").html(setores);
             }
         },
-        complete: function(){
+        complete: function () {
             RemoverLoad();
         }
     })
@@ -107,7 +131,7 @@ function AlterarSetorAJAX(formID) {
         let setor_original = $("#setor_original_alterar").val();
 
         $.ajax({
-            beforeSend: function(){
+            beforeSend: function () {
                 Load();
             },
             type: 'post',
@@ -128,7 +152,7 @@ function AlterarSetorAJAX(formID) {
                     $("#alterarSetor").modal("hide");
                 }
             },
-            complete: function(){
+            complete: function () {
                 RemoverLoad();
             }
         })
@@ -140,7 +164,7 @@ function Excluir() {
     let id = $("#id_excluir").val();
 
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: 'post',
@@ -153,8 +177,9 @@ function Excluir() {
             MostrarMensagem(ret);
             ConsultarSetor();
             $("#modalExcluir").modal("hide");
+            $("#filtroSetor").val('');
         },
-        complete: function(){
+        complete: function () {
             RemoverLoad();
         }
     })
@@ -165,7 +190,7 @@ function Filtrar() {
     let filtro = $('#filtroSetor').val();
 
     $.ajax({
-        beforeSend: function(){
+        beforeSend: function () {
             Load();
         },
         type: 'post',
@@ -181,7 +206,7 @@ function Filtrar() {
                 TabelaFiltrada();
             }
         },
-        complete: function(){
+        complete: function () {
             RemoverLoad();
         }
     })

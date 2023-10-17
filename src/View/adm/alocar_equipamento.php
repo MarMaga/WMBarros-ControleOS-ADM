@@ -1,5 +1,6 @@
 <?php
-include_once dirname(__DIR__, 2) . '/Resource/dataview/AlocarEquipamentoDV.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
+include_once dirname(__DIR__, 2) . '/Resource/dataview/SetorDV.php';
 ?>
 
 <!DOCTYPE html>
@@ -42,22 +43,22 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AlocarEquipamentoDV.php';
                     </div>
                     <div class="card-body">
                         <form id="formAloc" method="post" action="alocar_equipamento.php">
+                            <input type="hidden" id="renderizar" value="OPTION">
                             <div class="form-group">
                                 <label>Setor</label>
-                                <select class="form-control select2 obg" name="setor" id="setor" style="width: 100%;">
-                                    <option value="" selected="selected">Selecione</option>
-                                    
+                                <select class="form-control select2 obg" name="idSetor" id="idSetor" style="width: 100%;">
+
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Equipamento</label>
                                 <select class="form-control select2 obg" name="equipamento" id="equipamento"
                                     style="width: 100%;">
-                                    
+
                                 </select>
                             </div>
-                            <button onclick="return NotificarCampos('formAloc')" class="btn btn-success"
-                                name="btn_gravar">Gravar</button>
+                            <button type="button" onclick="AlocarEquipamento('formAloc')" class="btn btn-success"
+                                name="btn_alocar">Alocar</button>
                         </form>
                     </div>
                 </div>
@@ -70,20 +71,24 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/AlocarEquipamentoDV.php';
 
         <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
 
+        <script>
+            AjustarMenu("Alocar equipamento", "menuEquipamentos", "alocarEquipamento");
+            $("#setor").focus();
+        </script>
+
         <script src="../../Resource/ajax/EquipamentoAJAX.js"></script>
-        <script src="../../Resource/ajax/AlocarEquipamentoAJAX.js"></script>
+        <script src="../../Resource/ajax/SetorAJAX.js"></script>
         <!-- <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script> -->
 
         <script>
-            CarregarTipos();
-            CarregarModelos();
+            ConsultarSetor();
             ListarEquipamentos();
             // $(document).ready(function () {
             //     $("#tipo").editableSelect();
             //     $("#modelo").editableSelect();
             // });
         </script>
-        
+
     </div>
     <!-- ./wrapper -->
 

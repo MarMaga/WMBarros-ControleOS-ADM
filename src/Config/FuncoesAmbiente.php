@@ -17,7 +17,9 @@ const CADASTRAR_SETOR = 'CadastrarSetor';
 const ALTERAR_SETOR = 'AlterarSetor';
 const EXCLUIR_SETOR = 'ExcluirSetor';
 
-const INSERIR_ALOCACAO = 'InserirAlocacao';
-const ALTERAR_ALOCACAO = 'AlterarAlocacao';
+const ALOCAR_EQUIPAMENTO = 'AlocarEquipamento';
+const DESALOCAR_EQUIPAMENTO = 'DesalocarEquipamento';
+
+const DESALOCAR = 'DESALOCAR';
 
 ?>

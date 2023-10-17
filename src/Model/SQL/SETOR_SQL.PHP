@@ -65,6 +65,27 @@ class SETOR_SQL
         return $sql;
     }
 
+    public static function CONSULTAR_SETORES_COM_EQUIPAMENTOS(): string
+    {
+        $sql = 'SELECT st.nome_setor,
+                       al.setor_id,
+                       (SELECT count(setor_id)
+                          FROM tb_alocacao as al
+						 WHERE st.id = al.setor_id
+                           AND situacao = 1) as quantidade
+                  FROM tb_setor as st
+            INNER JOIN tb_alocacao as al
+                    ON st.id = al.setor_id
+                 WHERE st.id
+                    IN (SELECT setor_id
+                          FROM tb_alocacao
+                         WHERE situacao = ?)
+              GROUP BY al.setor_id
+              ORDER BY st.nome_setor';
+
+        return $sql;
+    }
+
     public static function ALTERAR_SETOR(): string
     {
         $sql = 'UPDATE tb_setor 

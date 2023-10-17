@@ -32,6 +32,11 @@ class SetorCTRL
         return $this->modSetor->ConsultarSetorMODEL();
     }
 
+    public function ConsultarSetoresComEquipamentosCTRL(): int|array
+    {
+        return $this->modSetor->ConsultarSetoresComEquipamentosMODEL();
+    }
+
     public function FiltrarSetorCTRL(SetorVO $voSetor, string $checarCadastro): int|array
     {
         return $this->modSetor->FiltrarSetorMODEL($voSetor, $checarCadastro);

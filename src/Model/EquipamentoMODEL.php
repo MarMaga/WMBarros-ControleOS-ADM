@@ -4,7 +4,9 @@ namespace Src\Model;
 
 use Exception;
 use Src\Model\Conexao;
+use Src\Model\SQL\ALOCACAO_SQL;
 use Src\Model\SQL\EQUIPAMENTO_SQL;
+use Src\VO\AlocarVO;
 use Src\VO\EquipamentoVO;
 
 class EquipamentoMODEL extends Conexao
@@ -116,12 +118,18 @@ class EquipamentoMODEL extends Conexao
 
         $i = 1;
         $sql->bindValue($i++, $situacao);
+
         if ($idTipo != '' && $idModelo != '') {
+
             $sql->bindValue($i++, $idTipo);
             $sql->bindValue($i++, $idModelo);
+
         } else if ($idTipo == '' && $idModelo != '') {
+
             $sql->bindValue($i++, $idModelo);
+
         } else if ($idTipo != '' && $idModelo == '') {
+            
             $sql->bindValue($i++, $idTipo);
         }
 
@@ -152,23 +160,65 @@ class EquipamentoMODEL extends Conexao
 
     }
 
-    public function ListarEquipamentoAlocacaoMODEL($idTipo, $idModelo): array
+    public function SelecionarEquipamentosNaoAlocadosMODEL(int $sit_equipamento, int $sit_alocacao): array|null
     {
-        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::LISTAR_EQUIPAMENTO_ALOCACAO($idTipo, $idModelo));
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::LISTAR_EQUIPAMENTO_ALOCACAO());
 
         $i = 1;
-        if ($idTipo != '' && $idModelo != '') {
-            $sql->bindValue($i++, $idTipo);
-            $sql->bindValue($i++, $idModelo);
-        } else if ($idTipo == '' && $idModelo != '') {
-            $sql->bindValue($i++, $idModelo);
-        } else if ($idTipo != '' && $idModelo == '') {
-            $sql->bindValue($i++, $idTipo);
-        }
-        
+        $sql->bindValue($i++, $sit_equipamento);
+        $sql->bindValue($i++, $sit_alocacao);
+
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function FiltrarEquipamentosPorSetorMODEL(int $idSetor, int $sit_alocado): array|null
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::FILTRAR_EQUIPAMENTOS_POR_SETOR());
+
+        $i = 1;
+        $sql->bindValue($i++, $idSetor);
+        $sql->bindValue($i++, $sit_alocado);
+
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function AlocarEquipamentoMODEL(AlocarVO $voAloc): int
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::INSERIR_ALOCACAO());
+
+        $i = 1;
+        $sql->bindValue($i++, $voAloc->getIdEquipamento());
+        $sql->bindValue($i++, $voAloc->getIdSetor());
+        $sql->bindValue($i++, $voAloc->getSituacao());
+        $sql->bindValue($i++, $voAloc->getDataAlocacao());
+
+        try {
+            $sql->execute();
+            return 1;
+        } catch (Exception $ex) {
+            $voAloc->setErroTecnico($ex->getMessage());
+            parent::GravarErroLog($voAloc);
+            return -1;
+        }
+    }
+
+    public function DesalocarEquipamentoMODEL(AlocarVO $voAloc): int
+    {
+        $sql = $this->conexao->prepare(EQUIPAMENTO_SQL::DESALOCAR_EQUIPAMENTO());
+
+        $i = 1;
+        $sql->bindValue($i++, $voAloc->getSituacao());
+        $sql->bindValue($i++, $voAloc->getDataRemocao());
+        $sql->bindValue($i++, $voAloc->getId());
+
+        try {
+            $sql->execute();
+            return 1;
+        } catch (Exception $ex) {
+            return -1;
+        }
+    }
 }
 ?>
