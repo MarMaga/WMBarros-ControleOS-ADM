@@ -33,33 +33,68 @@ class EQUIPAMENTO_SQL
 
     public static function FILTRAR_EQUIPAMENTO($idTipo, $idModelo)
     {
-        $sql = 'SELECT eq.id as equipamento_id,
-                       ident_equipamento,
-                       desc_equipamento,
-                       situacao,
-                       data_descarte,
-                       motivo_descarte,
-                       tipo_equipamento,
-                       nome_modelo,
+        // $sql = 'SELECT eq.id as equipamento_id,
+        //                ident_equipamento,
+        //                desc_equipamento,
+        //                situacao,
+        //                data_descarte,
+        //                motivo_descarte,
+        //                tipo_equipamento,
+        //                nome_modelo,
+        //                (SELECT count(*)
+        //                   FROM tb_alocacao as al
+        //                  WHERE al.equipamento_id = eq.id
+        //                    AND al.situacao != ?) as esta_alocado
+        //           FROM tb_equipamento as eq
+        //     INNER JOIN tb_tipoequipamento as ti
+        //             ON eq.tipoequipamento_id = ti.id
+        //     INNER JOIN tb_modelo as mo
+        //             ON eq.modelo_id = mo.id';
+
+        $sql = 'SELECT eq.id as equipamento_id, 
+                       ident_equipamento, 
+                       eq.data_descarte, 
+                       eq.motivo_descarte, 
+                       eq.situacao as ativoInativo,
+                       ti.tipo_equipamento,
+                       mo.nome_modelo,
+                       al.id as alocacao_id, 
+                       al.data_alocacao, 
+                       al.data_remocao, 
+                       al.situacao as sit_alocacao, 
+                       al.setor_id,
                        st.nome_setor
-                       (SELECT count(*)
-                          FROM tb_alocacao as al
-                         WHERE al.equipamento_id = eq.id
-                           AND al.situacao != ?) as esta_alocado
                   FROM tb_equipamento as eq
+             LEFT JOIN tb_alocacao as al
+                    ON eq.id = al.equipamento_id
             INNER JOIN tb_tipoequipamento as ti
                     ON eq.tipoequipamento_id = ti.id
             INNER JOIN tb_modelo as mo
                     ON eq.modelo_id = mo.id
-            INNER JOIN tb_setor as st
-                    ON al.setor_id = st.id';
+             LEFT JOIN tb_setor as st
+                    ON al.setor_id = st.id
+                 WHERE (al.equipamento_id, al.id) 
+                    IN (SELECT equipamento_id, 
+                               MAX(id) 
+                          FROM tb_alocacao 
+                      GROUP BY equipamento_id)
+                   AND eq.situacao != 0';
 
-        if ($idTipo != '' && $idModelo != '') {
-            $sql .= ' WHERE eq.tipoequipamento_id = ? AND eq.modelo_id = ?';
+        if ($idTipo == '' && $idModelo == '') {
+            $sql .= 'OR eq.id 
+                        NOT IN 
+                        (SELECT equipamento_id 
+                           FROM tb_alocacao)
+                     ORDER BY eq.ident_equipamento';
+        } else if ($idTipo != '' && $idModelo != '') {
+            $sql .= ' WHERE eq.tipoequipamento_id = ? AND eq.modelo_id = ?
+                      ORDER BY eq.ident_equipamento';
         } else if ($idTipo == '' && $idModelo != '') {
-            $sql .= ' WHERE eq.modelo_id = ?';
+            $sql .= ' WHERE eq.modelo_id = ?
+                      ORDER BY eq.ident_equipamento';
         } else if ($idTipo != '' && $idModelo == '') {
-            $sql .= ' WHERE eq.tipoequipamento_id = ?';
+            $sql .= ' WHERE eq.tipoequipamento_id = ?
+                      ORDER BY eq.ident_equipamento';
         }
 
         return $sql;
