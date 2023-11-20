@@ -165,7 +165,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                             <tr>
                                 <td>
                                     <a href="#"
-                                        onclick="CarregarExcluirDesalocar('<?= $equipamentos[$i]['alocacaoID'] ?>','<?= $equipSetor ?>')"
+                                        onclick="CarregarExcluir('<?= $equipamentos[$i]['alocacaoID'] ?>','<?= $equipSetor ?>')"
                                         class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalExcluir"
                                         style="width: 60px">Desalocar</a>
                                 </td>
@@ -250,7 +250,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
 
 } else if (isset($_POST['btn_excluir'])) {
 
-    if ($_POST['btn_excluir'] == DESALOCAR) {
+    if ($_POST['btn_excluir'] == 'DESALOCAR') {
 
         $alocacaoID = $_POST['equipamentoID'];
 
@@ -272,7 +272,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
         $ret = $ctrlEq->ExcluirEquipamentoCTRL($voEq);
     }
 
-    if ($_POST['btn_excluir'] == 'ajx' || $_POST['btn_excluir'] == DESALOCAR) {
+    if ($_POST['btn_excluir'] == 'ajx' || $_POST['btn_excluir'] == 'DESALOCAR') {
         echo $ret;
     }
 

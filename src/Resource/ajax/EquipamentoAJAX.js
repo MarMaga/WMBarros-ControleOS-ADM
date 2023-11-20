@@ -139,13 +139,7 @@ function FiltrarEquipamentosPorSetor(idSetor) {
 
 function Excluir() {
     let equipamentoID = $("#id_excluir").val();
-    // desalocar = '' quando o registro deve ser excluído
-    // desalocar = DESALOCAR quando o equipamento deve ser desalocado do setor
-    let desaloc = $("#desalocar").val();
-
-    if (desaloc == '')
-        desaloc = 'ajx';
-
+    
     $.ajax({
         beforeSend: function () {
             Load();
@@ -153,13 +147,13 @@ function Excluir() {
         type: 'post',
         url: BASE_URL_DATAVIEW('equipamentoDV'),
         data: {
-            btn_excluir: desaloc,
+            btn_excluir: $("#tela").val() == 'tela_excluir' ? 'ajx' : 'DESALOCAR',
             equipamentoID: equipamentoID
         },
         success: function (ret) {
             MostrarMensagem(ret);
 
-            if (desaloc == 'DESALOCAR') {
+            if ($("#tela").val() == 'tela_desalocar') {
 
                 ConsultarSetoresComEquipamentos();
                 $("#divResultado").hide();

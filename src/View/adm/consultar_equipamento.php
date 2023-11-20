@@ -42,6 +42,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                     </div>
                     <div class="card-body">
                         <form id="formConsEq" method="post" action="consultar_equipamento.php">
+                            <input type="hidden" value="tela_excluir" id="tela">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Tipo</label>

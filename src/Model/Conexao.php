@@ -91,7 +91,7 @@ class Conexao extends LogErroVO
         $email = new MailSender();
 
         // envia o e-mail
-        $email->EnviarEmail($msg);
+        // $email->EnviarEmail($msg);
     }
 
     public static function retornarConexao()

@@ -14,3 +14,6 @@
 <script src="../../Resource/js/funcoes.js"></script>
 <!-- Modais -->
 <script src="../../Resource/js/carregar_modal.js"></script>
+<!-- Máscaras -->
+<script src="../../Template/mask/jquery.mask.min.js"></script>
+<script src="../../Template/mask/mask.js"></script>

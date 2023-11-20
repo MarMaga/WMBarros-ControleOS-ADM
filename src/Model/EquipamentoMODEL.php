@@ -4,7 +4,6 @@ namespace Src\Model;
 
 use Exception;
 use Src\Model\Conexao;
-use Src\Model\SQL\ALOCACAO_SQL;
 use Src\Model\SQL\EQUIPAMENTO_SQL;
 use Src\VO\AlocarVO;
 use Src\VO\EquipamentoVO;

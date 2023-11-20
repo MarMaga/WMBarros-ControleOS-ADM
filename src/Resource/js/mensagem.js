@@ -1,6 +1,18 @@
 function MostrarMensagem(ret) {
 
-    if (ret == -4) {
+    if (ret == -19231) {
+        // número aleatório apenas para facilitar a inclusão de novos números abaixo
+    } else if (ret == -9) {
+        toastr.error('E-mail já cadastrado');
+    } else if (ret == -8) {
+        toastr.warning('E-mail inválido');
+    } else if (ret == -7) {
+        toastr.error('CPF inválido');
+    } else if (ret == -6) {
+        toastr.warning('Formato de CEP inválido');
+    } else if (ret == -5) {
+        toastr.warning('CEP não encontrado');
+    } else if (ret == -4) {
         toastr.warning('Registro já cadastrado com outra descrição');
     } else if (ret == -3) {
         toastr.warning('Registro já cadastrado');

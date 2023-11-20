@@ -261,6 +261,16 @@ class Util
         print_r($array);
         echo '</pre>';
     }
+
+    public static function CriptogravarSenha($senha): string
+    {
+        return password_hash($senha, PASSWORD_DEFAULT);
+    }
+
+    public static function VerificarSenha($senha_digitada, $senha_hash): bool
+    {
+        return password_verify($senha_digitada, $senha_hash);
+    }
 }
 
 ?>

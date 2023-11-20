@@ -43,6 +43,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/EquipamentoDV.php';
                     </div>
                     <div class="card-body">
                         <form id="formDesaloc" method="post" action="desalocar_equipamento.php">
+                            <input type="hidden" value="tela_desalocar" id="tela">
                             <input type="hidden" id="renderizar" value="OPTION">
                             <div class="form-group">
                                 <label>Setor</label>

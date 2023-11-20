@@ -3,9 +3,9 @@
 namespace Src\VO;
 
 use Src\_Public\Util;
-use Src\VO\LogErroVO;
+use Src\VO\EnderecoVO;
 
-class UsuarioVO extends LogErroVO
+class UsuarioVO extends EnderecoVO
 {
 
     private $id;

@@ -166,7 +166,7 @@ function Excluir() {
     $.ajax({
         beforeSend: function () {
             Load();
-        },
+        },  
         type: 'post',
         url: BASE_URL_DATAVIEW('SetorDV'),
         data: {
