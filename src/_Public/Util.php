@@ -34,6 +34,13 @@ class Util
         return date('Y-m-d H:i');
     }
 
+    public static function TirarCaracteresEspeciais($palavra)
+    {
+        $especiais = array(".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "/", "?", "[", "]", "{", "}", "'", "&", "´", "`", "~", "^", "$", " ", "-", ":", "|", "¬", "º", "ª", "§", "//", "\\", "<", ">");
+        $palavra = str_replace($especiais, "", trim($palavra));
+        return $palavra;
+    }
+
     public static function TratarDadosGeral($palavra)
     {
         $especiais = array(".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "-", "=", "§", "$", "|", "\\", ":", "/", "<", ">", "?", "{", "}", "[", "]", "&", "'", '"', "´", "`", "“", "”", ' ', "~", "^", "_");
@@ -254,6 +261,27 @@ class Util
         }
 
         return $situacao;
+    }
+
+    public static function MostrarTipoUsuario(int $tipo): string
+    {
+        $nome_tipo = '';
+
+        switch ($tipo) {
+            case USUARIO_ADM:
+                $nome_tipo = 'ADMINISTRADOR';
+                break;
+            
+            case USUARIO_FUNCIONARIO:
+                $nome_tipo = 'FUNCIONÁRIO';
+                break;
+
+            case USUARIO_TECNICO:
+                $nome_tipo = 'TÉCNICO';
+                break;
+        }
+
+        return $nome_tipo;
     }
 
     public static function MostrarDadosArray($array){

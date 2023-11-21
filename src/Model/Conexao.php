@@ -3,7 +3,7 @@
 namespace Src\Model;
 
 use Src\VO\LogErroVO;
-use Src\_Public\MailSender;
+// use Src\_Public\MailSender;
 
 // Configurações do Site
 define('HOST', 'localhost'); //IP
@@ -88,7 +88,7 @@ class Conexao extends LogErroVO
                 </html>';
 
         // cria o objeto para enviar o e-mail
-        $email = new MailSender();
+        // $email = new MailSender();
 
         // envia o e-mail
         // $email->EnviarEmail($msg);

@@ -24,6 +24,8 @@ function MostrarMensagem(ret) {
         toastr.warning('Preencher os campos obrigatórios');
     } else if (ret == 1) {
         toastr.success('Ação realizada com sucesso');
+    } else if (ret == 2) {
+        toastr.info('Nenhum resultado encontrado');
     }
 
     // switch (ret) {

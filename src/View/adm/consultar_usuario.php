@@ -44,13 +44,13 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
                         <form id="formConsUsu" method="post" action="consultar_usuario.php">
                             <div class="form-group">
                                 <label>Pesquisar por Nome</label>
-                                <input class="form-control obg" name="nome" id="nome" placeholder="Digite aqui...">
+                                <input class="form-control obg" id="nome_filtro" onkeyup="FiltrarUsuario()"
+                                    placeholder="Digite aqui...">
                             </div>
-                            <button onclick="return NotificarCampos('formConsUsu')" class="btn btn-success" name="btn_buscar">Buscar</button>
                         </form>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="divResult" style="display: none">
                     <div class="card-header">
                         <h3 class="card-title">Usuários cadastrados</h3>
                     </div>
@@ -60,39 +60,11 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Altere ou exclua os registros</h3>
-
-                                        <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 150px;">
-                                                <input type="text" name="table_search" class="form-control float-right"
-                                                    placeholder="Pesquise por...">
-
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-default"><i
-                                                            class="fas fa-search"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ação</th>
-                                                    <th>Nome</th>
-                                                    <th>Setor</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-xs">Alterar</a>
-                                                        <a href="#" class="btn btn-danger btn-xs">Excluir</a>
-                                                    </td>
-                                                    <td>...</td>
-                                                    <td>...</td>
-                                                </tr>
-                                            </tbody>
+                                        <table class="table table-hover" id="tableResult">
+
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
@@ -111,6 +83,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
 
         <?php include_once PATH . 'Template/_includes/_footer.php'; ?>
 
+        <script src="../../Resource/ajax/UsuarioAJAX.js"></script>
     </div>
     <!-- ./wrapper -->
 

@@ -1,5 +1,5 @@
 function verificarEmailDuplicado(email) {
-    
+
     if (validarEmail(email)) {
         $.ajax({
             beforeSend: function () {
@@ -25,18 +25,18 @@ function verificarEmailDuplicado(email) {
     }
 }
 
-function CadastrarUsuario(formID){
-    if(NotificarCampos(formID)){
-        
+function CadastrarUsuario(formID) {
+    if (NotificarCampos(formID)) {
+
         let tipo = $('#tipo').val();
 
         $.ajax({
-            beforeSend: function(){
+            beforeSend: function () {
                 Load();
             },
             type: 'post',
             url: BASE_URL_DATAVIEW('UsuarioDV'),
-            data:{
+            data: {
                 btn_cadastrar: 'ajx',
                 tipo: tipo,
                 nome_empresa: tipo == 3 ? $('#empresa').val() : '',
@@ -51,15 +51,59 @@ function CadastrarUsuario(formID){
                 cidade: $('#cidade').val(),
                 estado: $('#estado').val()
             },
-            success: function(ret) {
+            success: function (ret) {
+                alert(ret);
                 if (ret == 1) {
                     CarregarCamposUsuario(0);
                 }
             },
-            complete: function() {
+            complete: function () {
                 RemoverLoad();
                 MostrarMensagem(1);
             }
         })
     }
+}
+
+function FiltrarUsuario() {
+
+    let nome = document.getElementById("nome_filtro").value;
+
+    if (nome != "") {
+        if(nome.length > 2){
+            $.ajax({
+                beforeSend: function () {
+                    Load();
+                },
+                type: "post",
+                url: BASE_URL_DATAVIEW("UsuarioDV"),
+                data: {
+                    filtrar_usuario: "ajx",
+                    nome_filtro: nome
+                },
+                success: function (dados) {
+                    if (dados == 0) {
+                        $("#tableResult").html("");
+                        $("#divResult").hide();
+                        MostrarMensagem(2);
+                    } else {
+                        $("#divResult").show();
+                        $("#tableResult").html(dados);
+                        $("#toast-container").hide();
+                    }
+                },
+                complete: function () {
+                    RemoverLoad();
+                }
+            })
+        }
+    } else {
+        $("#tableResult").html("");
+        $("#divResult").hide();
+    }
+}
+
+function AlterarStatusUsuario(id, status){
+
+    
 }

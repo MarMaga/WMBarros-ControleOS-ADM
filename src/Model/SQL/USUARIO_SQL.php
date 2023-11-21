@@ -72,4 +72,22 @@ class USUARIO_SQL
                  WHERE sigla_estado = ?';
         return $sql;
     }
+
+    public static function FILTRAR_USUARIO(): string
+    {
+        $sql = 'SELECT id, nome_usuario, tipo_usuario, status_usuario
+                  FROM tb_usuario
+                 WHERE nome_usuario LIKE ?';
+        
+        return $sql;
+    }
+
+    public static function ALTERAR_STATUS(): string
+    {
+        $sql = 'UPDATE tb_usuario 
+                   SET situacao_usuario = ? 
+                 WHERE id = ?';
+
+        return $sql;
+    }
 }

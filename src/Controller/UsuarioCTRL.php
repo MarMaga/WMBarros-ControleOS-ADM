@@ -51,4 +51,15 @@ class UsuarioCTRL
         return $this->model->CadastrarUsuarioMODEL($vo);
     }
 
+    public function FiltrarUsuarioCTRL(string $nome): array
+    {
+        return $this->model->FiltrarUsuarioMODEL($nome);
+    }
+
+    public function AlterarStatusCTRL(UsuarioVO $vo): int
+    {
+        $vo->setFuncaoErro(ALTERAR_STATUS_USUARIO);
+        $vo->setStatus($vo->getStatus() == SITUACAO_ATIVO ? SITUACAO_INATIVO : SITUACAO_ATIVO);
+        return $this->model->AlterarStatusMODEL($vo);
+    }
 }

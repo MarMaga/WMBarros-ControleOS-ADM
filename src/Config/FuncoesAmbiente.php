@@ -1,6 +1,7 @@
 <?php
 const CADASTRAR_USUARIO = 'CadastrarUsuario';
 const ALTERAR_USUARIO = 'AlterarUsuario';
+const ALTERAR_STATUS_USUARIO = 'AlterarStatusUsuario';
 
 const CADASTRAR_TIPO_EQUIPAMENTO = 'CadastrarTipoEquipamento';
 const ALTERAR_TIPO_EQUIPAMENTO = 'AlterarTipoEquipamento';

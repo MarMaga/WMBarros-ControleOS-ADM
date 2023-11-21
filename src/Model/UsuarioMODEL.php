@@ -9,6 +9,7 @@ use Src\Model\SQL\USUARIO_SQL;
 use Src\VO\EnderecoVO;
 use Src\VO\TecnicoVO;
 use Src\VO\FuncionarioVO;
+
 class UsuarioMODEL extends Conexao
 {
     private $conexao;
@@ -30,39 +31,39 @@ class UsuarioMODEL extends Conexao
     public function CadastrarUsuarioMODEL($vo): int
     {
         $sql = $this->conexao->prepare(USUARIO_SQL::CADASTRAR_USUARIO());
-        $i=1;
-        $sql->bindValue($i++,$vo->getNome());
-        $sql->bindValue($i++,$vo->getTipo());
-        $sql->bindValue($i++,$vo->getEmail());
-        $sql->bindValue($i++,$vo->getCPF());
-        $sql->bindValue($i++,$vo->getSenha());
-        $sql->bindValue($i++,$vo->getStatus());
-        $sql->bindValue($i++,$vo->getTelefone());
+        $i = 1;
+        $sql->bindValue($i++, $vo->getNome());
+        $sql->bindValue($i++, $vo->getTipo());
+        $sql->bindValue($i++, $vo->getEmail());
+        $sql->bindValue($i++, $vo->getCPF());
+        $sql->bindValue($i++, $vo->getSenha());
+        $sql->bindValue($i++, $vo->getStatus());
+        $sql->bindValue($i++, $vo->getTelefone());
 
-        try{
+        try {
             $this->conexao->beginTransaction();
-            
+
             // cadastra na tb_usuario
             $sql->execute();
-            
+
             // recupera o id do usuário cadastrado
             $id_usuario = $this->conexao->lastInsertId();
 
             switch ($vo->getTipo()) {
                 case USUARIO_TECNICO:
                     $sql = $this->conexao->prepare(USUARIO_SQL::CADASTRAR_USUARIO_TECNICO());
-                    $i=1;
+                    $i = 1;
                     $sql->bindValue($i++, $id_usuario);
                     $sql->bindValue($i++, $vo->getNomeEmpresa());
                     // cadastra na tb_tecnico
                     $sql->execute();
                     break;
-                    
+
                 case USUARIO_FUNCIONARIO:
                     $sql = $this->conexao->prepare(USUARIO_SQL::CADASTRAR_USUARIO_FUNCIONARIO());
-                    $i=1;
-                    $sql->bindValue($i++,$id_usuario);
-                    $sql->bindValue($i++,$vo->getIdSetor());
+                    $i = 1;
+                    $sql->bindValue($i++, $id_usuario);
+                    $sql->bindValue($i++, $vo->getIdSetor());
                     // cadastra na tb_funcionario
                     $sql->execute();
                     break;
@@ -72,7 +73,7 @@ class UsuarioMODEL extends Conexao
 
             // PASSO 1 - verifica se a cidade daquele estado existe
             $sql = $this->conexao->prepare(USUARIO_SQL::VERIFICAR_CIDADE_CADASTRADA());
-            $i= 1;
+            $i = 1;
             $sql->bindValue($i++, $vo->getCidade());
             $sql->bindValue($i++, $vo->getEstado());
 
@@ -124,7 +125,7 @@ class UsuarioMODEL extends Conexao
             }
 
             // PASSO 3 - CADASTRA O ENDEREÇO
-            
+
             $sql = $this->conexao->prepare(USUARIO_SQL::CADASTRAR_ENDERECO());
             $i = 1;
             $sql->bindValue($i++, $vo->getRua());
@@ -139,8 +140,32 @@ class UsuarioMODEL extends Conexao
 
             return 1;
 
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             $this->conexao->rollBack();
+            $vo->setErroTecnico($ex->getMessage());
+            parent::GravarErroLog($vo);
+            return -1;
+        }
+    }
+
+    public function FiltrarUsuarioMODEL(string $nome): array
+    {
+        $sql = $this->conexao->prepare(USUARIO_SQL::FILTRAR_USUARIO());
+        $sql->bindValue(1, "%$nome%");
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function AlterarStatusMODEL(UsuarioVO $vo): int
+    {
+        $sql = $this->conexao->prepare(USUARIO_SQL::ALTERAR_STATUS());
+        $i = 1;
+        $sql->bindValue($i++, $vo->getStatus());
+        $sql->bindValue($i++, $vo->getId());
+        try{
+            $sql->execute();
+            return 1;
+        } catch (Exception $ex){
             $vo->setErroTecnico($ex->getMessage());
             parent::GravarErroLog($vo);
             return -1;
