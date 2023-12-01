@@ -89,7 +89,7 @@ function FiltrarUsuario() {
                     } else {
                         $("#divResult").show();
                         $("#tableResult").html(dados);
-                        $("#toast-container").hide();
+                        // $("#toast-container").hide();
                     }
                 },
                 complete: function () {
