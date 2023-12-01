@@ -51,7 +51,7 @@ if (isset($_POST['verificar_email_duplicado'])) {
 
     $ret = $ctrl->CadastrarUsuarioCTRL($vo);
     echo $ret;
-} else if ($_POST['filtrar_usuario']) {
+} else if (isset($_POST['filtrar_usuario'])) {
 
     $usuarios_encontrados = $ctrl->FiltrarUsuarioCTRL($_POST['nome_filtro']);
 
@@ -62,6 +62,7 @@ if (isset($_POST['verificar_email_duplicado'])) {
         <thead>
             <tr>
                 <th>Ação</th>
+                <th>Situação</th>
                 <th>Nome</th>
                 <th>Tipo</th>
             </tr>
@@ -71,7 +72,12 @@ if (isset($_POST['verificar_email_duplicado'])) {
             <tr>
                 <td>
                     <a href="#" class="btn btn-warning btn-xs">Alterar</a>
-                    <a href="#" class="btn btn-danger btn-xs">Excluir</a>
+                </td>
+                <td>
+                    <div class="custom-control custom-switch custom-switch-<?= $item['status_usuario'] == 0 ? 'off' : 'on' ?>-danger custom-switch-<?= $item['status_usuario'] == 0 ? 'on' : 'off' ?>-success">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch3" onclick="AlterarStatusUsuario('<?= $item['id'] ?>','<?= $item['status_usuario'] ?>')">
+                        <label class="custom-control-label" for="customSwitch3"><?= Util::MostrarSituacao($item['status_usuario']) ?></label>
+                    </div>
                 </td>
                 <td>
             <?= $item['nome_usuario'] ?>

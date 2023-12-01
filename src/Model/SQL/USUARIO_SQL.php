@@ -85,7 +85,7 @@ class USUARIO_SQL
     public static function ALTERAR_STATUS(): string
     {
         $sql = 'UPDATE tb_usuario 
-                   SET situacao_usuario = ? 
+                   SET status_usuario = ? 
                  WHERE id = ?';
 
         return $sql;

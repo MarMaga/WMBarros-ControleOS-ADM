@@ -70,7 +70,7 @@ function FiltrarUsuario() {
     let nome = document.getElementById("nome_filtro").value;
 
     if (nome != "") {
-        if(nome.length > 2){
+        if (nome.length > 2) {
             $.ajax({
                 beforeSend: function () {
                     Load();
@@ -103,7 +103,27 @@ function FiltrarUsuario() {
     }
 }
 
-function AlterarStatusUsuario(id, status){
+function AlterarStatusUsuario(id, status) {
 
-    
+    $.ajax({
+        beforeSend: function () {
+            Load();
+        },
+        type: 'post',
+        url: BASE_URL_DATAVIEW('UsuarioDV'),
+        data: {
+            alterar_status_usuario: 'ajx',
+            id_user: id,
+            status_user: status
+        },
+        success: function (ret) {
+            MostrarMensagem(ret);
+
+            if (ret == 1)
+                FiltrarUsuario();
+        },
+        complete: function () {
+            RemoverLoad();
+        }
+    })
 }

@@ -45,7 +45,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/ConsultarUsuarioDV.php';
                             <div class="form-group">
                                 <label>Pesquisar por Nome</label>
                                 <input class="form-control obg" id="nome_filtro" onkeyup="FiltrarUsuario()"
-                                    placeholder="Digite aqui...">
+                                    placeholder="Digite pelo menos 3 caracteres para pesquisar">
                             </div>
                         </form>
                     </div>
