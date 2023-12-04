@@ -62,4 +62,12 @@ class UsuarioCTRL
         $vo->setStatus($vo->getStatus() == SITUACAO_ATIVO ? SITUACAO_INATIVO : SITUACAO_ATIVO);
         return $this->model->AlterarStatusMODEL($vo);
     }
+
+    public function DetalharUsuarioCTRL(int $id): array|int
+    {
+        if($id == '' || $id <= 0)
+            return 0;
+
+        return $this->model->DetalharUsuarioMODEL($id);
+    }
 }

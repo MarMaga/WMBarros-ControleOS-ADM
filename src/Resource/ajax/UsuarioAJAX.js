@@ -52,7 +52,6 @@ function CadastrarUsuario(formID) {
                 estado: $('#estado').val()
             },
             success: function (ret) {
-                alert(ret);
                 if (ret == 1) {
                     CarregarCamposUsuario(0);
                 }
@@ -62,6 +61,67 @@ function CadastrarUsuario(formID) {
                 MostrarMensagem(1);
             }
         })
+    }
+}
+
+function AlterarUsuario(formID) {
+    if (NotificarCampos(formID)) {
+
+        let tipo = $("#tipo").val();
+        let nenhumDadoAlterado = true;
+
+        if ($("#nome").val().trim() != $("#nomeOriginal").val() ||
+            $("#telefone").val().replace("(", "").replace(")", "").replace(" ", "").replace("-", "") != $("#telefoneOriginal").val() ||
+            $("#email").val().trim() != $("#emailOriginal").val() ||
+            $("#cpf").val().replace(".", "").replace(".", "").replace("-", "") != $("#cpfOriginal").val() ||
+            $("#cep").val().replace("-", "") != $("#cepOriginal").val() ||
+            $("#rua").val().trim() != $("#ruaOriginal").val() ||
+            $("#bairro").val().trim() != $("#bairroOriginal").val() ||
+            $("#estado").val().trim() != $("#estadoOriginal").val() ||
+            $("#cidade").val().trim() != $("#cidadeOriginal").val())
+            nenhumDadoAlterado = false;
+
+        if (tipo == 2 && $("#idSetor").val() != $("#idSetorOriginal").val() && nenhumDadoAlterado)
+            nenhumDadoAlterado = false;
+
+        if (tipo == 3 && $("#nome_empresa").val().trim() != $("#nomeEmpresaOriginal").val() && nenhumDadoAlterado)
+            nenhumDadoAlterado = false;
+
+        if (nenhumDadoAlterado) {
+            MostrarMensagem(-2);
+        } else {
+            $.ajax({
+                beforeSend: function () {
+                    Load();
+                },
+                type: 'post',
+                url: BASE_URL_DATAVIEW('UsuarioDV'),
+                data: {
+                    btn_alterar: 'ajx',
+                    tipo: tipo,
+                    nome_empresa: tipo == 3 ? $('#empresa').val() : '',
+                    setor: tipo == 2 ? $('#idSetor').val() : '',
+                    nome: $('#nome').val(),
+                    email: $('#email').val(),
+                    cpf: $('#cpf').val(),
+                    telefone: $('#telefone').val(),
+                    rua: $('#rua').val(),
+                    bairro: $('#bairro').val(),
+                    cep: $('#cep').val(),
+                    cidade: $('#cidade').val(),
+                    estado: $('#estado').val()
+                },
+                success: function (ret) {
+                    if (ret == 1) {
+                        CarregarCamposUsuario(0);
+                    }
+                },
+                complete: function () {
+                    RemoverLoad();
+                    MostrarMensagem(1);
+                }
+            })
+        }
     }
 }
 

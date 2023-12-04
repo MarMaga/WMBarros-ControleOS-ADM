@@ -87,7 +87,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                     </tr>
                 </thead>
                 <tbody>
-        <?php for ($i = 0; $i < count($equipamentos); $i++) { ?>
+                <?php for ($i = 0; $i < count($equipamentos); $i++) { ?>
                         <tr>
                             <td>
                                 <a href="equipamento.php?id=<?= $equipamentos[$i]['equipamento_id'] ?>"
@@ -142,7 +142,7 @@ if (isset($_POST['btn_gravar']) && $_POST['btn_gravar'] == 'cadastrar') {
                     <?php } ?>
                             </td>
                         </tr>
-        <?php } ?>
+                <?php } ?>
                 </tbody>
 
 <?php } else if (isset($_POST['filtrar_equipamentos_por_setor'])) {

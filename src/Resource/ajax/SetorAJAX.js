@@ -36,7 +36,7 @@ function ConsultarSetor() {
         type: "post",
         url: BASE_URL_DATAVIEW('SetorDV'),
         data: {
-            consultar_setor: $("#renderizar").val() == 'TABLE' ? 'TABLE' : 'OPTION'
+            consultar_setor: $("#renderizar").val() == 'TABLE' ? 'TABLE' : 'OPTION',
         },
         success: function (setores) {
             if ($("#renderizar").val() == 'TABLE') {
@@ -58,6 +58,27 @@ function ConsultarSetor() {
             } else if ($("#renderizar").val() == 'OPTION') {
                 $('#idSetor').html(setores);
             }
+        },
+        complete: function () {
+            RemoverLoad();
+        }
+    })
+}
+
+function ConsultarSetorAlterarUsuario(idSetor) {
+
+    $.ajax({
+        beforeSend: function () {
+            Load();
+        },
+        type: "post",
+        url: BASE_URL_DATAVIEW('SetorDV'),
+        data: {
+            consultar_setor_alterar_usuario: 'OPTION',
+            idSetor: idSetor
+        },
+        success: function (setores) {
+            $("#idSetor").html(setores);
         },
         complete: function () {
             RemoverLoad();
@@ -166,7 +187,7 @@ function Excluir() {
     $.ajax({
         beforeSend: function () {
             Load();
-        },  
+        },
         type: 'post',
         url: BASE_URL_DATAVIEW('SetorDV'),
         data: {

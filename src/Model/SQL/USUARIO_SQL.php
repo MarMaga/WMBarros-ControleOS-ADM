@@ -90,4 +90,58 @@ class USUARIO_SQL
 
         return $sql;
     }
+
+    public static function DETALHAR_USUARIO(): string
+    {
+        $sql = 'SELECT usu.nome_usuario,
+                       usu.tipo_usuario,
+                       usu.email_usuario,
+                       usu.cpf_usuario,
+                       usu.senha_usuario,
+                       usu.status_usuario,
+                       usu.tel_usuario,
+                       en.rua,
+                       en.bairro,
+                       en.cep,
+                       en.id as id_endereco,
+                       en.id_cidade,
+                       cid.nome_cidade,
+                       est.sigla_estado,
+                       tec.nome_empresa,
+                       fun.id_setor
+                  FROM tb_usuario as usu
+             LEFT JOIN tb_funcionario as fun
+                    ON usu.id = fun.id_usuario
+             LEFT JOIN tb_tecnico as tec
+                    ON usu.id = tec.id_usuario
+            INNER JOIN tb_endereco as en
+                    ON usu.id = en.id_usuario
+            INNER JOIN tb_cidade as cid
+                    ON en.id_cidade = cid.id
+            INNER JOIN tb_estado as est
+                    ON cid.id_estado = est.id
+                 WHERE usu.id = ?';
+
+        return $sql;
+    }
+
+    public static function ALTERAR_USUARIO_TECNICO(): string
+    {
+        $sql = 'UPDATE tb_tecnico
+                   SET nome_empresa = ?
+                 WHERE id = ?';
+
+        return $sql;
+    }
+
+    public static function ALTERAR_USUARIO_FUNCIONARIO(): string
+    {
+        $sql = 'UPDATE tb_funcionario
+                   SET setor_id = ?
+                 WHERE id = ?';
+
+        return $sql;
+    }
+
+
 }

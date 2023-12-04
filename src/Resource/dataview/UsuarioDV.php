@@ -51,6 +51,45 @@ if (isset($_POST['verificar_email_duplicado'])) {
 
     $ret = $ctrl->CadastrarUsuarioCTRL($vo);
     echo $ret;
+
+} else if (isset($_POST['btn_alterar'])) {
+
+    switch ($_POST['tipo']) {
+
+        case USUARIO_ADM:
+            $vo = new UsuarioVO;
+            break;
+
+        case USUARIO_TECNICO:
+            $vo = new TecnicoVO;
+
+            $vo->setNomeEmpresa($_POST['nome_empresa']);
+            break;
+
+        case USUARIO_FUNCIONARIO:
+            $vo = new FuncionarioVO;
+
+            $vo->setIdSetor($_POST['setor']);
+            break;
+    }
+
+    // SETA AS PROPRIEDADES DO USUÁRIO
+    $vo->setNome($_POST['nome']);
+    $vo->setTipo($_POST['tipo']);
+    $vo->setEmail($_POST['email']);
+    $vo->setCPF($_POST['cpf']);
+    $vo->setTelefone($_POST['telefone']);
+
+    // SETA AS PROPRIEDADES DO ENDEREÇO
+    $vo->setRua($_POST['rua']);
+    $vo->setBairro($_POST['bairro']);
+    $vo->setCep($_POST['cep']);
+    $vo->setCidade($_POST['cidade']);
+    $vo->setEstado($_POST['estado']);
+
+    $ret = $ctrl->CadastrarUsuarioCTRL($vo);
+    echo $ret;
+    
 } else if (isset($_POST['filtrar_usuario'])) {
 
     $usuarios_encontrados = $ctrl->FiltrarUsuarioCTRL($_POST['nome_filtro']);
@@ -71,12 +110,12 @@ if (isset($_POST['verificar_email_duplicado'])) {
         <?php foreach ($usuarios_encontrados as $item) { ?>
             <tr>
                 <td>
-                    <a href="#" class="btn btn-warning btn-xs">Alterar</a>
+                    <a href="alterar_usuario.php?cod=<?= $item['id'] ?>" class="btn btn-warning btn-xs">Alterar</a>
                 </td>
                 <td>
                     <div class="custom-control custom-switch custom-switch-<?= $item['status_usuario'] == 0 ? 'off' : 'on' ?>-danger custom-switch-<?= $item['status_usuario'] == 0 ? 'on' : 'off' ?>-success">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch3" onclick="AlterarStatusUsuario('<?= $item['id'] ?>','<?= $item['status_usuario'] ?>')">
-                        <label class="custom-control-label" for="customSwitch3"><?= Util::MostrarSituacao($item['status_usuario']) ?></label>
+                        <input type="checkbox" class="custom-control-input" id="customSwitch<?= $item['id'] ?>" onclick="AlterarStatusUsuario('<?= $item['id'] ?>','<?= $item['status_usuario'] ?>')">
+                        <label class="custom-control-label" for="customSwitch<?= $item['id'] ?>"><?= Util::MostrarSituacao($item['status_usuario']) ?></label>
                     </div>
                 </td>
                 <td>
@@ -97,4 +136,11 @@ if (isset($_POST['verificar_email_duplicado'])) {
     $vo->setStatus($_POST['status_user']);
 
     echo $ctrl->AlterarStatusCTRL($vo);
+
+} else if (isset($_GET['cod']) && is_numeric($_GET['cod'])){
+
+    $dados = $ctrl->DetalharUsuarioCTRL($_GET['cod']);
+
+    if (!is_array($dados) || empty($dados))
+        Util::ChamarPagina('consultar_usuario');    
 }

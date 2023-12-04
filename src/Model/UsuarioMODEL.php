@@ -171,4 +171,12 @@ class UsuarioMODEL extends Conexao
             return -1;
         }
     }
+
+    public function DetalharUsuarioMODEL(string $id): array
+    {
+        $sql = $this->conexao->prepare(USUARIO_SQL::DETALHAR_USUARIO());
+        $sql->bindValue(1, $id);
+        $sql->execute();
+        return $sql->fetch(\PDO::FETCH_ASSOC);
+    }
 }

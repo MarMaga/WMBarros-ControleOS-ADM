@@ -117,10 +117,13 @@ if (isset($_POST['btn_filtrar'])) {
             echo 'NADA';
         }
     } else { ?>
+
         <option value="" selected="selected">Selecione</option>
         <?php
         foreach ($setores as $item) { ?>
-            <option value="<?= $item['id'] ?>"><?= $item['nome_setor'] ?></option>
+            <option value="<?= $item['id'] ?>">
+                <?= $item['nome_setor'] ?>
+            </option>
         <?php }
     }
 } elseif (isset($_POST['consultar_setores_com_equipamentos'])) {
@@ -131,11 +134,24 @@ if (isset($_POST['btn_filtrar'])) {
         <option value="" selected="selected">Selecione</option>
         <?php
         foreach ($setores as $item) { ?>
-            <option value="<?= $item['setor_id'] ?>"><?= $item['nome_setor'] . ' - ' . $item['quantidade'] ?></option>
+            <option value="<?= $item['setor_id'] ?>">
+                <?= $item['nome_setor'] . ' - ' . $item['quantidade'] ?>
+            </option>
         <?php }
     } else {
         echo 'NADA';
     }
+
+} elseif (isset($_POST['consultar_setor_alterar_usuario'])) {
+
+    $setores = $ctrlSetorEq->ConsultarSetorCTRL();
+    $idSetorDoUsuario = $_POST['idSetor'];
+
+    foreach ($setores as $item) { ?>
+        <option <?= $idSetorDoUsuario == $item['id'] ? 'selected="selected"' : '' ?>
+        value="<?= $item['id'] ?>"><?= $item['nome_setor'] ?>
+        </option>
+    <?php }
 }
 
 ?>
