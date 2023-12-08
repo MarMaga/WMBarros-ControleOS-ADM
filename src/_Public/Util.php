@@ -290,7 +290,7 @@ class Util
         echo '</pre>';
     }
 
-    public static function CriptogravarSenha($senha): string
+    public static function CriptografarSenha($senha): string
     {
         return password_hash($senha, PASSWORD_DEFAULT);
     }

@@ -148,6 +148,121 @@ class UsuarioMODEL extends Conexao
         }
     }
 
+    public function AlterarUsuarioMODEL($vo): int
+    {
+        $sql = $this->conexao->prepare(USUARIO_SQL::ALTERAR_USUARIO());
+        $i = 1;
+        $sql->bindValue($i++, $vo->getNome());
+        $sql->bindValue($i++, $vo->getEmail());
+        $sql->bindValue($i++, $vo->getCPF());
+        $sql->bindValue($i++, $vo->getTelefone());
+        $sql->bindValue($i++, $vo->getId());
+
+        try {
+            $this->conexao->beginTransaction();
+
+            // altera a tb_usuario
+            $sql->execute();
+
+            switch ($vo->getTipo()) {
+                case USUARIO_TECNICO:
+                    $sql = $this->conexao->prepare(USUARIO_SQL::ALTERAR_USUARIO_TECNICO());
+                    $i = 1;
+                    $sql->bindValue($i++, $vo->getNomeEmpresa());
+                    $sql->bindValue($i++, $vo->getId());
+                    // altera a tb_tecnico
+                    $sql->execute();
+                    break;
+
+                case USUARIO_FUNCIONARIO:
+                    $sql = $this->conexao->prepare(USUARIO_SQL::ALTERAR_USUARIO_FUNCIONARIO());
+                    $i = 1;
+                    $sql->bindValue($i++, $vo->getIdSetor());
+                    $sql->bindValue($i++, $vo->getId());
+                    // altera a tb_funcionario
+                    $sql->execute();
+                    break;
+            }
+
+            // PROCESSO QUE ALTERA O ENDEREÇO
+
+            // PASSO 1 - verifica se a cidade daquele estado existe
+            $sql = $this->conexao->prepare(USUARIO_SQL::VERIFICAR_CIDADE_CADASTRADA());
+            $i = 1;
+            $sql->bindValue($i++, $vo->getCidade());
+            $sql->bindValue($i++, $vo->getEstado());
+
+            $sql->execute();
+
+            $tem_cidade = $sql->fetchAll(\PDO::FETCH_ASSOC);
+
+            $id_cidade = 0;
+
+            if (count($tem_cidade) > 0) {
+
+                $id_cidade = $tem_cidade[0]['id_cidade'];
+
+            } else {
+
+                $id_estado = 0;
+
+                // PASSO 2 - verifica se o estado existe
+                $sql = $this->conexao->prepare(USUARIO_SQL::VERIFICAR_ESTADO_CADASTRADO());
+                $sql->bindValue(1, $vo->getEstado());
+
+                $sql->execute();
+
+                $tem_estado = $sql->fetchAll(\PDO::FETCH_ASSOC);
+
+                if (count($tem_estado) > 0) {
+
+                    $id_estado = $tem_estado[0]['id'];
+
+                } else {
+
+                    // CADASTRA O ESTADO
+                    $sql = $this->conexao->prepare(USUARIO_SQL::CADASTRAR_ESTADO());
+                    $sql->bindValue(1, $vo->getEstado());
+
+                    $sql->execute();
+
+                    $id_estado = $this->conexao->lastInsertId();
+
+                }
+
+                $sql = $this->conexao->prepare(USUARIO_SQL::CADASTRAR_CIDADE());
+                $sql->bindValue(1, $vo->getCidade());
+                $sql->bindValue(2, $id_estado);
+
+                $sql->execute();
+
+                $id_cidade = $this->conexao->lastInsertId();
+            }
+
+            // PASSO 3 - ATUALIZA O ENDEREÇO
+
+            $sql = $this->conexao->prepare(USUARIO_SQL::ALTERAR_ENDERECO());
+            $i = 1;
+            $sql->bindValue($i++, $vo->getRua());
+            $sql->bindValue($i++, $vo->getBairro());
+            $sql->bindValue($i++, $vo->getCep());
+            $sql->bindValue($i++, $id_cidade);
+            $sql->bindValue($i++, $vo->getEnderecoId());
+
+            $sql->execute();
+
+            $this->conexao->commit();
+
+            return 1;
+
+        } catch (Exception $ex) {
+            $this->conexao->rollBack();
+            $vo->setErroTecnico($ex->getMessage());
+            parent::GravarErroLog($vo);
+            return -1;
+        }
+    }
+
     public function FiltrarUsuarioMODEL(string $nome): array
     {
         $sql = $this->conexao->prepare(USUARIO_SQL::FILTRAR_USUARIO());

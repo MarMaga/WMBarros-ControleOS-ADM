@@ -43,9 +43,33 @@ class UsuarioCTRL
         // setar o status
         $vo->setStatus(SITUACAO_ATIVO);
         // setando a senha criptografada
-        $vo->setSenha(Util::CriptogravarSenha($vo->getCPF()));
+        $vo->setSenha(Util::CriptografarSenha($vo->getCPF()));
         // setando as propriedades de grava erro
         $vo->setFuncaoErro(CADASTRAR_USUARIO);
+        $vo->setCodLogado(Util::CodigoLogado());
+
+        return $this->model->CadastrarUsuarioMODEL($vo);
+    }
+
+    public function AlterarUsuarioCTRL($vo): int
+    {
+        // VALIDA AS PROPRIEDADES COMUNS ENTRE TODOS OS TIPOS DE USUÁRIO
+
+        if (empty($vo->getNome()) || empty($vo->getEmail()) ||
+            empty($vo->getCPF()) || empty($vo->getTelefone()) || 
+            empty($vo->getRua()) || empty($vo->getBairro()) ||
+            empty($vo->getCep()) || empty($vo->getCidade()) ||
+            empty($vo->getEstado())
+        )
+            return 0;
+
+        // VALIDA AS PROPRIEDADES ESPECÍFICAS DOS USUÁRIOS
+        // NÃO PRECISA VALIDAR O SETOR PORQUE ELE SEMPRE ESTÁ PRESENTE (NÃO EXISTE A OPTION 'SELECIONAR')
+        if ($vo->getTipo() == USUARIO_TECNICO && empty($vo->getNomeEmpresa()))
+            return 0;
+
+        // setando as propriedades de grava erro
+        $vo->setFuncaoErro(ALTERAR_USUARIO);
         $vo->setCodLogado(Util::CodigoLogado());
 
         return $this->model->CadastrarUsuarioMODEL($vo);

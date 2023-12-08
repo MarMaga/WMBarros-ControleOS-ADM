@@ -67,29 +67,14 @@ function CadastrarUsuario(formID) {
 function AlterarUsuario(formID) {
     if (NotificarCampos(formID)) {
 
-        let tipo = $("#tipo").val();
-        let nenhumDadoAlterado = true;
+        let tipo_usuario = $("#tipo_usuario").val();
+        let id_usuario = $("#id_usuario").val();
+        let id_endereco = $("#id_endereco").val();
 
-        if ($("#nome").val().trim() != $("#nomeOriginal").val() ||
-            $("#telefone").val().replace("(", "").replace(")", "").replace(" ", "").replace("-", "") != $("#telefoneOriginal").val() ||
-            $("#email").val().trim() != $("#emailOriginal").val() ||
-            $("#cpf").val().replace(".", "").replace(".", "").replace("-", "") != $("#cpfOriginal").val() ||
-            $("#cep").val().replace("-", "") != $("#cepOriginal").val() ||
-            $("#rua").val().trim() != $("#ruaOriginal").val() ||
-            $("#bairro").val().trim() != $("#bairroOriginal").val() ||
-            $("#estado").val().trim() != $("#estadoOriginal").val() ||
-            $("#cidade").val().trim() != $("#cidadeOriginal").val())
-            nenhumDadoAlterado = false;
-
-        if (tipo == 2 && $("#idSetor").val() != $("#idSetorOriginal").val() && nenhumDadoAlterado)
-            nenhumDadoAlterado = false;
-
-        if (tipo == 3 && $("#nome_empresa").val().trim() != $("#nomeEmpresaOriginal").val() && nenhumDadoAlterado)
-            nenhumDadoAlterado = false;
-
-        if (nenhumDadoAlterado) {
+        if (NenhumDadoUsuarioAlterado()) {
             MostrarMensagem(-2);
         } else {
+
             $.ajax({
                 beforeSend: function () {
                     Load();
@@ -98,30 +83,61 @@ function AlterarUsuario(formID) {
                 url: BASE_URL_DATAVIEW('UsuarioDV'),
                 data: {
                     btn_alterar: 'ajx',
-                    tipo: tipo,
+                    tipo_usuario: tipo_usuario,
+                    id_usuario: id_usuario,
+                    id_endereco: id_endereco,
                     nome_empresa: tipo == 3 ? $('#empresa').val() : '',
                     setor: tipo == 2 ? $('#idSetor').val() : '',
                     nome: $('#nome').val(),
                     email: $('#email').val(),
-                    cpf: $('#cpf').val(),
-                    telefone: $('#telefone').val(),
+                    cpf: $('#cpf').val().replace(/\.\-/, ""),
+                    telefone: $('#telefone').val().replace(/\(\)s\-/, ""),
                     rua: $('#rua').val(),
                     bairro: $('#bairro').val(),
-                    cep: $('#cep').val(),
+                    cep: $('#cep').val().replace("-", ""),
                     cidade: $('#cidade').val(),
                     estado: $('#estado').val()
                 },
                 success: function (ret) {
-                    if (ret == 1) {
-                        CarregarCamposUsuario(0);
-                    }
+                    MostrarMensagem(ret);
+                    // timer
+                    // chamar página consultar_usuario
                 },
                 complete: function () {
                     RemoverLoad();
-                    MostrarMensagem(1);
                 }
             })
         }
+    }
+}
+
+function NenhumDadoUsuarioAlterado()
+{    
+    let nenhumDadoAlterado = true;
+
+    if ($("#nome").val().trim() != $("#nomeOriginal").val() ||
+        // $("#telefone").val().replace("(", "").replace(")", "").replace(" ", "").replace("-", "") != $("#telefoneOriginal").val() ||
+        $("#telefone").val().replace(/\(\)s\-/, "") != $("#telefoneOriginal").val() ||
+        $("#email").val().trim() != $("#emailOriginal").val() ||
+        // $("#cpf").val().replace(".", "").replace(".", "").replace("-", "") != $("#cpfOriginal").val() ||
+        $("#cpf").val().replace(/\.\-/, "") != $("#cpfOriginal").val() ||
+        $("#cep").val().replace("-", "") != $("#cepOriginal").val() ||
+        $("#rua").val().trim() != $("#ruaOriginal").val() ||
+        $("#bairro").val().trim() != $("#bairroOriginal").val() ||
+        $("#estado").val().trim() != $("#estadoOriginal").val() ||
+        $("#cidade").val().trim() != $("#cidadeOriginal").val())
+        nenhumDadoAlterado = false;
+
+    if (tipo_usuario == 2 && $("#idSetor").val() != $("#idSetorOriginal").val() && nenhumDadoAlterado)
+        nenhumDadoAlterado = false;
+
+    if (tipo_usuario == 3 && $("#nome_empresa").val().trim() != $("#nomeEmpresaOriginal").val() && nenhumDadoAlterado)
+        nenhumDadoAlterado = false;
+
+    if (nenhumDadoAlterado) {
+        return false;
+    } else {
+        return true;
     }
 }
 

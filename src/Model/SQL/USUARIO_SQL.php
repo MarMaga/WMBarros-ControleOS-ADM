@@ -4,6 +4,7 @@ namespace Src\Model\SQL;
 
 class USUARIO_SQL
 {
+
     public static function VERIFICAR_EMAIL(): string
     {
         $sql = 'SELECT count(email_usuario) as contar_email
@@ -93,7 +94,8 @@ class USUARIO_SQL
 
     public static function DETALHAR_USUARIO(): string
     {
-        $sql = 'SELECT usu.nome_usuario,
+        $sql = 'SELECT usu.id as id_usuario,
+                       usu.nome_usuario,
                        usu.tipo_usuario,
                        usu.email_usuario,
                        usu.cpf_usuario,
@@ -125,12 +127,14 @@ class USUARIO_SQL
         return $sql;
     }
 
-    public static function ALTERAR_USUARIO_TECNICO(): string
+    public static function ALTERAR_USUARIO(): string
     {
-        $sql = 'UPDATE tb_tecnico
-                   SET nome_empresa = ?
+        $sql = 'UPDATE tb_usuario
+                   SET nome_usuario = ?,
+                       email_usuario = ?,
+                       cpf_usuario = ?,
+                       tel_usuario = ?
                  WHERE id = ?';
-
         return $sql;
     }
 
@@ -143,5 +147,23 @@ class USUARIO_SQL
         return $sql;
     }
 
+    public static function ALTERAR_USUARIO_TECNICO(): string
+    {
+        $sql = 'UPDATE tb_tecnico
+                   SET nome_empresa = ?
+                 WHERE id = ?';
 
+        return $sql;
+    }
+
+    public static function ALTERAR_ENDERECO(): string
+    {
+        $sql = 'UPDATE tb_endereco
+                   SET rua = ?,
+                       bairro = ?
+                       cep = ?,
+                       id_cidade = ?
+                 WHERE id = ?';
+        return $sql;
+    }
 }

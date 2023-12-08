@@ -141,17 +141,6 @@ if (isset($_POST['btn_filtrar'])) {
     } else {
         echo 'NADA';
     }
-
-} elseif (isset($_POST['consultar_setor_alterar_usuario'])) {
-
-    $setores = $ctrlSetorEq->ConsultarSetorCTRL();
-    $idSetorDoUsuario = $_POST['idSetor'];
-
-    foreach ($setores as $item) { ?>
-        <option <?= $idSetorDoUsuario == $item['id'] ? 'selected="selected"' : '' ?>
-        value="<?= $item['id'] ?>"><?= $item['nome_setor'] ?>
-        </option>
-    <?php }
 }
 
 ?>

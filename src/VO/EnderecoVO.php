@@ -15,11 +15,11 @@ class EnderecoVO extends LogErroVO
     private $estado;
 
     // SET e GET id
-    public function setId(int $id): void
+    public function setEnderecoId(int $id): void
     {
         $this->id = $id;
     }
-    public function getId(): int
+    public function getEnderecoId(): int
     {
         return $this->id;
     }

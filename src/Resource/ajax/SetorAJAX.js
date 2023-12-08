@@ -65,27 +65,6 @@ function ConsultarSetor() {
     })
 }
 
-function ConsultarSetorAlterarUsuario(idSetor) {
-
-    $.ajax({
-        beforeSend: function () {
-            Load();
-        },
-        type: "post",
-        url: BASE_URL_DATAVIEW('SetorDV'),
-        data: {
-            consultar_setor_alterar_usuario: 'OPTION',
-            idSetor: idSetor
-        },
-        success: function (setores) {
-            $("#idSetor").html(setores);
-        },
-        complete: function () {
-            RemoverLoad();
-        }
-    })
-}
-
 function ConsultarSetoresComEquipamentos() {
 
     $.ajax({
