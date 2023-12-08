@@ -77,7 +77,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/SetorDV.php';
                                     <label>E-mail</label>
                                     <input onchange="verificarEmailDuplicado(this.value)" type="text" name="email"
                                         id="email" class="form-control obg" placeholder="Digite aqui o e-mail"
-                                        value="<?= $dados['email_usuario'] ?>">
+                                        value=<?= $dados['email_usuario'] ?>>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <input type="hidden" id="cpfOriginal" value="<?= $dados['cpf_usuario'] ?>">

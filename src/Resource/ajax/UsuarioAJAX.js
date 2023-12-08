@@ -90,8 +90,8 @@ function AlterarUsuario(formID) {
                     setor: tipo == 2 ? $('#idSetor').val() : '',
                     nome: $('#nome').val(),
                     email: $('#email').val(),
-                    cpf: $('#cpf').val().replace(/\.\-/, ""),
-                    telefone: $('#telefone').val().replace(/\(\)s\-/, ""),
+                    cpf: $('#cpf').val().replace(".", "").replace(".", "").replace("-", ""),
+                    telefone: $('#telefone').val().replace("(", "").replace(")", "").replace(" ", "").replace("-", ""),
                     rua: $('#rua').val(),
                     bairro: $('#bairro').val(),
                     cep: $('#cep').val().replace("-", ""),
@@ -116,11 +116,9 @@ function NenhumDadoUsuarioAlterado()
     let nenhumDadoAlterado = true;
 
     if ($("#nome").val().trim() != $("#nomeOriginal").val() ||
-        // $("#telefone").val().replace("(", "").replace(")", "").replace(" ", "").replace("-", "") != $("#telefoneOriginal").val() ||
-        $("#telefone").val().replace(/\(\)s\-/, "") != $("#telefoneOriginal").val() ||
+        $("#telefone").val().replace("(", "").replace(")", "").replace(" ", "").replace("-", "") != $("#telefoneOriginal").val() ||
         $("#email").val().trim() != $("#emailOriginal").val() ||
-        // $("#cpf").val().replace(".", "").replace(".", "").replace("-", "") != $("#cpfOriginal").val() ||
-        $("#cpf").val().replace(/\.\-/, "") != $("#cpfOriginal").val() ||
+        $("#cpf").val().replace(".", "").replace(".", "").replace("-", "") != $("#cpfOriginal").val() ||
         $("#cep").val().replace("-", "") != $("#cepOriginal").val() ||
         $("#rua").val().trim() != $("#ruaOriginal").val() ||
         $("#bairro").val().trim() != $("#bairroOriginal").val() ||
