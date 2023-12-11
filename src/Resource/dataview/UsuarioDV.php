@@ -49,13 +49,13 @@ if (isset($_POST['verificar_email_duplicado'])) {
     $vo->setCep($_POST['cep']);
     $vo->setCidade($_POST['cidade']);
     $vo->setEstado($_POST['estado']);
-
+    
     $ret = $ctrl->CadastrarUsuarioCTRL($vo);
     echo $ret;
 
 } else if (isset($_POST['btn_alterar'])) {
 
-    switch ($_POST['tipo']) {
+    switch ($_POST['tipo_usuario']) {
 
         case USUARIO_ADM:
             $vo = new UsuarioVO;
@@ -151,4 +151,13 @@ if (isset($_POST['verificar_email_duplicado'])) {
 
     if ($dados['tipo_usuario'] == USUARIO_FUNCIONARIO)
         $setores = (new SetorCTRL)->ConsultarSetorCTRL();
+
+} else if (isset($_POST['btn_logar'])){
+
+    $login = $_POST['login_usuario'];
+    $senha = $_POST['senha_usuario'];
+
+    $ret = $ctrl->ValidarLoginCTRL($login, $senha);
+
+    echo $ret;
 }

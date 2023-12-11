@@ -75,7 +75,7 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/SetorDV.php';
                                 <div class="form-group col-md-9">
                                     <input type="hidden" id="emailOriginal" value="<?= $dados['email_usuario'] ?>">
                                     <label>E-mail</label>
-                                    <input onchange="verificarEmailDuplicado(this.value)" type="text" name="email"
+                                    <input onkeyup="atualizaValue('email',this.value)" onchange="verificarEmailDuplicado(this.value)" type="text" name="email"
                                         id="email" class="form-control obg" placeholder="Digite aqui o e-mail"
                                         value=<?= $dados['email_usuario'] ?>>
                                 </div>
@@ -93,18 +93,21 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/SetorDV.php';
                                     <label>Setor</label>
                                     <select class="form-control select2 obg" name="idSetor" id="idSetor"
                                         style="width: 100%;">
-                                    <?php foreach($setores as $item){ ?>
-                                        <option <?= $dados['id_setor'] == $item['id'] ? 'selected' : '' ?> value="<?= $item['id'] ?>"><?= $item['nome_setor'] ?></option>
-                                    <?php } ?>
+                                        <?php foreach ($setores as $item) { ?>
+                                            <option <?= $dados['id_setor'] == $item['id'] ? 'selected' : '' ?>
+                                                value="<?= $item['id'] ?>">
+                                                <?= $item['nome_setor'] ?>
+                                            </option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             <?php } else if ($dados['tipo_usuario'] == USUARIO_TECNICO) { ?>
-                                <div class="form-group">
-                                    <input type="hidden" id="nomeEmpresaOriginal" value="<?= $dados['nome_empresa'] ?>">
-                                    <label>Nome da empresa</label>
-                                    <input type="text" name="empresa" id="empresa" class="form-control obg"
-                                        placeholder="Digite aqui o nome da empresa" value="<?= $dados['nome_empresa'] ?>">
-                                </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="nomeEmpresaOriginal" value="<?= $dados['nome_empresa'] ?>">
+                                        <label>Nome da empresa</label>
+                                        <input type="text" name="empresa" id="empresa" class="form-control obg"
+                                            placeholder="Digite aqui o nome da empresa" value="<?= $dados['nome_empresa'] ?>">
+                                    </div>
                             <?php } ?>
                             <div class="form-group">
                                 <input type="hidden" id="cepOriginal" value="<?= $dados['cep'] ?>">
@@ -159,6 +162,9 @@ include_once dirname(__DIR__, 2) . '/Resource/dataview/SetorDV.php';
         <script src="../../Resource/ajax/usuarioAJAX.js"></script>
         <script src="../../Resource/ajax/setorAJAX.js"></script>
 
+        <script>
+
+        </script>
         <!-- <script>
             $("#cpfcnpj").keydown(function () {
                 try {

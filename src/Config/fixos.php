@@ -4,6 +4,8 @@ define('PATH', $_SERVER['DOCUMENT_ROOT'] . '/');
 //define('PATH', $_SERVER['DOCUMENT_ROOT'] . 'ControleOS-ADM/src/');
 //define('PATH', $_SERVER['DOCUMENT_ROOT'] . 'ControleOS-ADM/src/');
 
+define('BASE_PATH_INICIAL', 'http://localhost:8000/view/acesso/inicial_adm.php');
+
 const SITUACAO_ATIVO = 1;
 const SITUACAO_INATIVO = 0;
 

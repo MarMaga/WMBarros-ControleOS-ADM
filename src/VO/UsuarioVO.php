@@ -54,7 +54,7 @@ class UsuarioVO extends EnderecoVO
     //GET e SET nome
     public function setNome(string $nome): void
     {
-        $this->nome = Util::TratarDadosGeral($nome);
+        $this->nome = Util::TirarCaracteresEspeciais($nome);
     }
     public function getNome(): string
     {

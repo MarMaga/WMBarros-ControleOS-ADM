@@ -31,7 +31,7 @@ class UsuarioCTRL
             empty($vo->getEstado())
         )
             return 0;
-
+        
         // VALIDA AS PROPRIEDADES ESPECÍFICAS DOS USUÁRIOS
 
         if ($vo->getTipo() == USUARIO_TECNICO && empty($vo->getNomeEmpresa()))
@@ -93,5 +93,29 @@ class UsuarioCTRL
             return 0;
 
         return $this->model->DetalharUsuarioMODEL($id);
+    }
+
+    public function ValidarLoginCTRL(string $login, string $senha): int | array
+    {
+        if (empty($login) || empty($senha))
+            return 0;
+
+        $usuario = $this->model->ValidarLoginMODEL($login, SITUACAO_ATIVO);
+
+        // não encontrou CPF de usuário ativado
+        // Mensagem: Login inválido
+        if (empty($usuario))
+            return -10;
+
+        // senha inválida
+        // Mensagem: Login inválido
+        if(Util::VerificarSenha($senha, $usuario['senha_usuario']))
+            return -10;
+
+        Util::CriarSessao($usuario['id'], $usuario['nome_usuario']);
+        // Util::ChamarPagina(PATH . 'view/adm/inicial_adm');
+
+        // mensagem "Você conectou-se, $_SESSION['nome_usuario']"
+        return 3;
     }
 }

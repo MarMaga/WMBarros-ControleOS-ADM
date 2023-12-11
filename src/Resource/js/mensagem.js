@@ -2,6 +2,8 @@ function MostrarMensagem(ret) {
 
     if (ret == -19231) {
         // número aleatório apenas para facilitar a inclusão de novos números abaixo
+    } else if (ret == -10) {
+        toastr.error('Login inválido');
     } else if (ret == -9) {
         toastr.error('E-mail já cadastrado');
     } else if (ret == -8) {
@@ -26,6 +28,8 @@ function MostrarMensagem(ret) {
         toastr.success('Ação realizada com sucesso');
     } else if (ret == 2) {
         toastr.info('Nenhum resultado encontrado');
+    } else if (ret == 3) {
+        toastr.success('Acesso liberado!');
     }
 
     // switch (ret) {

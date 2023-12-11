@@ -1,5 +1,5 @@
-function verificarEmailDuplicado(email) {
-
+function verificarEmailDuplicado(email)
+{
     if (validarEmail(email)) {
         $.ajax({
             beforeSend: function () {
@@ -25,7 +25,8 @@ function verificarEmailDuplicado(email) {
     }
 }
 
-function CadastrarUsuario(formID) {
+function CadastrarUsuario(formID)
+{
     if (NotificarCampos(formID)) {
 
         let tipo = $('#tipo').val();
@@ -87,7 +88,7 @@ function AlterarUsuario(formID) {
                     id_usuario: id_usuario,
                     id_endereco: id_endereco,
                     nome_empresa: tipo == 3 ? $('#empresa').val() : '',
-                    setor: tipo == 2 ? $('#idSetor').val() : '',
+                    setor: tipo == 2 ? parseInt($('#idSetor').val()) : '',
                     nome: $('#nome').val(),
                     email: $('#email').val(),
                     cpf: $('#cpf').val().replace(".", "").replace(".", "").replace("-", ""),
@@ -99,9 +100,9 @@ function AlterarUsuario(formID) {
                     estado: $('#estado').val()
                 },
                 success: function (ret) {
+                    alert(ret);
                     MostrarMensagem(ret);
-                    // timer
-                    // chamar página consultar_usuario
+                    Redirecionar("consultar_usuario.php", 5);
                 },
                 complete: function () {
                     RemoverLoad();
@@ -111,8 +112,7 @@ function AlterarUsuario(formID) {
     }
 }
 
-function NenhumDadoUsuarioAlterado()
-{    
+function NenhumDadoUsuarioAlterado() {
     let nenhumDadoAlterado = true;
 
     if ($("#nome").val().trim() != $("#nomeOriginal").val() ||
@@ -200,4 +200,34 @@ function AlterarStatusUsuario(id, status) {
             RemoverLoad();
         }
     })
+}
+
+function Logar(formID) {
+
+    if (NotificarCampos(formID)) {
+
+        let login = $("#login").val();
+        let senha = $("#senha").val();
+
+        $.ajax({
+            before: function () {
+                Load();
+            },
+            type: 'post',
+            url: BASE_URL_DATAVIEW('UsuarioDV'),
+            data: {
+                btn_logar: 'ajx',
+                login_usuario: login,
+                senha_usuario: senha
+            },
+            success: function (ret) {
+                MostrarMensagem(ret);
+                if (ret == 3)
+                    Redirecionar('inicial_adm.php', 2);
+            },
+            complete: function () {
+                RemoverLoad();
+            }
+        })
+    }
 }

@@ -4,7 +4,6 @@ namespace Src\_Public;
 
 class Util
 {
-
     private static function SetarFusoHorario()
     {
         date_default_timezone_set('America/Sao_Paulo');
@@ -36,14 +35,16 @@ class Util
 
     public static function TirarCaracteresEspeciais($palavra)
     {
-        $especiais = array(".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "/", "?", "[", "]", "{", "}", "'", "&", "´", "`", "~", "^", "$", " ", "-", ":", "|", "¬", "º", "ª", "§", "//", "\\", "<", ">");
+        // igual ao $especiais da função TratarDadosGeral, mas sem o espaço
+        $especiais = array(".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "-", "=", "§", "$", "&", "|", "//", "\\", ":", "/", "<", ">", "?", "[", "]", "{", "}", "~", "'", '"', "´", "`", "“", "”", "~", "^", "_", "¬", "º", "ª");
         $palavra = str_replace($especiais, "", trim($palavra));
         return $palavra;
     }
 
     public static function TratarDadosGeral($palavra)
     {
-        $especiais = array(".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "-", "=", "§", "$", "|", "\\", ":", "/", "<", ">", "?", "{", "}", "[", "]", "&", "'", '"', "´", "`", "“", "”", ' ', "~", "^", "_");
+        // igual ao $especiais da função TirarCaracteresEspeciais, mas com o espaço
+        $especiais = array(".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "-", "=", "§", "$", "&", "|", "//", "\\", ":", "/", "<", ">", "?", "[", "]", "{", "}", "~", "'", '"', "´", "`", "“", "”", "~", "^", "_", "¬", "º", "ª", ' ');
         $palavra = strip_tags($palavra);
         $palavra = str_replace($especiais, "", $palavra);
         return $palavra;
@@ -199,51 +200,48 @@ class Util
         return $localPontoVirgula;
     }
 
-    private static function IniciarSessao(){
+    private static function IniciarSessao(): void
+    {
 
         if(!isset($_SESSION)){
             session_start();
         }
     }
 
-    public static function CriarSessao($cod, $nome){
-
+    public static function CriarSessao($cod, $nome): void
+    {
         self::IniciarSessao();
 
         $_SESSION['cod'] = $cod;
         $_SESSION['nome'] = $nome;
     }
 
-    public static function NomeLogado(){
+    public static function NomeLogado(): string
+    {
         self::IniciarSessao();
         return $_SESSION['nome'];
     }
 
-    public static function CodigoLogado(){
+    public static function CodigoLogado(): int
+    {
         self::IniciarSessao();
-        //return $_SESSION['cod'];
-        return '1';
+        return $_SESSION['cod'];
     }
 
-    public static function Deslogar(){
-
-        self::IniciarSessao();
+    public static function Deslogar()
+    {
         unset($_SESSION['cod']);
         unset($_SESSION['nome']);
 
-        self::ChamarPagina('login.php');
-        exit;
+        self::ChamarPagina('http://localhost:8000/view/acesso/login');
     }
 
-    public static function VerificarLogado(){
-
+    public static function VerificarLogado()
+    {
         self::IniciarSessao();
 
-        if(!isset($_SESSION['cod']) || $_SESSION['cod'] == ''){
-            
+        if(!isset($_SESSION['cod']) || empty($_SESSION['cod']))
             self::ChamarPagina('login.php');
-            exit;
-        }
     }
 
     public static function MostrarSituacao(int $sit): string

@@ -166,4 +166,16 @@ class USUARIO_SQL
                  WHERE id = ?';
         return $sql;
     }
+
+    public static function VALIDAR_LOGIN(): string
+    {
+        $sql = 'SELECT id,
+                       nome_usuario,
+                       senha_usuario
+                  FROM tb_usuario
+                 WHERE cpf_usuario = ?
+                   AND status_usuario = ?';
+        return $sql;
+    }
+
 }

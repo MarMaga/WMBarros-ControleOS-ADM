@@ -294,4 +294,13 @@ class UsuarioMODEL extends Conexao
         $sql->execute();
         return $sql->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function ValidarLoginMODEL(string $login, int $status): array | null | bool
+    {
+        $sql = $this->conexao->prepare(USUARIO_SQL::VALIDAR_LOGIN());
+        $sql->bindValue(1, $login);
+        $sql->bindValue(2, $status);
+        $sql->execute();
+        return $sql->fetch(\PDO::FETCH_ASSOC);
+    }
 }

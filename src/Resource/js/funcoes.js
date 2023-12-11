@@ -1,3 +1,11 @@
+function BASE_PATH_INICIAL(){
+    return 'http://localhost:8000/view/acesso/inicial_adm.php';
+}
+
+function BASE_PATH_ADM(){
+    return 'http://localhost:8000/view/adm/';
+}
+
 function BASE_URL_DATAVIEW(dataview) {
     return '../../Resource/dataview/' + dataview + '.php';
 }
@@ -237,4 +245,14 @@ function ajustaMascaraFone(fone){
     } else {
         $("#telefone").mask('(00) 00000-0000');
     }
+}
+
+function Redirecionar(url, segundos){
+    setTimeout(() => {
+        window.location = BASE_PATH_ADM() + url
+    }, segundos * 1000)
+}
+
+function atualizaValue(id, valor){
+    $('#' + id).val(valor);
 }
