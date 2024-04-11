@@ -42,8 +42,8 @@ class UsuarioCTRL
         
         // setar o status
         $vo->setStatus(SITUACAO_ATIVO);
-        // setando a senha criptografada
-        $vo->setSenha(Util::CriptografarSenha($vo->getCPF()));
+        // setando a senha criptografada (criptografia e remoção de tags acontece na VO)
+        $vo->setSenha($vo->getCPF());
         // setando as propriedades de grava erro
         $vo->setFuncaoErro(CADASTRAR_USUARIO);
         $vo->setCodLogado(Util::CodigoLogado());

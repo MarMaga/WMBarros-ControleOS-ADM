@@ -223,7 +223,7 @@ function Logar(formID) {
             success: function (ret) {
                 MostrarMensagem(ret);
                 if (ret == 3)
-                    Redirecionar('inicial_adm.php', 2);
+                    Redirecionar('inicial_adm.php', 1);
             },
             complete: function () {
                 RemoverLoad();

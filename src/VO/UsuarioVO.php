@@ -104,7 +104,8 @@ class UsuarioVO extends EnderecoVO
     //GET e SET senha
     public function setSenha(string $senha): void
     {
-        $this->senha = Util::RemoverTags($senha);
+        // já remove as tags (RemoverTags()) quando o CPF é incluído na VO (setCPF()) que contém TratarDadosGeral()
+        $this->senha = Util::CriptografarSenha($senha);
     }
     public function getSenha(): string
     {
